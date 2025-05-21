@@ -3219,7 +3219,7 @@ local CopyPos = Tab5:CreateButton({
 local Section1AnimationsTab = AnimsTab:CreateSection("Animation Packs")
 
 
-local emotesApi = loadstring(game:HttpGet('https://raw.githubusercontent.com/MmZDrirk/Zzzzz/refs/heads/main/EmotesApi.txt'))()
+local emotesApi = loadstring(game:HttpGet('https://raw.githubusercontent.com/skbdiebdkdbdkd/Uejeiebeenenwoen/refs/heads/main/EmotesApi'))()
 
 
 local function ChangeAnims(idle,walk,run,jump,fall,swim)
