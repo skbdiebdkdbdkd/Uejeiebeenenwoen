@@ -1,0 +1,337 @@
+return {
+
+  ToyIdle = "10921301576",
+
+  ToyWalk = "10921312010",
+
+  ToyRun = "10921306285",
+
+  ToyJump = "10921308158",
+
+  ToyFall = "10921307241",
+
+  ToySwim = "10921309319",
+
+  
+
+  OldSchoolIdle = "10921230744",
+
+  OldSchoolWalk = "10921244891",
+
+  OldSchoolRun = "10921240218",
+
+  OldSchoolJump = "10921242013",
+
+  OldSchoolFall = "10921241244",
+
+  OldSchoolSwim = "10921244018",
+
+  
+
+  RobotIdle = "10921248039",
+
+  RobotWalk = "10921255446",
+
+  RobotRun = "10921250460",
+
+  RobotJump = "10921252123",
+
+  RobotFall = "10921251156",
+
+  RobotSwim = "10921253767",
+
+  
+
+  CartoonyIdle = "10921071918",
+
+  CartoonyWalk = "10921082452",
+
+  CartoonyRun = "10921076136",
+
+  CartoonyJump = "10921078135",
+
+  CartoonyFall = "10921077030",
+
+  CartoonySwim = "10921079380",
+
+  
+
+  AdidasIdle = "18537376492",
+
+  AdidasWalk = "18537392113",
+
+  AdidasRun = "18537384940",
+
+  AdidasJump = "18537380791",
+
+  AdidasFall = "18537367238",
+
+  AdidasSwim = "18537387180",
+
+  
+
+  MageIdle = "10921144709",
+
+  MageWalk = "10921152678",
+
+  MageRun = "10921148209",
+
+  MageJump = "10921149743",
+
+  MageFall = "10921148939",
+
+  MageSwim = "10921151661",
+
+  
+
+  ElderIdle = "10921101664",
+
+  ElderWalk = "10921111375",
+
+  ElderRun = "10921104374",
+
+  ElderJump = "10921107367",
+
+  ElderFall = "10921105765",
+
+  ElderSwim = "10921110146",
+
+  
+
+  StylishIdle = "10921272275",
+
+  StylishWalk = "10921283326",
+
+  StylishRun = "10921276116",
+
+  StylishJump = "10921279832",
+
+  StylishFall = "10921278648",
+
+  StylishSwim = "10921281964",
+
+  
+
+  BoldIdle = "16738333868",
+
+  BoldWalk = "16738340646",
+
+  BoldRun = "16738337225",
+
+  BoldJump = "16738336650",
+
+  BoldFall = "16738333171",
+
+  BoldSwim = "16738339817",
+
+  
+
+  CatWalIdle = "133806214992291",
+
+  CatWalkWalk = "109168724482748",
+
+  CatWalkRun = "81024476153754",
+
+  CatWalkJump = "116936326516985",
+
+  CatWalkFall = "92294537340807",
+
+  CatWalkSwim = "98854111361360",
+
+  
+
+  ZombieIdle = "10921344533",
+
+  ZombieWalk = "10921355261",
+
+  ZombieRun = "616163682",
+
+  ZombieJump = "10921351278",
+
+  ZombieFall = "10921350320",
+
+  ZombieSwim = "10921353442",
+
+  
+
+  WickedIdle = "118832222982049",
+
+  WickedWalk = "92072849924640",
+
+  WickedRun = "72301599441680",
+
+  WickedJump = "104325245285198",
+
+  WickedFall = "121152442762481",
+
+  WickedSwim = "113199415118199",
+
+  
+
+  NflIdle = "92080889861410",
+
+  NflWalk = "110358958299415",
+
+  NflRun = "117333533048078",
+
+  NflJump = "119846112151352",
+
+  NflFall = "129773241321032",
+
+  NflSwim = "79090109939093",
+
+  
+
+  SuperHeroIdle = "10921288909",
+
+  SuperHeroWalk = "10921298616",
+
+  SuperHeroRun = "10921291831",
+
+  SuperHeroJump = "10921294559",
+
+  SuperHeroFall = "10921293373",
+
+  SuperHeroSwim = "10921297391",
+
+  
+
+  NoBoundariesIdle = "18747067405",
+
+  NoBoundariesWalk = "18747074203",
+
+  NoBoundariesRun = "18747070484",
+
+  NoBoundariesJump = "18747069148",
+
+  NoBoundariesFall = "18747062535",
+
+  NoBoundariesSwim = "18747071682",
+
+  
+
+  VampireIdle = "10921315373",
+
+  VampireWalk = "10921326949",
+
+  VampireRun = "10921320299",
+
+  VampireJump = "10921322186",
+
+  VampireFall = "10921321317",
+
+  VampireSwim = "10921325443",
+
+  
+
+  WereWolfIdle = "10921330408",
+
+  WereWolfWalk = "10921342074",
+
+  WereWolfRun = "10921336997",
+
+  WereWolfJump = "1083218792",
+
+  WereWolfFall = "10921337907",
+
+  WereWolfSwim = "10921341319",
+
+  
+
+  NinjaIdle = "10921155160",
+
+  NinjaWalk = "10921162768",
+
+  NinjaRun = "10921157929",
+
+  NinjaJump = "10921160088",
+
+  NinjaFall = "10921159222",
+
+  NinjaSwim = "10922757002",
+
+  
+
+  AstronautIdle = "10921034824",
+
+  AstronautWalk = "10921046031",
+
+  AstronautRun = "10921039308",
+
+  AstronautJump = "10921042494",
+
+  AstronautFall = "10921040576",
+
+  AstronautSwim = "10921045006",
+
+  
+
+  LevitationIdle = "10921132962",
+
+  LevitationWalk = "10921140719",
+
+  LevitationRun = "10921135644",
+
+  LevitationJump = "10921137402",
+
+  LevitationFall = "10921136539",
+
+  LevitationSwim = "10921139478",
+
+  
+
+  KnightIdle = "10921117521",
+
+  KnightWalk = "10921127095",
+
+  KnightRun = "10921121197",
+
+  KnightJump = "10921123517",
+
+  KnightFall = "10921122579",
+
+  KnightSwim = "10921125935",
+
+  
+
+  BubblyIdle = "10921054344",
+
+  BubblyWalk = "10980888364",
+
+  BubblyRun = "10921057244",
+
+  BubblyJump = "10921062673",
+
+  BubblyFall = "10921061530",
+
+  BubblySwim = "10922582160",
+
+  
+
+  PirateIdle = "750781874",
+
+  PirateWalk = "750785693",
+
+  PirateRun = "750783738",
+
+  PirateJump = "750782230",
+
+  PirateFall = "750780242",
+
+  PirateSwim = "750785176",
+
+  
+
+  RThroIdle = "10921259953",
+
+  RThroWalk = "10921269718",
+
+  RThroRun = "10921261968",
+
+  RThroJump = "10921263860",
+
+  RThroFall = "10921262864",
+
+  RThroSwim = "10921265698"
+
+}
