@@ -1,1 +1,3755 @@
-xd
+if game.Players.LocalPlayer.Name ~= "Hzisjejekejjr" then
+
+
+
+
+
+
+
+
+
+
+local customTheme = {
+
+
+
+    TextColor = Color3.fromRGB(220, 220, 220),
+
+
+
+
+
+    Background = Color3.fromRGB(15, 15, 15),
+
+    Topbar = Color3.fromRGB(25, 25, 25),
+
+    Shadow = Color3.fromRGB(0, 0, 0),
+
+
+
+    NotificationBackground = Color3.fromRGB(20, 20, 20),
+
+    NotificationActionsBackground = Color3.fromRGB(30, 30, 30),
+
+
+
+    TabBackground = Color3.fromRGB(20, 20, 20),
+
+    TabStroke = Color3.fromRGB(200, 200, 200),
+
+    TabBackgroundSelected = Color3.fromRGB(40, 40, 40),
+
+    TabTextColor = Color3.fromRGB(200, 200, 200),
+
+    SelectedTabTextColor = Color3.fromRGB(230, 230, 230),
+
+
+
+    ElementBackground = Color3.fromRGB(25, 25, 25),
+
+    ElementBackgroundHover = Color3.fromRGB(35, 35, 35),
+
+    SecondaryElementBackground = Color3.fromRGB(30, 30, 30),
+
+    ElementStroke = Color3.fromRGB(200, 200, 200),
+
+    SecondaryElementStroke = Color3.fromRGB(180, 180, 180),
+
+
+
+    SliderBackground = Color3.fromRGB(35, 35, 35),
+
+    SliderProgress = Color3.fromRGB(220, 220, 220),
+
+    SliderStroke = Color3.fromRGB(200, 200, 200),
+
+
+
+    ToggleBackground = Color3.fromRGB(20, 20, 20),
+
+    ToggleEnabled = Color3.fromRGB(50, 200, 100),
+
+    ToggleDisabled = Color3.fromRGB(70, 70, 70),
+
+    ToggleEnabledStroke = Color3.fromRGB(200, 255, 200),
+
+    ToggleDisabledStroke = Color3.fromRGB(150, 150, 150),
+
+    ToggleEnabledOuterStroke = Color3.fromRGB(180, 255, 180),
+
+    ToggleDisabledOuterStroke = Color3.fromRGB(120, 120, 120),
+
+
+
+    DropdownSelected = Color3.fromRGB(40, 40, 40),
+
+    DropdownUnselected = Color3.fromRGB(25, 25, 25),
+
+
+
+    InputBackground = Color3.fromRGB(20, 20, 20),
+
+    InputStroke = Color3.fromRGB(200, 200, 200),
+
+    PlaceholderColor = Color3.fromRGB(160, 160, 160),
+
+
+
+    SliderValueTextColor = Color3.fromRGB(0, 0, 0), -- << Negro
+
+    SliderTextBackground = Color3.fromRGB(0, 0, 0), -- << Negro
+
+}
+
+
+
+
+
+local workspace = game.Workspace
+
+local iluminacion = game:GetService("Lighting")
+
+local Players = game.Players
+
+local localPlayer = Players.LocalPlayer
+
+local pGui = localPlayer.PlayerGui
+
+local char = localPlayer.Character
+
+local Animate = char:WaitForChild("Animate")
+
+local hm = char:WaitForChild("Humanoid")
+
+local h = char:WaitForChild("HumanoidRootPart")
+
+local Head = char:WaitForChild("Head")
+
+local camera = game.Workspace.CurrentCamera
+
+local Run = game:GetService("RunService")
+
+local Uis = game:GetService("UserInputService")
+
+local VirtualInputManager = game:GetService("VirtualInputManager")
+
+
+local function reconnect()
+
+  
+
+  workspace = game.Workspace
+
+ iluminacion = game:GetService("Lighting")
+
+ Players = game.Players
+
+ localPlayer = Players.LocalPlayer
+
+ pGui = localPlayer.PlayerGui
+
+ char = localPlayer.Character
+
+ Animate = char:WaitForChild("Animate")
+
+ hm = char:WaitForChild("Humanoid")
+
+ h = char:WaitForChild("HumanoidRootPart")
+
+ Head = char:WaitForChild("Head")
+
+ camera = game.Workspace.CurrentCamera
+
+ Run = game:GetService("RunService")
+
+ Uis = game:GetService("UserInputService")
+ local VirtualInputManager = game:GetService("VirtualInputManager")
+ 
+
+  
+
+end
+
+
+
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+getgenv().Rayfield = Rayfield
+
+
+
+local Window = Rayfield:CreateWindow({
+
+   Name = "NullModz: By NulModder",
+
+   Icon = 128930528840240,
+
+   LoadingTitle = "LOADING...",
+
+   LoadingSubtitle = "by NullModder",
+
+   Theme = customTheme,
+
+   DisableRayfieldPrompts = false,
+
+   DisableBuildWarnings = false,
+
+   ConfigurationSaving = {
+
+      Enabled = true,
+
+      FolderName = nil,
+
+      FileName = "Big Hub"
+
+   },
+
+   Discord = {
+
+      Enabled = false,
+
+      Invite = "noinvitelink",
+
+      RememberJoins = true
+
+   },
+
+   KeySystem = false,
+
+   KeySettings = {
+
+      Title = "NullModz KeySystem",
+
+      Subtitle = "Key System",
+
+      Note = "GetKey In The Discord Channel",
+
+      FileName = "Key",
+
+      SaveKey = true,
+
+      GrabKeyFromSite = false,
+
+      Key = {"xd"}
+
+   }
+
+})
+
+
+
+
+
+--//Paginas
+
+local Tab1 = Window:CreateTab("Players", 4483362458)
+
+local Tab2 = Window:CreateTab("LocalPlayer", 4483362458)
+
+local Tab3 = Window:CreateTab("Combat", 4483362458)
+
+local AnimsTab = Window:CreateTab("Animations", 4483362458)
+local Tab4 = Window:CreateTab("Games", 4483362458)
+
+local Tab5 = Window:CreateTab("DevTools", 4483362458)
+
+getgenv().Tab1 = Tab1
+getgenv().Tab2 = Tab2
+getgenv().Tab3 = Tab3
+getgenv().AnimsTab = AnimsTab
+getgenv().Tab4 = Tab4
+getgenv().Tab5 = Tab5
+
+
+
+
+
+
+
+
+
+
+--//ScriptingVars
+
+local TargetName = " "
+
+
+
+
+
+--//Global Functions Tab1
+
+
+
+local function FindPlayer(name)
+
+    name = name:lower()
+
+    for _, player in pairs(game.Players:GetPlayers()) do
+
+        if player.Name:lower():find(name) or player.DisplayName:lower():find(name) then
+
+            return player
+
+        end
+
+    end
+
+    return nil
+
+end
+
+
+
+local function PlayAndStopAnim(id,TimePosition,Speed)
+
+local anim = Instance.new("Animation")
+
+anim.AnimationId = "rbxassetid://".. id
+
+
+
+local animTrack = hm:LoadAnimation(anim)
+
+animTrack:Play()
+
+animTrack:AdjustSpeed(Speed)
+
+animTrack.TimePosition = TimePosition
+
+end
+
+
+
+--//functionsTab1
+
+
+
+local function TpToPlayerWithName()
+
+  local Target = FindPlayer(TargetName)
+
+  if Target then
+
+    local TargetChar = Target.Character
+
+    if TargetChar then
+
+      local TargetHRP = TargetChar:FindFirstChild("HumanoidRootPart")
+
+      if TargetHRP and h then
+
+        h.CFrame = TargetHRP.CFrame
+
+      end
+
+    end
+
+  end
+
+end
+
+
+
+
+
+local seguirBang = false
+
+local isBang = false
+
+local BangSpeed = 1
+
+
+
+local function Bang()
+
+  isBang = true
+
+  local Target = FindPlayer(TargetName)
+
+  if Target then
+
+    local TargetChar = Target.Character
+
+    if TargetChar then
+
+      local TargetHRP = TargetChar:FindFirstChild("HumanoidRootPart")
+ or TargetChar:WaitForChild("HumanoidRootPart")
+      seguirBang = true
+
+      if TargetHRP and h then
+
+        task.spawn(function()
+
+          PlayAndStopAnim(10713962506,1.4,0)
+
+          workspace.Gravity = 0
+
+          hm.PlatformStand = true
+
+          local i = -6
+
+          local D = -1
+
+          while isBang do
+
+            i = i + (BangSpeed * D)
+
+            
+
+            if i <= -6 then
+
+              i = -6
+
+              D = 1
+
+            elseif i >= -1 then
+
+              i = -1
+
+              D = -1
+
+            end
+
+            
+
+            h.CFrame = TargetHRP.CFrame * CFrame.new(0,0,-i)
+
+            task.wait(0.0001)
+
+          end
+
+        end)
+
+      end
+
+    end
+
+  end
+
+end
+
+
+
+local function unBang()
+
+  if isBang then
+
+    isBang = false
+
+    seguirBang = false
+
+    h.Anchored = false
+
+    workspace.Gravity = 196.2
+
+    hm.PlatformStand = false
+
+
+
+  for _, animTrack in ipairs(hm:GetPlayingAnimationTracks()) do
+
+    if animTrack.Animation.AnimationId == "rbxassetid://10713962506" then
+
+      animTrack:Stop()
+
+    end
+
+  end
+
+end
+
+end
+
+
+
+
+
+local SeguirGetBang = false
+
+local GetBangState = false
+
+local GetBangSpeed = 1
+
+
+
+local function GetBangg()
+
+  local Target = FindPlayer(TargetName)
+
+  if Target then
+
+    local TargetChar = Target.Character
+
+    if TargetChar then
+
+      local TargetHRP = TargetChar:FindFirstChild("HumanoidRootPart")
+or TargetChar:WaitForChild("HumanoidRootPart")
+      SeguirGetBang = true
+
+      GetBangState = true
+
+    if TargetHRP and h then
+
+      task.spawn(function()
+
+        PlayAndStopAnim(10714395175,0.2,0)
+
+        workspace.Gravity = 0
+
+        hm.PlatformStand = true
+
+        
+
+        local i = -6
+
+        local D = -1
+
+          while GetBangState do
+
+            i = i + (GetBangSpeed * D)
+
+            
+
+            if i >= -1 then
+
+              i = -1
+
+              D = -1
+
+            elseif i <= -6 then
+
+              i = -6
+
+              D = 1
+
+            end
+
+            
+
+            h.CFrame = TargetHRP.CFrame * CFrame.new(0,0,i)
+
+            task.wait(0.0001)
+
+          end
+
+        end)
+
+    end
+
+  end
+
+end
+
+end
+
+
+
+
+
+local function unGetBangg()
+
+  if GetBangState then
+
+    GetBangState = false
+
+    SeguirGetBang = false
+
+    h.Anchored = false
+
+    workspace.Gravity = 196.2
+
+    hm.PlatformStand = false
+
+    
+
+  for _, animTrack in ipairs(hm:GetPlayingAnimationTracks()) do
+
+    if animTrack.Animation.AnimationId == "rbxassetid://10714395175" then
+
+      animTrack:Stop()
+
+    end
+
+  end
+
+end
+
+end
+
+
+
+
+
+
+
+local SeguirChupando = false
+
+local ChuparState = false
+
+local SuckSpeed = 1
+
+
+
+local function Chupar()
+
+  local Target = FindPlayer(TargetName)
+
+  if Target then
+
+    local TargetChar = Target.Character
+
+    if TargetChar then
+
+      local TargetHRP = TargetChar:FindFirstChild("HumanoidRootPart")
+ or TargetChar:WaitForChild("HumanoidRootPart")
+      ChuparState = true
+
+      SeguirChupando = true
+
+      if TargetHRP and h then
+
+        task.spawn(function()
+
+          PlayAndStopAnim(13694096724,2,0)
+
+          workspace.Gravity = 0
+
+          hm.PlatformStand = true
+
+          
+
+          
+
+          local i = 1
+
+          local D = -1
+
+          
+
+          while ChuparState do
+
+            i = i + (SuckSpeed * D)
+
+            
+
+            if i >= -2 then
+
+              i = -2
+
+              D = -1
+
+            elseif i <= -6 then
+
+              i = -6
+
+              D = 1
+
+            end
+
+            
+
+            h.CFrame = TargetHRP.CFrame * CFrame.new(0,-0.5,i)
+
+            h.CFrame = CFrame.lookAt(h.Position, TargetHRP.Position)
+
+            task.wait(0.0001)
+
+          end
+
+        end)
+
+      end
+
+    end
+
+  end
+
+end
+
+
+
+local function UnChupar()
+
+  if ChuparState == true then
+
+    ChuparState = false
+
+    SeguirChupando = false
+
+    h.Anchored = false
+
+    workspace.Gravity = 196.2
+
+    hm.PlatformStand = false
+
+  
+
+for _, animTrack in ipairs(hm:GetPlayingAnimationTracks()) do
+
+    if animTrack.Animation.AnimationId == "rbxassetid://13694096724" then
+
+      animTrack:Stop()
+
+    end
+
+end
+
+end
+
+end
+
+
+
+local HeadDanceState = false
+
+
+
+
+
+local function EnableHeadDance()
+
+  local Target = FindPlayer(TargetName)
+
+  if Target then
+
+    local TargetChar = Target.Character
+
+    if TargetChar then
+
+      local TargetHead = TargetChar:FindFirstChild("Head")
+or TargetChar:WaitForChild("Head")
+      HeadDanceState = true
+
+      if TargetHead and h then
+
+        task.spawn(function()
+
+          PlayAndStopAnim(15122972413,1,1)
+
+          workspace.Gravity = 0
+
+          hm.PlatformStand = true
+
+          while HeadDanceState do
+
+            h.Anchored = false
+
+            h.CFrame = TargetHead.CFrame * CFrame.new(0,3,0)
+
+            h.Anchored = true
+
+            h.Anchored = false
+
+            wait(0.0001)
+
+          end
+
+        end)
+
+      end
+
+    end
+
+  end
+
+end
+
+
+
+local function UnableHeadDance()
+
+  if HeadDanceState == true then
+
+    HeadDanceState = false
+
+    workspace.Gravity = 196.2
+
+    hm.PlatformStand = false
+
+    for _, animTrack in ipairs(hm:GetPlayingAnimationTracks()) do
+
+    if animTrack.Animation.AnimationId == "rbxassetid://15122972413" then
+
+      animTrack:Stop()
+
+    end
+
+   end
+
+  end
+
+end
+
+
+
+
+
+local HugState = false
+
+
+
+local function EnableHug()
+
+  local Target = FindPlayer(TargetName)
+
+  if Target then
+
+    local TargetChar = Target.Character
+
+    if TargetChar then
+
+      local TargetHRP = TargetChar:FindFirstChild("HumanoidRootPart")
+or TargetChar:WaitForChild("HumanoidRootPart")
+      HugState = true
+
+      if TargetHRP and h then
+
+        task.spawn(function()
+
+          PlayAndStopAnim(15392759696,1,0)
+
+          workspace.Gravity = 0
+
+          hm.PlatformStand = true
+
+          while HugState do
+
+            h.Anchored = false
+
+            h.CFrame = TargetHRP.CFrame * CFrame.new(0,0,-1)
+
+            h.CFrame = CFrame.lookAt(h.Position,TargetHRP.Position)
+
+            h.Anchored = true
+
+            wait(0.0001)
+
+            h.Anchored = false
+
+            wait(0.0001)
+
+          end
+
+        end)
+
+      end
+
+    end
+
+  end
+
+end
+
+
+
+local function UnableHug()
+
+  if HugState == true then
+
+    HugState = false
+
+    h.Anchored = false
+
+    workspace.Gravity = 196.2
+
+    hm.PlatformStand = false
+
+    
+
+    
+
+    for _, animTrack in ipairs(hm:GetPlayingAnimationTracks()) do
+
+    if animTrack.Animation.AnimationId == "rbxassetid://15392759696" then
+
+      animTrack:Stop()
+
+    end
+
+   end
+
+  end
+
+end
+
+
+
+
+
+
+
+local function EnableBackHug()
+
+  local Target = FindPlayer(TargetName)
+
+  if Target then
+
+    local TargetChar = Target.Character
+
+    if TargetChar then
+
+      local TargetHRP = TargetChar:FindFirstChild("HumanoidRootPart")
+or TargetChar:WaitForChild("HumanoidRootPart")
+      HugState = true
+
+      if TargetHRP and h then
+
+        task.spawn(function()
+
+          PlayAndStopAnim(15392759696,1,0)
+
+          workspace.Gravity = 0
+
+          hm.PlatformStand = true
+
+          while HugState do
+
+            h.Anchored = false
+
+            h.CFrame = TargetHRP.CFrame * CFrame.new(0,0,1)
+
+            h.CFrame = CFrame.lookAt(h.Position,TargetHRP.Position)
+
+            h.Anchored = true
+
+            wait(0.0001)
+
+            h.Anchored = false
+
+            wait(0.0001)
+
+          end
+
+        end)
+
+      end
+
+    end
+
+  end
+
+end
+
+
+
+local function UnableBackHug()
+
+  if HugState == true then
+
+    HugState = false
+
+    h.Anchored = false
+
+    workspace.Gravity = 196.2
+
+    hm.PlatformStand = false
+
+    
+
+    
+
+    for _, animTrack in ipairs(hm:GetPlayingAnimationTracks()) do
+
+    if animTrack.Animation.AnimationId == "rbxassetid://15392759696" then
+
+      animTrack:Stop()
+
+    end
+
+   end
+
+  end
+
+end
+
+
+
+local HeadSitState = false
+
+
+
+
+
+local function EnableHeadSit()
+
+  local Target = FindPlayer(TargetName)
+
+  if Target then
+
+    local TargetChar = Target.Character
+
+    if TargetChar then
+
+      local TargetHead = TargetChar:FindFirstChild("Head")
+or TargetChar:WaitForChild("Head")
+      HeadSitState = true
+
+      if TargetHead and h then
+
+        task.spawn(function()
+
+          PlayAndStopAnim(12507085924,2.4,0)
+
+          workspace.Gravity = 0
+
+          hm.PlatformStand = true
+
+          while HeadSitState do
+
+            h.Anchored = false
+
+            h.CFrame = TargetHead.CFrame * CFrame.new(0,3,0)
+
+            h.Anchored = true
+
+            h.Anchored = false
+
+            wait(0.0001)
+
+          end
+
+        end)
+
+      end
+
+    end
+
+  end
+
+end
+
+
+
+local function UnableHeadSit()
+
+  if HeadSitState == true then
+
+    HeadSitState = false
+
+    workspace.Gravity = 196.2
+
+    hm.PlatformStand = false
+
+    
+
+    for _, animTrack in ipairs(hm:GetPlayingAnimationTracks()) do
+
+    if animTrack.Animation.AnimationId == "rbxassetid://12507085924" then
+
+      animTrack:Stop()
+
+    end
+
+   end
+
+  end
+
+end
+
+
+
+local SeguirHeadSuck = false
+
+local HeadSuckState = false
+
+local HeadSuckSpeed = 0.1
+
+
+
+
+
+local function EnableHeadSuck()
+
+  local Target = FindPlayer(TargetName)
+
+  if Target then
+
+    local TargetChar = Target.Character
+
+    if TargetChar then
+
+      local TargetHead = TargetChar:FindFirstChild("Head")
+or TargetChar:WaitForChild("Head")
+      if TargetHead and h then
+
+        task.spawn(function()
+
+          HeadSuckState = true
+
+          SeguirHeadSuck = true
+
+          PlayAndStopAnim(12992262118,1,0)
+
+          workspace.Gravity = 0
+
+          hm.PlatformStand = true
+
+          
+
+          local i = -1
+
+          local D = -1
+
+          
+
+          while HeadSuckState do
+
+            i = i + (HeadSuckSpeed * D)
+
+            
+
+            if i >= -1 then
+
+              i = -1
+
+              D = -1
+
+            elseif i <= -6 then
+
+              i = -6
+
+              D = 1
+
+            end
+
+            
+
+            h.CFrame = TargetHead.CFrame * CFrame.new(0,0,i)
+
+            h.CFrame = CFrame.lookAt(h.Position, TargetHead.Position)
+
+            task.wait(0.0001)
+
+          end
+
+        end)
+
+      end
+
+    end
+
+  end
+
+end
+
+
+
+
+
+local function UnableHeadSuck()
+
+  if HeadSuckState == true then
+
+    HeadSuckState = false
+
+    SeguirHeadSuck = false
+
+    hm.PlatformStand = false
+
+    workspace.Gravity = 196.2
+
+    
+
+    for _, animTrack in ipairs(hm:GetPlayingAnimationTracks()) do
+
+    if animTrack.Animation.AnimationId == "rbxassetid://12992262118" then
+
+      animTrack:Stop()
+
+    end
+
+    end
+
+  end
+
+end
+
+
+
+
+
+local SeguirOrbitando = false
+
+local IsOrbit = false
+
+local OrbitRadio = 1
+
+local OrbitSpeed = 1
+
+
+
+
+
+local function EnableOrbit()
+
+  local Target = FindPlayer(TargetName)
+
+  if Target then
+
+    local TargetChar = Target.Character
+
+    if TargetChar then
+
+      local TargetHRP = TargetChar:FindFirstChild("HumanoidRootPart")
+or TargetChar:WaitForChild("HumanoidRootPart")
+      SeguirOrbitando = true
+
+      IsOrbit = true
+
+      if TargetHRP and h then
+
+        task.spawn(function()
+
+        PlayAndStopAnim(10714347453,1,0)
+
+          workspace.Gravity = 0
+
+          hm.PlatformStand = true
+
+          local i = 0
+
+          while IsOrbit do
+
+            if IsOrbit == false then
+
+              break
+
+            elseif IsOrbit == true then
+
+              i = (i+ OrbitSpeed) % 360
+
+              local rad = math.rad(i)
+
+              local OffSet = CFrame.new(math.cos(rad) * OrbitRadio ,0,math.sin(rad) * OrbitRadio)
+
+              h.CFrame = TargetHRP.CFrame * OffSet
+
+              h.CFrame = CFrame.lookAt(h.Position, TargetHRP.Position)
+
+            end
+
+            task.wait(0.0001)
+
+          end
+
+        end)
+
+      end
+
+    end
+
+  end
+
+end
+
+
+
+
+
+local function UnableOrbit()
+
+  if IsOrbit == true then
+
+    IsOrbit = false
+
+    SeguirOrbitando = false
+
+    workspace.Gravity = 196.2
+
+    hm.PlatformStand = false
+
+    
+    
+for _, animTrack in ipairs(hm:GetPlayingAnimationTracks()) do
+
+    if animTrack.Animation.AnimationId == "rbxassetid://10714347453" then
+
+      animTrack:Stop()
+
+    end
+
+   end
+
+  end
+
+end
+
+
+
+local FollowState = false
+
+local FollowDistanceVar = 2
+
+
+
+
+
+
+
+local function EnableFollow()
+
+  local Target = FindPlayer(TargetName)
+
+  if Target then
+
+    local TargetChar = Target.Character
+
+    if TargetChar then
+
+      local TargetHRP = TargetChar:FindFirstChild("HumanoidRootPart")
+or TargetChar:WaitForChild("HumanoidRootPart")
+      if TargetHRP and h then
+
+        task.spawn(function()
+
+          FollowState = true
+
+          workspace.Gravity = 0
+
+          hm.PlatformStand = true
+
+          PlayAndStopAnim(10714347256,1.3,0)
+
+          while FollowState do
+
+            h.CFrame = TargetHRP.CFrame * CFrame.new(0,0,FollowDistanceVar)
+
+            task.wait(0.0001)
+
+          end
+
+        end)
+
+      end
+
+    end
+
+  end
+
+end
+
+
+
+
+
+local function UnableFollow()
+
+  if FollowState == true then
+
+    FollowState = false
+
+    workspace.Gravity = 196.2
+
+    hm.PlatformStand = false
+
+    
+
+    
+
+    for _, animTrack in ipairs(hm:GetPlayingAnimationTracks()) do
+
+    if animTrack.Animation.AnimationId == "rbxassetid://10714347256" then
+
+      animTrack:Stop()
+
+    end
+
+    end
+
+    
+
+  end
+
+end
+
+
+
+
+local SpectateState = false
+
+
+
+
+
+
+
+local function Espectate()
+
+  local Target = FindPlayer(TargetName)
+
+  if Target then
+
+    local TargetChar = Target.Character
+
+    if TargetChar then
+
+      local TargetHead = TargetChar:FindFirstChild("Head")
+or TargetChar:WaitForChild("Head")
+
+      if TargetHead then
+
+        camera.CameraSubject = TargetHead
+         SpectateState = true
+
+      end
+
+    end
+
+  end
+
+end
+
+
+
+local function unSpectate()
+
+  camera.CameraSubject = hm
+  SpectateState = false
+
+end
+
+
+
+local locateState = false
+
+
+
+
+
+local function Locate()
+
+  local Target = FindPlayer(TargetName)
+
+  if Target then
+
+    local TargetChar = Target.Character
+
+    if TargetChar then
+
+      locateState = true
+
+      local luz = TargetChar:FindFirstChild("Highlight")
+
+      if not luz then
+
+      local ESP = Instance.new("Highlight")
+
+      ESP.OutlineColor = Target.TeamColor.Color
+
+      ESP.FillColor = Target.TeamColor.Color
+
+      ESP.Parent = TargetChar
+
+    end
+
+    end
+
+  end
+
+end
+
+
+
+local function UnLocate()
+
+  local Target = FindPlayer(TargetName)
+
+  if Target then
+
+    local TargetChar = Target.Character
+
+    if TargetChar then
+
+      locateState = false
+
+      local ESP = TargetChar:FindFirstChild("Highlight")
+
+      if ESP then
+
+        ESP:Destroy()
+
+      end
+
+    end
+
+  end
+
+end
+
+
+
+local LocateAllState = false
+
+
+
+local function locateALL()
+
+  for _, p in ipairs(Players:GetPlayers()) do
+
+    local pChar = p.Character
+
+    if pChar then
+
+      LocateAllState = true
+
+      local luz = pChar:FindFirstChild("Highlight")
+
+      if not luz then
+
+        local ESP = Instance.new("Highlight")
+
+        ESP.OutlineColor = p.TeamColor.Color
+
+        ESP.FillColor = p.TeamColor.Color
+
+        ESP.Parent = pChar
+
+      end
+
+    end
+
+  end
+
+end
+
+
+
+local function UnLocateAll()
+
+  for _, p in ipairs(Players:GetPlayers()) do
+
+    local pChar = p.Character
+
+    if pChar then
+
+      LocateAllState = false
+
+      local luz = pChar:FindFirstChild("Highlight")
+
+      if luz then
+
+        luz:Destroy()
+
+      end
+
+    end
+
+  end
+
+end
+
+--//Tab1_Players
+
+
+
+
+
+local Section1Tab1 = Tab1:CreateSection("Insert Name")
+
+
+
+
+
+local Input = Tab1:CreateInput({
+
+   Name = "TargetName",
+
+   PlaceholderText = "Ej: NullScripter123",
+
+   RemoveTextAfterFocusLost = false,
+
+   Callback = function(text)
+
+      TargetName = text
+
+   end
+
+})
+
+
+
+
+
+local Section2Tab1 = Tab1:CreateSection("Functions")
+
+
+
+
+
+local Teleport = Tab1:CreateButton({
+
+   Name = "Teleport",
+
+   Callback = function()
+
+     TpToPlayerWithName()
+
+   end,
+
+})
+
+
+
+
+
+
+local Bang = Tab1:CreateToggle({
+
+   Name = "Bang",
+
+   CurrentValue = false,
+
+   Flag = "Toggle1",
+
+   Callback = function(Value)
+
+     if Value then
+
+       Bang()
+
+      else
+
+      unBang()
+
+    end
+
+   end,
+
+})
+
+
+
+
+
+local BangSpeedS = Tab1:CreateSlider({
+
+   Name = "BangSpeed",
+
+   Range = {0.01, 6},
+
+   Increment = 0.01,
+
+   Suffix = "BangSpeed",
+
+   CurrentValue = 1,
+
+   Flag = "Slider1", 
+
+   Callback = function(Value)
+
+     BangSpeed = Value
+
+   end,
+
+})
+
+
+
+
+
+local GetBang = Tab1:CreateToggle({
+
+   Name = "GetBang",
+
+   CurrentValue = false,
+
+   Flag = "Toggle1",
+
+   Callback = function(Value)
+
+     if Value then
+
+       GetBangg()
+
+      else
+
+      unGetBangg()
+
+    end
+
+   end,
+
+})
+
+
+
+local GetBangSpeedS = Tab1:CreateSlider({
+
+   Name = "GetBangSpeed",
+
+   Range = {0.01, 6},
+
+   Increment = 0.01,
+
+   Suffix = "GetBangSpeed",
+
+   CurrentValue = 1,
+
+   Flag = "Slider1", 
+
+   Callback = function(Value)
+
+     GetBangSpeed = Value
+
+   end,
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+local HeadDance = Tab1:CreateToggle({
+
+   Name = "HeadDance",
+
+   CurrentValue = false,
+
+   Flag = "Toggle1",
+
+   Callback = function(Value)
+
+     if Value then
+
+       EnableHeadDance()
+
+      else
+
+      UnableHeadDance()
+
+    end
+
+   end,
+
+})
+
+
+
+
+
+local Suck = Tab1:CreateToggle({
+
+   Name = "Suck",
+
+   CurrentValue = false,
+
+   Flag = "Toggle1",
+
+   Callback = function(Value)
+
+     if Value then
+
+       Chupar()
+
+      else
+
+      UnChupar()
+
+    end
+
+   end,
+
+})
+
+
+
+
+
+local SuckSpeedS = Tab1:CreateSlider({
+
+   Name = "SuckSpeed",
+
+   Range = {0.01, 6},
+
+   Increment = 0.01,
+
+   Suffix = "SuckSpeed",
+
+   CurrentValue = 1,
+
+   Flag = "Slider1", 
+
+   Callback = function(Value)
+
+     SuckSpeed = Value
+
+   end,
+
+})
+
+
+
+
+
+
+
+local GetSuck = Tab1:CreateToggle({
+
+   Name = "GetSuck",
+
+   CurrentValue = false,
+
+   Flag = "Toggle1",
+
+   Callback = function(Value)
+
+     if Value then
+
+       EnableHeadSuck()
+
+      else
+
+      UnableHeadSuck()
+
+    end
+
+   end,
+
+})
+
+
+
+
+
+
+
+local GetSuckSpeed = Tab1:CreateSlider({
+
+   Name = "GetSuckSpeed",
+
+   Range = {0.01, 6},
+
+   Increment = 0.01,
+
+   Suffix = "GetSuckSpeed",
+
+   CurrentValue = 1,
+
+   Flag = "Slider1", 
+
+   Callback = function(Value)
+
+     HeadSuckSpeed = Value
+
+   end,
+
+})
+
+
+
+
+
+
+
+local Orbit = Tab1:CreateToggle({
+
+   Name = "Orbit",
+
+   CurrentValue = false,
+
+   Flag = "Toggle1",
+
+   Callback = function(Value)
+
+     if Value then
+
+       EnableOrbit()
+
+      else
+
+      UnableOrbit()
+
+    end
+
+   end,
+
+})
+
+
+
+
+
+
+
+local OrbitRadius = Tab1:CreateSlider({
+
+   Name = "OrbitRadius",
+
+   Range = {0.01, 30},
+
+   Increment = 0.01,
+
+   Suffix = "OrbitRadius",
+
+   CurrentValue = 1,
+
+   Flag = "Slider1", 
+
+   Callback = function(Value)
+
+     OrbitRadio = Value
+
+   end,
+
+})
+
+
+
+
+
+
+
+
+
+
+
+local OrbitSpeed = Tab1:CreateSlider({
+
+   Name = "OrbitSpeed",
+
+   Range = {0.1, 30},
+
+   Increment = 0.1,
+
+   Suffix = "OrbitSpeed",
+
+   CurrentValue = 1,
+
+   Flag = "Slider1", 
+
+   Callback = function(Value)
+
+     OrbitSpeed = Value
+
+   end,
+
+})
+
+
+
+
+
+local Follow = Tab1:CreateToggle({
+
+   Name = "FollowPlayer",
+
+   CurrentValue = false,
+
+   Flag = "Toggle1",
+
+   Callback = function(Value)
+
+     if Value then
+
+       EnableFollow()
+
+      else
+
+      UnableFollow()
+
+    end
+
+   end,
+
+})
+
+
+
+
+
+local FollowDistance = Tab1:CreateSlider({
+
+   Name = "FollowDistance",
+
+   Range = {2, 200},
+
+   Increment = 1,
+
+   Suffix = "Distance",
+
+   CurrentValue = 2,
+
+   Flag = "Slider1", 
+
+   Callback = function(Value)
+
+     FollowDistanceVar = Value
+
+   end,
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+local Hug = Tab1:CreateToggle({
+
+   Name = "Hug",
+
+   CurrentValue = false,
+
+   Flag = "Toggle1",
+
+   Callback = function(Value)
+
+     if Value then
+
+       EnableHug()
+
+      else
+
+      UnableHug()
+
+    end
+
+   end,
+
+})
+
+
+
+
+
+local BackHug = Tab1:CreateToggle({
+
+   Name = "BackHug",
+
+   CurrentValue = false,
+
+   Flag = "Toggle1",
+
+   Callback = function(Value)
+
+     if Value then
+
+       EnableBackHug()
+
+      else
+
+      UnableBackHug()
+
+    end
+
+   end,
+
+})
+
+
+
+
+
+local HeadSit = Tab1:CreateToggle({
+
+   Name = "HeadSit",
+
+   CurrentValue = false,
+
+   Flag = "Toggle1",
+
+   Callback = function(Value)
+
+     if Value then
+
+       EnableHeadSit()
+
+      else
+
+      UnableHeadSit()
+
+    end
+
+   end,
+
+})
+
+
+
+
+
+local Spectate = Tab1:CreateToggle({
+
+   Name = "Spectate",
+
+   CurrentValue = false,
+
+   Flag = "Toggle1",
+
+   Callback = function(Value)
+
+     if Value then
+
+       Espectate()
+
+      else
+
+      unSpectate()
+
+    end
+
+   end,
+
+})
+
+
+
+
+
+local Locate = Tab1:CreateToggle({
+
+   Name = "Locate",
+
+   CurrentValue = false,
+
+   Flag = "Toggle1",
+
+   Callback = function(Value)
+
+     if Value then
+
+       Locate()
+
+      else
+
+      UnLocate()
+
+    end
+
+   end,
+
+})
+
+
+
+
+
+local Section3Tab1 = Tab1:CreateSection("AllPlayers_Functions")
+
+
+
+local EspAll = Tab1:CreateToggle({
+
+   Name = "EspAll",
+
+   CurrentValue = false,
+
+   Flag = "Toggle1",
+
+   Callback = function(Value)
+
+     if Value then
+
+       locateALL()
+
+      else
+
+      UnLocateAll()
+
+    end
+
+   end,
+
+})
+
+
+
+
+
+--// guis tab2
+
+
+local function DashGui()
+
+if pGui:FindFirstChild("DashGui") then
+return
+end
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "DashGui"
+ScreenGui.Parent = pGui
+
+local Frame = Instance.new("Frame")
+Frame.Name = "DashFrame"
+Frame.Size = UDim2.new(0.1, 0, 0.2, 0)
+Frame.Position = UDim2.new(0.9, 0, 0.35, 0)
+Frame.BackgroundColor3 = Color3.new(1, 1, 1)
+Frame.BorderColor3 = Color3.new(255, 255, 255)
+Frame.BorderSizePixel = 1
+Frame.Active = true
+Frame.BackgroundTransparency = 1
+Frame.Draggable = false
+Frame.Parent = ScreenGui
+
+
+local TextButton = Instance.new("TextButton")
+TextButton.Name = "DashButton"
+TextButton.Size = UDim2.new(1, 0, 0.8, 0)
+TextButton.Position = UDim2.new(0.005, 0, 0.1, 0)
+TextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+TextButton.BorderColor3 = Color3.new(255, 255, 255)
+TextButton.BorderSizePixel = 1
+TextButton.TextSize = 15
+TextButton.Text = "Dash"
+TextButton.BackgroundTransparency = 0.5
+TextButton.TextColor3 = Color3.new(255, 255, 255)
+TextButton.Font = Enum.Font.Code
+TextButton.Parent = Frame
+
+TextButton.MouseButton1Click:Connect(function()
+VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.F, false, game)
+
+wait(0.01)
+
+VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.F, false, game)
+end)
+
+end
+
+
+
+
+
+local function SleepGui()
+
+if pGui:FindFirstChild("SleepGui") then
+return
+end
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "SleepGui"
+ScreenGui.Parent = pGui
+
+local Frame = Instance.new("Frame")
+Frame.Name = "SleepFrame"
+Frame.Size = UDim2.new(0.1, 0, 0.2, 0)
+Frame.Position = UDim2.new(0.9, 0, 0.35, 0)
+Frame.BackgroundColor3 = Color3.new(1, 1, 1)
+Frame.BorderColor3 = Color3.new(255, 255, 255)
+Frame.BorderSizePixel = 1
+Frame.Active = true
+Frame.BackgroundTransparency = 1
+Frame.Draggable = false
+Frame.Parent = ScreenGui
+
+
+local TextButton = Instance.new("TextButton")
+TextButton.Name = "SleepButton"
+TextButton.Size = UDim2.new(1, 0, 0.8, 0)
+TextButton.Position = UDim2.new(0.005, 0, 0.1, 0)
+TextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+TextButton.BorderColor3 = Color3.new(255, 255, 255)
+TextButton.BorderSizePixel = 1
+TextButton.TextSize = 15
+TextButton.Text = "Sleep"
+TextButton.BackgroundTransparency = 0.5
+TextButton.TextColor3 = Color3.new(255, 255, 255)
+TextButton.Font = Enum.Font.Code
+TextButton.Parent = Frame
+
+TextButton.MouseButton1Click:Connect(function()
+VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.F, false, game)
+
+wait(0.01)
+
+VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.F, false, game)
+end)
+
+end
+
+
+
+
+local function TimeStopGui()
+
+if pGui:FindFirstChild("TimeStopGui") then
+return
+end
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "TimeStopGui"
+ScreenGui.Parent = pGui
+
+local Frame = Instance.new("Frame")
+Frame.Name = "TimeStopFrame"
+Frame.Size = UDim2.new(0.1, 0, 0.2, 0)
+Frame.Position = UDim2.new(0.9, 0, 0.35, 0)
+Frame.BackgroundColor3 = Color3.new(1, 1, 1)
+Frame.BorderColor3 = Color3.new(255, 255, 255)
+Frame.BorderSizePixel = 1
+Frame.Active = true
+Frame.BackgroundTransparency = 1
+Frame.Draggable = false
+Frame.Parent = ScreenGui
+
+
+local TextButton = Instance.new("TextButton")
+TextButton.Name = "TimeStopButton"
+TextButton.Size = UDim2.new(1, 0, 0.8, 0)
+TextButton.Position = UDim2.new(0.005, 0, 0.1, 0)
+TextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+TextButton.BorderColor3 = Color3.new(255, 255, 255)
+TextButton.BorderSizePixel = 1
+TextButton.TextSize = 15
+TextButton.Text = "SilentTP"
+TextButton.BackgroundTransparency = 0.5
+TextButton.TextColor3 = Color3.new(255, 255, 255)
+TextButton.Font = Enum.Font.Code
+TextButton.Parent = Frame
+
+TextButton.MouseButton1Click:Connect(function()
+VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.F, false, game)
+
+wait(0.01)
+
+VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.F, false, game)
+end)
+
+end
+
+
+
+
+
+
+
+--//Global Functions Tab2
+
+
+
+local function Move(Direccion)
+
+  h.CFrame = h.CFrame * Direccion
+
+end
+
+
+
+--//functionsTab2
+
+
+
+local DashState = false
+
+local DashConnection = nil
+
+
+
+local function EnableDash()
+if Uis.TouchEnabled then
+DashGui()
+end
+
+
+
+  DashState = true
+
+  DashConnection = Uis.InputBegan:Connect(function(input)
+
+    if input.KeyCode == Enum.KeyCode.F then
+
+      if DashState == true then
+
+        PlayAndStopAnim(15698404340,0.5,0)
+
+        for i = 1,7,1 do
+
+        Move(CFrame.new(0,0,-5))
+
+        wait(0.002)
+
+        end
+
+    for _, animTrack in ipairs(hm:GetPlayingAnimationTracks()) do
+
+    if animTrack.Animation.AnimationId == "rbxassetid://15698404340" then
+
+      animTrack:Stop()
+
+    end
+
+  end
+
+      end
+
+    end
+
+  end)
+
+end
+
+
+
+local function UnableDash()
+
+  if DashState == true then
+
+    DashState = false
+
+    if DashConnection then
+
+    DashConnection:Disconnect()
+
+    end
+    
+local ScreenGui = pGui:FindFirstChild("DashGui")
+if ScreenGui then
+ScreenGui:Destroy()
+end
+
+  end
+
+end
+
+
+
+
+
+
+
+local function UnableSleepAnim(Id)
+  for _, AnimTrack in ipairs(hm:GetPlayingAnimationTracks()) do
+
+  if AnimTrack.Animation then
+
+    if AnimTrack.Animation.AnimationId == Id then
+
+      AnimTrack:Stop()
+
+    end
+
+  end
+
+  end
+
+end
+
+
+
+local SleepConnection = nil
+
+local IsSleepToggle = false
+
+local IsSleep = false
+
+
+
+local function SleepConnect()
+
+
+if Uis.TouchEnabled then
+SleepGui()
+end
+
+SleepGui()
+
+SleepConnection = Uis.InputBegan:Connect(function(input)
+
+  if input.KeyCode == Enum.KeyCode.F then
+
+    if IsSleep == false then
+
+      IsSleep = true
+
+      PlayAndStopAnim(2695918332,0,1)
+
+    elseif IsSleep == true then
+
+      IsSleep = false
+
+      UnableSleepAnim("rbxassetid://2695918332")
+
+    end
+
+  end
+
+end)
+
+end
+
+
+
+
+
+
+
+local TpWalkState = false
+
+local Speed = 1
+
+
+
+local function EnableTpWalk()
+
+  TpWalkState = true
+
+  task.spawn(function()
+
+    while TpWalkState do
+
+      local Velocity = h.Velocity.Magnitude
+
+      if Velocity > 1 then
+
+        h.CFrame = h.CFrame * CFrame.new(0,0,-Speed)
+
+      else
+
+        print("esperando que se mueva")
+
+      end
+
+      task.wait(0.01)
+
+    end
+
+  end)
+
+end
+
+
+
+local function UnableTpWalk()
+
+  if TpWalkState == true then
+
+    TpWalkState = false
+
+  end
+
+end
+
+
+
+local ShiftLockState = false
+
+
+
+local function EnableShiftLock()
+
+  task.spawn(function()
+
+    ShiftLockState = true
+
+  while ShiftLockState do
+
+    local LookVector = camera.CFrame.LookVector
+
+    local offSet = Vector3.new(LookVector.X, 0 ,LookVector.Z)
+
+  h.CFrame = CFrame.new(h.Position, h.Position + offSet)
+
+  task.wait(0.0001)
+
+  end
+
+  end)
+
+end
+
+
+
+
+
+local function UnableShiftLock()
+
+  if ShiftLockState == true then
+
+    ShiftLockState = false
+
+  end
+
+end
+
+
+
+
+
+
+--//Tab2_LocalPlayer
+
+
+
+local Section1Tab2 = Tab2:CreateSection("LocalPlayer")
+
+
+
+local WalkSpeed = Tab2:CreateSlider({
+
+   Name = "WalkSpeed",
+
+   Range = {16, 500},
+
+   Increment = 16,
+
+   Suffix = "WalkSpeed",
+
+   CurrentValue = 16,
+
+   Flag = "Slider1", 
+
+   Callback = function(Value)
+
+     hm.WalkSpeed = Value
+
+   end,
+
+})
+
+
+
+local JumpPower = Tab2:CreateSlider({
+
+   Name = "JumpPower",
+
+   Range = {50, 500},
+
+   Increment = 10,
+
+   Suffix = "JumpPower",
+
+   CurrentValue = 50,
+
+   Flag = "Slider1", 
+
+   Callback = function(Value)
+
+     hm.JumpPower = Value
+
+   end,
+
+})
+
+
+
+local Recuperar_VC = Tab2:CreateButton({
+
+   Name = "Recuperar VC",
+
+   Callback = function()
+
+     game:GetService("VoiceChatService"):joinVoice()
+   end,
+
+})
+
+
+
+
+
+local FlyGui = Tab2:CreateButton({
+
+   Name = "FlyGui : Not Mine Credits To The Creator",
+
+   Callback = function()
+
+     loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
+
+   end,
+
+})
+
+
+
+
+
+local Dash = Tab2:CreateToggle({
+
+   Name = "Dash (F)",
+
+   CurrentValue = false,
+
+   Flag = "DashToggle",
+
+   Callback = function(Value)
+
+     if Value then
+
+       EnableDash()
+
+      else
+
+       UnableDash()
+
+    end
+
+   end,
+
+})
+
+
+
+
+
+local Sleep = Tab2:CreateToggle({
+
+   Name = "Sleep (F)",
+
+   CurrentValue = false,
+
+   Flag = "SleepToggle",
+
+   Callback = function(Value)
+
+     if Value then
+
+       if IsSleepToggle == false then
+
+         IsSleepToggle = true
+
+         SleepConnect()
+
+       end
+
+      else
+
+       IsSleepToggle = false
+
+       UnableSleepAnim()
+
+       SleepConnection:Disconnect()
+
+       
+       if pGui:FindFirstChild("SleepGui") then
+       pGui.SleepGui:Destroy()
+       end
+       
+    end
+
+   end,
+
+})
+
+
+
+
+
+
+local ShiftLock = Tab2:CreateToggle({
+
+   Name = "ShiftLock",
+
+   CurrentValue = false,
+
+   Flag = "ShiftLockToggle",
+
+   Callback = function(Value)
+
+     if Value then
+
+       EnableShiftLock()
+
+      else
+
+       UnableShiftLock()
+
+    end
+
+   end,
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+local TpWalk = Tab2:CreateToggle({
+
+   Name = "TpWalk",
+
+   CurrentValue = false,
+
+   Flag = "TpWalkToggle",
+
+   Callback = function(Value)
+
+     if Value then
+
+       EnableTpWalk()
+
+      else
+
+       UnableTpWalk()
+
+    end
+
+   end,
+
+})
+
+
+
+
+
+local TpWalkSpeed = Tab2:CreateSlider({
+
+   Name = "TpWalkSpeed",
+
+   Range = {1, 5},
+
+   Increment = 1,
+
+   Suffix = "TpWalkSpeed",
+
+   CurrentValue = 1,
+
+   Flag = "Slider1", 
+
+   Callback = function(Value)
+
+     Speed = Value
+
+   end,
+
+})
+
+
+
+--//Global Functions Tab3
+
+
+
+local nearestPlayer = nil
+
+
+
+local function GetNearestPlayer()
+
+  local Distancia_MasCorta = math.huge
+
+  for _, p in ipairs(Players:GetPlayers()) do
+
+    if p == localPlayer then
+
+      print("Excluido el localPlayer")
+
+    else
+
+      if p.TeamColor.Color ~= localPlayer.TeamColor.Color then
+
+    local pChar = p.Character
+
+    if pChar then
+
+      local pHRP = pChar:FindFirstChild("HumanoidRootPart")
+
+      if pHRP then
+
+        local distancia = (h.Position - pHRP.Position).Magnitude
+
+        if distancia < Distancia_MasCorta then
+
+          Distancia_MasCorta = distancia
+
+          nearestPlayer = p.Name
+
+          print("el jugador mas cercano es".. p.Name)
+
+          end
+
+        end
+
+        end
+
+      end
+
+    end
+
+  end
+
+end
+
+
+
+--//Tab3_Functions
+
+
+
+local aimbotState = false
+
+
+
+local function EnableAimbot()
+
+  aimbotState = true
+
+  task.spawn(function()
+
+    while aimbotState do
+
+      GetNearestPlayer()
+
+      local Target = Players:FindFirstChild(nearestPlayer)
+
+      if Target and Target.TeamColor == localPlayer.TeamColor then
+
+        print("equipo local escluido del aimbot")
+
+      else
+
+      if Target and Target.Character then
+
+        local TargetHRP = Target.Character:FindFirstChild("HumanoidRootPart")
+
+        if TargetHRP then
+
+          local TargetPosition = TargetHRP.Position
+
+          local LookAt = Vector3.new(TargetPosition.X , h.Position.Y , TargetPosition.Z)
+
+          h.CFrame = CFrame.lookAt(h.Position, LookAt)
+
+          camera.CFrame = CFrame.lookAt(camera.CFrame.Position, TargetPosition)
+
+          end
+
+        end
+
+      end
+
+      task.wait(0.001)
+
+    end
+
+  end)
+
+end
+
+
+
+local function UnableAimbot()
+
+  if aimbotState then
+
+    aimbotState = false
+
+  end
+
+end
+
+
+
+local HitboxStatus = false
+
+local Size = 3
+
+
+
+local function EnableHitbox()
+
+  HitboxStatus = true
+
+  for _, p in ipairs(Players:GetPlayers()) do
+
+    if p == localPlayer then
+
+      print("LocalPlayer excluido")
+
+    else
+
+    local pChar = p.Character
+
+    if pChar then
+
+      local pHRP = pChar:FindFirstChild("HumanoidRootPart")
+
+      if pHRP then
+
+        pHRP.Size = Vector3.new(Size,Size,Size)
+
+        pHRP.Material = Enum.Material.Neon
+
+        pHRP.Transparency = 0.8
+
+        pHRP.Color = Color3.fromRGB(255,0,0)
+
+        pHRP.Shape = Enum.PartType.Ball
+
+      end
+
+      end
+
+    end
+
+  end
+
+end
+
+
+
+local function UnableHitbox()
+
+  HitboxStatus = false
+
+  for _, p in ipairs(Players:GetPlayers()) do
+
+    if p == localPlayer then
+
+      print("localPlayer excluido")
+
+    else
+
+    local pChar = p.Character
+
+    if pChar then
+
+      local pHRP = pChar:FindFirstChild("HumanoidRootPart")
+
+      if pHRP then
+
+        pHRP.Size = Vector3.new(2,2,2)
+
+        pHRP.Transparency = 1
+
+        pHRP.Shape = Enum.PartType.Block
+
+      end
+
+      end
+
+    end
+
+  end
+
+end
+
+--//Tab3_Combat
+
+
+
+local Section1Tab3 = Tab3:CreateSection("Combat_Functions")
+
+
+
+local Aimbot = Tab3:CreateToggle({
+
+   Name = "Aimbot",
+
+   CurrentValue = false,
+
+   Flag = "AimbotToggle",
+
+   Callback = function(Value)
+
+     if Value then
+
+       EnableAimbot()
+
+      else
+
+      UnableAimbot()
+
+    end
+
+   end,
+
+})
+
+
+
+local Hitbox = Tab3:CreateToggle({
+
+   Name = "HitboxExpander",
+
+   CurrentValue = false,
+
+   Flag = "HitboxToggle",
+
+   Callback = function(Value)
+
+     if Value then
+
+       EnableHitbox()
+
+      else
+
+      UnableHitbox()
+
+    end
+
+   end,
+
+})
+
+
+
+
+
+local HitboxSlider = Tab3:CreateSlider({
+
+   Name = "HitboxSize",
+
+   Range = {3, 50},
+
+   Increment = 3,
+
+   Suffix = "Size",
+
+   CurrentValue = 3,
+
+   Flag = "Slider1", 
+
+   Callback = function(Value)
+
+     Size = Value
+
+   end,
+
+})
+
+
+
+--//Tab4
+
+
+
+local Section1Tab4 = Tab4:CreateSection("MM2")
+
+
+
+local Mm2 = Tab4:CreateButton({
+
+   Name = "MM2:XHub",
+
+   Callback = function()
+
+     loadstring(game:HttpGet("https://rawscripts.net/raw/Murder-Mystery-2-Xhub-13473"))()
+
+   end,
+
+})
+
+
+
+
+
+--//Tab5
+
+
+
+local Section1Tab5 = Tab5:CreateSection("DevTools")
+
+
+
+local DexExplorerPC = Tab5:CreateButton({
+
+   Name = "Dex Explorer (Pc)",
+
+   Callback = function()
+
+     loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Dex-Explorer-not-mine-33056"))()
+
+   end,
+
+})
+
+
+
+local DexExplorerMOBILE = Tab5:CreateButton({
+
+   Name = "Dex Explorer (Mobile)",
+
+   Callback = function()
+
+     loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Old-KEYLESS-Infinix-Dex-14090"))()
+
+   end,
+
+})
+
+
+
+local AnimationSpoofer = Tab5:CreateButton({
+
+   Name = "Animation Spoofer",
+
+   Callback = function()
+
+     loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Animation-Spoofer-12343"))()
+
+   end,
+
+})
+
+
+
+local CopyPos = Tab5:CreateButton({
+
+   Name = "CopyPosition",
+
+   Callback = function()
+
+     loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Position-Display-GUI-33062"))()
+
+   end,
+
+})
+
+
+
+
+
+local Section1AnimationsTab = AnimsTab:CreateSection("Animation Packs")
+
+
+local emotesApi = loadstring(game:HttpGet('https://raw.githubusercontent.com/MmZDrirk/Zzzzz/refs/heads/main/EmotesApi.txt'))()
+
+
+local function ChangeAnims(idle,walk,run,jump,fall,swim)
+
+Animate.idle:ClearAllChildren()
+ Animate.walk:ClearAllChildren()
+ Animate.run:ClearAllChildren()
+ Animate.jump:ClearAllChildren()
+ Animate.fall:ClearAllChildren()
+ Animate.swim:ClearAllChildren()
+
+
+
+
+
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://".. idle
+animation.Parent = Animate.idle
+
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://".. walk
+animation.Parent = Animate.walk
+
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://".. run
+animation.Parent = Animate.run
+
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://".. jump
+animation.Parent = Animate.jump
+
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://".. fall
+animation.Parent = Animate.fall
+
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://".. swim
+animation.Parent = Animate.swim
+
+end
+
+
+
+
+
+local ToyAnims = AnimsTab:CreateButton({
+   Name = "ToyAnimation",
+   Callback = function()
+ChangeAnims(
+emotesApi.ToyIdle,
+emotesApi.ToyWalk,
+emotesApi.ToyRun,
+emotesApi.ToyJump,
+emotesApi.ToyFall,
+emotesApi.ToySwim
+)
+   end,
+})
+
+local OldSchoolAnims = AnimsTab:CreateButton({
+   Name = "OldSchoolAnimation",
+   Callback = function()
+ChangeAnims(
+emotesApi.OldSchoolIdle,
+emotesApi.OldSchoolWalk,
+emotesApi.OldSchoolRun,
+emotesApi.OldSchoolJump,
+emotesApi.OldSchoolFall,
+emotesApi.OldSchoolSwim
+)
+   end,
+})
+
+local RobotAnims = AnimsTab:CreateButton({
+   Name = "RobotAnimation",
+   Callback = function()
+ChangeAnims(
+emotesApi.RobotIdle,
+emotesApi.RobotWalk,
+emotesApi.RobotRun,
+emotesApi.RobotJump,
+emotesApi.RobotFall,
+emotesApi.RobotSwim
+)
+   end,
+})
+
+local CartoonyAnims = AnimsTab:CreateButton({
+   Name = "CartoonyAnimation",
+   Callback = function()
+ChangeAnims(
+emotesApi.CartoonyIdle,
+emotesApi.CartoonyWalk,
+emotesApi.CartoonyRun,
+emotesApi.CartoonyJump,
+emotesApi.CartoonyFall,
+emotesApi.CartoonySwim
+)
+   end,
+})
+
+local AdidasAnims = AnimsTab:CreateButton({
+   Name = "AdidasAnimation",
+   Callback = function()
+ChangeAnims(
+emotesApi.AdidasIdle,
+emotesApi.AdidasWalk,
+emotesApi.AdidasRun,
+emotesApi.AdidasJump,
+emotesApi.AdidasFall,
+emotesApi.AdidasSwim
+)
+   end,
+})
+
+local MageAnims = AnimsTab:CreateButton({
+   Name = "MageAnimation",
+   Callback = function()
+ChangeAnims(
+emotesApi.MageIdle,
+emotesApi.MageWalk,
+emotesApi.MageRun,
+emotesApi.MageJump,
+emotesApi.MageFall,
+emotesApi.MageSwim
+)
+   end,
+})
+
+local ElderAnims = AnimsTab:CreateButton({
+   Name = "ElderAnimation",
+   Callback = function()
+ChangeAnims(
+emotesApi.ElderIdle,
+emotesApi.ElderWalk,
+emotesApi.ElderRun,
+emotesApi.ElderJump,
+emotesApi.ElderFall,
+emotesApi.ElderSwim
+)
+   end,
+})
+
+local StylishAnims = AnimsTab:CreateButton({
+   Name = "StylishAnimation",
+   Callback = function()
+ChangeAnims(
+emotesApi.StylishIdle,
+emotesApi.StylishWalk,
+emotesApi.StylishRun,
+emotesApi.StylishJump,
+emotesApi.StylishFall,
+emotesApi.StylishSwim
+)
+   end,
+})
+
+local BoldAnims = AnimsTab:CreateButton({
+   Name = "BoldAnimation",
+   Callback = function()
+ChangeAnims(
+emotesApi.BoldIdle,
+emotesApi.BoldWalk,
+emotesApi.BoldRun,
+emotesApi.BoldJump,
+emotesApi.BoldFall,
+emotesApi.BoldSwim
+)
+   end,
+})
+
+local CatWalkAnims = AnimsTab:CreateButton({
+   Name = "CatWalkAnimation",
+   Callback = function()
+ChangeAnims(
+emotesApi.CatWalIdle,
+emotesApi.CatWalkWalk,
+emotesApi.CatWalkRun,
+emotesApi.CatWalkJump,
+emotesApi.CatWalkFall,
+emotesApi.CatWalkSwim
+)
+   end,
+})
+
+local ZombieAnims = AnimsTab:CreateButton({
+   Name = "ZombieAnimation",
+   Callback = function()
+ChangeAnims(
+emotesApi.ZombieIdle,
+emotesApi.ZombieWalk,
+emotesApi.ZombieRun,
+emotesApi.ZombieJump,
+emotesApi.ZombieFall,
+emotesApi.ZombieSwim
+)
+   end,
+})
+
+local WickedAnims = AnimsTab:CreateButton({
+   Name = "WickedAnimation",
+   Callback = function()
+ChangeAnims(
+emotesApi.WickedIdle,
+emotesApi.WickedWalk,
+emotesApi.WickedRun,
+emotesApi.WickedJump,
+emotesApi.WickedFall,
+emotesApi.WickedSwim
+)
+   end,
+})
+
+local NflAnims = AnimsTab:CreateButton({
+   Name = "NflAnimation",
+   Callback = function()
+ChangeAnims(
+emotesApi.NflIdle,
+emotesApi.NflWalk,
+emotesApi.NflRun,
+emotesApi.NflJump,
+emotesApi.NflFall,
+emotesApi.NflSwim
+)
+   end,
+})
+
+local SuperHeroAnims = AnimsTab:CreateButton({
+   Name = "SuperHeroAnimation",
+   Callback = function()
+ChangeAnims(
+emotesApi.SuperHeroIdle,
+emotesApi.SuperHeroWalk,
+emotesApi.SuperHeroRun,
+emotesApi.SuperHeroJump,
+emotesApi.SuperHeroFall,
+emotesApi.SuperHeroSwim
+)
+   end,
+})
+
+local NoBoundariesAnims = AnimsTab:CreateButton({
+   Name = "NoBoundariesAnimation",
+   Callback = function()
+ChangeAnims(
+emotesApi.NoBoundariesIdle,
+emotesApi.NoBoundariesWalk,
+emotesApi.NoBoundariesRun,
+emotesApi.NoBoundariesJump,
+emotesApi.NoBoundariesFall,
+emotesApi.NoBoundariesSwim
+)
+   end,
+})
+
+local VampireAnims = AnimsTab:CreateButton({
+   Name = "VampireAnimation",
+   Callback = function()
+ChangeAnims(
+emotesApi.VampireIdle,
+emotesApi.VampireWalk,
+emotesApi.VampireRun,
+emotesApi.VampireJump,
+emotesApi.VampireFall,
+emotesApi.VampireSwim
+)
+   end,
+})
+
+local WereWolfAnims = AnimsTab:CreateButton({
+   Name = "WereWolfAnimation",
+   Callback = function()
+ChangeAnims(
+emotesApi.WereWolfIdle,
+emotesApi.WereWolfWalk,
+emotesApi.WereWolfRun,
+emotesApi.WereWolfJump,
+emotesApi.WereWolfFall,
+emotesApi.WereWolfSwim
+)
+   end,
+})
+
+local NinjaAnims = AnimsTab:CreateButton({
+   Name = "NinjaAnimation",
+   Callback = function()
+ChangeAnims(
+emotesApi.NinjaIdle,
+emotesApi.NinjaWalk,
+emotesApi.NinjaRun,
+emotesApi.NinjaJump,
+emotesApi.NinjaFall,
+emotesApi.NinjaSwim
+)
+   end,
+})
+
+local AstronautAnims = AnimsTab:CreateButton({
+   Name = "AstronautAnimation",
+   Callback = function()
+ChangeAnims(
+emotesApi.AstronautIdle,
+emotesApi.AstronautWalk,
+emotesApi.AstronautRun,
+emotesApi.AstronautJump,
+emotesApi.AstronautFall,
+emotesApi.AstronautSwim
+)
+   end,
+})
+
+local LevitationAnims = AnimsTab:CreateButton({
+   Name = "LevitationAnimation",
+   Callback = function()
+ChangeAnims(
+emotesApi.LevitationIdle,
+emotesApi.LevitationWalk,
+emotesApi.LevitationRun,
+emotesApi.LevitationJump,
+emotesApi.LevitationFall,
+emotesApi.LevitationSwim
+)
+   end,
+})
+
+local KnightAnims = AnimsTab:CreateButton({
+   Name = "KnightAnimation",
+   Callback = function()
+ChangeAnims(
+emotesApi.KnightIdle,
+emotesApi.KnightWalk,
+emotesApi.KnightRun,
+emotesApi.KnightJump,
+emotesApi.KnightFall,
+emotesApi.KnightSwim
+)
+   end,
+})
+
+local BubblyAnims = AnimsTab:CreateButton({
+   Name = "BubblyAnimation",
+   Callback = function()
+ChangeAnims(
+emotesApi.BubblyIdle,
+emotesApi.BubblyWalk,
+emotesApi.BubblyRun,
+emotesApi.BubblyJump,
+emotesApi.BubblyFall,
+emotesApi.BubblySwim
+)
+   end,
+})
+
+local PirateAnims = AnimsTab:CreateButton({
+   Name = "PirateAnimation",
+   Callback = function()
+ChangeAnims(
+emotesApi.PirateIdle,
+emotesApi.PirateWalk,
+emotesApi.PirateRun,
+emotesApi.PirateJump,
+emotesApi.PirateFall,
+emotesApi.PirateSwim
+)
+   end,
+})
+
+local RThroAnims = AnimsTab:CreateButton({
+   Name = "RThroAnimation",
+   Callback = function()
+ChangeAnims(
+emotesApi.RThroIdle,
+emotesApi.RThroWalk,
+emotesApi.RThroRun,
+emotesApi.RThroJump,
+emotesApi.RThroFall,
+emotesApi.RThroSwim
+)
+   end,
+})
+
+
+
+
+
+
+--//CharacterAdded
+
+
+
+localPlayer.CharacterAdded:Connect(function()
+
+  
+
+task.spawn(function()
+
+  while wait(0.01) do
+
+  reconnect()
+
+  end
+
+end)
+
+
+
+wait(0.5)
+
+  
+
+  if aimbotState == true then
+
+    EnableAimbot()
+
+    print("aimbot Reconnectado")
+
+  else
+
+    print("se intento reactivar el aimbot pero la condicion no se cumplio")
+
+  end
+
+  
+
+  if HitboxStatus == true then
+
+    EnableHitbox()
+
+    print("hitbox Reconnectada")
+
+  else
+
+    print("se intento reactivar el hitbox pero la condicion no se cumplio")
+
+  end
+
+
+
+if locateState == true then
+
+  Locate()
+
+  print("Locate Reconnectado")
+
+else
+
+  print("se intento reactivar el locate pero la condicion no se cumplio")
+
+end
+
+
+
+if LocateAllState == true then
+
+  locateALL()
+
+  print("EspAll Reconnectado")
+
+else 
+
+  print("se intento reactivar denuevo el LocateAll pero la Condicion no se cumplio")
+
+end
+    
+        if SpectateState == true then
+         Espectate()
+    end
+    
+    if DashState == true then
+    DashGui()
+    end
+    
+end)
+
+
+
+
+for _, p in ipairs(Players:GetPlayers()) do
+p.CharacterAdded:Connect(function()
+
+if LocateAllState == true then
+
+      LocateAll()
+
+    end
+
+    
+    if SpectateState == true then
+         Espectate()
+    end
+
+
+
+    if HitboxStatus == true then
+
+      EnableHitbox()
+
+    end
+    
+
+end)
+end
+
+
+
+
+
+Players.PlayerAdded:Connect(function(plr)
+
+  plr.CharacterAdded:Connect(function()
+
+    if LocateAllState == true then
+
+      LocateAll()
+
+    end
+
+    
+    if SpectateState == true then
+         Espectate()
+    end
+
+
+
+    if HitboxStatus == true then
+
+      EnableHitbox()
+
+    end
+  end)
+
+end)
+end
