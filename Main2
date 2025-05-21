@@ -1,0 +1,693 @@
+
+local workspace = game.Workspace
+local iluminacion = game:GetService("Lighting")
+local Players = game.Players
+local localPlayer = Players.LocalPlayer
+local pGui = localPlayer.PlayerGui
+local char = localPlayer.Character or localPlayer.CharacterAdded:Wait()
+local Animate = char:WaitForChild("Animate")
+local hm = char:WaitForChild("Humanoid")
+local h = char:WaitForChild("HumanoidRootPart")
+local Head = char:WaitForChild("Head")
+local camera = workspace.CurrentCamera
+local Run = game:GetService("RunService")
+local Uis = game:GetService("UserInputService")
+local VirtualInputManager = game:GetService("VirtualInputManager")
+
+
+
+local NullModz = loadstring(game:HttpGet("https://raw.githubusercontent.com/MmZDrirk/Zzzzz/refs/heads/main/Main.txt"))()
+
+
+local Rayfield = getgenv().Rayfield
+local Tab1 = getgenv().Tab1
+local Tab2 = getgenv().Tab2
+local Tab3 = getgenv().Tab3
+local AnimsTab = getgenv().AnimsTab
+local Tab4 = getgenv().Tab4
+local Tab5 = getgenv().Tab5
+
+--//Tab1 Functions
+
+
+
+
+
+--//Tab2 Functions
+
+local AntiFlingConnection = nil
+
+
+local function AntiFling()
+if AntiFlingConnection then
+AntiFlingConnection:Disconnect()
+end
+
+    AntiFlingConnection = Run.Heartbeat:Connect(function()
+    for _, p in ipairs(Players:GetPlayers()) do
+    if p ~= localPlayer and p.Character then
+    for _, parts in ipairs(p.Character:GetChildren()) do
+    if parts:IsA("BasePart") then
+    parts.CanCollide = false
+    end
+    end
+    end
+    end
+    end)
+end
+
+local function UnableAntiFling()
+    if AntiFlingConnection then
+    AntiFlingConnection:Disconnect()
+    
+    for _, p in ipairs(Players:GetPlayers()) do
+    if p.Character then
+    for _, parts in ipairs(p.Character:GetChildren()) do
+    if parts:IsA("BasePart") and parts.Name ~= "HumanoidRootPart" then
+    parts.CanCollide = true
+    end
+    end
+    end
+    end
+    end
+end
+
+
+---------------
+
+
+local AntiAfkState = false
+
+
+
+local function AntiAfk()
+task.spawn(function()
+AntiAfkState = true
+while AntiAfkState do
+h.CFrame = h.CFrame * CFrame.new(0,1,0)
+task.wait(5)
+end
+end)
+end
+
+local function UnableAntiAfk()
+if AntiAfkState == true then
+AntiAfkState = false
+end
+end
+
+
+
+----------------
+
+
+local VisibleParts = {}
+local InvisibleParts = {}
+
+
+local function xray()
+table.clear(VisibleParts)
+table.clear(InvisibleParts)
+
+
+for _, obj in ipairs(workspace:GetDescendants()) do
+if obj ~= localPlayer.Character and obj:IsA("BasePart") then
+if obj.Transparency == 0 then
+table.insert(VisibleParts, obj)
+end
+
+if obj.Transparency == 1 then
+table.insert(InvisibleParts, obj)
+end
+
+obj.Transparency = 0.9
+end
+end
+end
+
+
+local function Unablexray()
+for _, parts in ipairs(VisibleParts) do
+if parts then
+parts.Transparency =  0
+end
+end
+
+for _, parts in ipairs(InvisibleParts) do
+if parts then
+parts.Transparency = 1
+end
+end
+end
+
+
+-----------------------
+
+local OriginClockTime = nil
+local OriginBrightness = nil
+local OriginAmbient = nil
+local OriginGlobalShadows = nil
+
+local ModdedClockTime = 14
+local ModdedBrightness = 5
+local ModdedAmbient = Color3.new(1,1,1)
+
+local function FullBright()
+OriginClickTime = iluminacion.ClockTime
+OriginBrightness = iluminacion.Brightness
+OriginAmbient = iluminacion.Ambient
+OriginGlobalShadows = iluminacion.GlobalShadows
+
+iluminacion.ClockTime = ModdedClockTime
+iluminacion.Brightness = ModdedBrightness
+iluminacion.Ambient = ModdedAmbient
+iluminacion.GlobalShadows = false
+end
+
+local function UnableFullBright()
+iluminacion.ClockTime = OriginClockTime
+iluminacion.Brightness = OriginBrightness
+iluminacion.Ambient = OriginAmbient
+iluminacion.GlobalShadows = OriginGlobalShadows
+end
+
+-------------------------
+
+local originClockTime = nil
+local ClockTimeConnect = nil
+local Time = 0.1
+
+
+local function CustomTime()
+originClockTime = iluminacion.ClockTime
+
+ClockTimeConnect = Run.Heartbeat:Connect(function()
+iluminacion.ClockTime = Time
+end)
+end
+
+local function UnableCustomTime()
+if ClockTimeConnect then
+ClockTimeConnect:Disconnect()
+end
+
+iluminacion.ClockTime = originClockTime
+
+end
+
+---------------------------
+
+
+local MuteAllConnection = nil
+local Sonidos = {}
+
+
+local function MuteAll()
+table.clear(Sonidos)
+for _, obj in ipairs(game:GetDescendants()) do
+if obj:IsA("Sound") then
+Sonidos[obj] = obj.Volume
+obj.Volume = 0
+end
+end
+end
+
+local function UnMuteAll()
+for sonido, Volumen in pairs(Sonidos) do
+if sonido and sonido:IsDescendantOf(game) then
+sonido.Volume = Volumen
+end
+end
+
+table.clear(Sonidos)
+end
+
+
+
+local AntiF = Tab2:CreateToggle({
+    Name = "AntiFling()",
+    CurrentValue = false,
+    Flag = "AntiFlingToggle",
+    Callback = function(Value)
+        if Value then
+            AntiFling()
+        else
+            UnableAntiFling()
+        end
+    end,
+})
+
+local antiAFK = Tab2:CreateToggle({
+    Name = "AntiAFK",
+    CurrentValue = false,
+    Flag = "AntiAFKToggle",
+    Callback = function(Value)
+        if Value then
+            AntiAfk()
+        else
+            UnableAntiAfk()
+        end
+    end,
+})
+
+local XRay = Tab2:CreateToggle({
+    Name = "XRay",
+    CurrentValue = false,
+    Flag = "XRayToggle",
+    Callback = function(Value)
+        if Value then
+            xray()
+        else
+            Unablexray()
+        end
+    end,
+})
+
+local Fb = Tab2:CreateToggle({
+    Name = "FullBright",
+    CurrentValue = false,
+    Flag = "FullBrightToggle",
+    Callback = function(Value)
+        if Value then
+            FullBright()
+        else
+            UnableFullBright()
+        end
+    end,
+})
+
+local CustomT = Tab2:CreateToggle({
+    Name = "CustomTime",
+    CurrentValue = false,
+    Flag = "CustomTimeToggle",
+    Callback = function(Value)
+        if Value then
+            CustomTime()
+        else
+            UnableCustomTime()
+        end
+    end,
+})
+
+local CustomTimeSlider = Tab2:CreateSlider({
+
+   Name = "Time",
+
+   Range = {0.1, 24},
+
+   Increment = 0.1,
+
+   Suffix = "Time",
+
+   CurrentValue = 16,
+
+   Flag = "Slider1", 
+
+   Callback = function(Value)
+
+     Time = Value
+   end,
+
+})
+
+
+local Mute = Tab2:CreateToggle({
+    Name = "MuteGame (Don't VoiceChat)",
+    CurrentValue = false,
+    Flag = "MuteGameToggle",
+    Callback = function(Value)
+        if Value then
+            MuteAll()
+        else
+            UnMuteAll()
+        end
+    end,
+})
+
+
+--//Tab3Functions
+
+
+
+-- Librerías
+local Players = game:GetService("Players")
+local Run = game:GetService("RunService")
+local localPlayer = Players.LocalPlayer
+local Camera = workspace.CurrentCamera
+
+-- Configurables
+_G.ESP_ENABLED = false
+_G.SHOW_BOX = false
+_G.SHOW_LINE = false
+_G.SHOW_NAME = false
+_G.ESP_MULTICOLOR = false
+_G.ESP_COLOR = Color3.new(1, 0, 0)
+
+-- Dibujos
+local espObjects = {}
+
+-- Crear ESP
+local function CreateESP(player)
+    if espObjects[player] then
+        for _, v in pairs(espObjects[player]) do
+            v:Remove()
+        end
+    end
+
+    local boxOutline = Drawing.new("Square")
+    boxOutline.Color = Color3.new(0,0,0)
+    boxOutline.Thickness = 3
+    boxOutline.Filled = false
+    boxOutline.Visible = false
+
+    local box = Drawing.new("Square")
+    box.Color = _G.ESP_COLOR
+    box.Thickness = 2
+    box.Filled = false
+    box.Visible = false
+
+    local line = Drawing.new("Line")
+    line.Color = _G.ESP_COLOR
+    line.Thickness = 2
+    line.Visible = false
+
+    local name = Drawing.new("Text")
+    name.Text = player.Name
+    name.Color = _G.ESP_COLOR
+    name.Size = 14
+    name.Visible = false
+    name.Center = true
+    name.Outline = true
+
+    espObjects[player] = {
+        boxOutline = boxOutline,
+        box = box,
+        line = line,
+        name = name
+    }
+end
+
+-- Actualizar ESP
+local function UpdateESP()
+    local viewportSize = Camera.ViewportSize
+    local screenCenter = Vector2.new(viewportSize.X / 2, viewportSize.Y)
+
+    local color = _G.ESP_COLOR
+    if _G.ESP_MULTICOLOR then
+        local time = tick()
+        color = Color3.fromHSV((time % 5) / 5, 1, 1)
+    end
+
+    for player, drawings in pairs(espObjects) do
+        local character = player.Character
+        local rootPart = character and character:FindFirstChild("HumanoidRootPart")
+        local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+
+        if not _G.ESP_ENABLED or player == localPlayer or not character or not rootPart or not humanoid or humanoid.Health <= 0 then
+            drawings.boxOutline.Visible = false
+            drawings.box.Visible = false
+            drawings.line.Visible = false
+            drawings.name.Visible = false
+        else
+            local screenPos, onScreen = Camera:WorldToViewportPoint(rootPart.Position)
+
+            if onScreen then
+                local size = Vector2.new(35, 55)
+
+                drawings.box.Color = color
+                drawings.line.Color = color
+                drawings.name.Color = color
+
+                if _G.SHOW_BOX then
+                    drawings.boxOutline.Visible = true
+                    drawings.box.Visible = true
+                    drawings.boxOutline.Position = Vector2.new(screenPos.X - size.X/2 - 1.5, screenPos.Y - size.Y/2 - 1.5)
+                    drawings.boxOutline.Size = size
+                    drawings.box.Position = Vector2.new(screenPos.X - size.X/2, screenPos.Y - size.Y/2)
+                    drawings.box.Size = size
+                else
+                    drawings.boxOutline.Visible = false
+                    drawings.box.Visible = false
+                end
+
+                if _G.SHOW_LINE then
+                    drawings.line.Visible = true
+                    drawings.line.From = screenCenter
+                    drawings.line.To = Vector2.new(screenPos.X, screenPos.Y)
+                else
+                    drawings.line.Visible = false
+                end
+
+                if _G.SHOW_NAME then
+                    drawings.name.Visible = true
+                    drawings.name.Position = Vector2.new(screenPos.X, screenPos.Y - size.Y/2 - 15)
+                else
+                    drawings.name.Visible = false
+                end
+            else
+                drawings.boxOutline.Visible = false
+                drawings.box.Visible = false
+                drawings.line.Visible = false
+                drawings.name.Visible = false
+            end
+        end
+    end
+end
+
+-- Inicializar jugador
+local function setupPlayer(player)
+    player.CharacterAdded:Connect(function()
+        wait(1)
+        CreateESP(player)
+    end)
+    if player.Character then
+        CreateESP(player)
+    end
+end
+
+-- Conectar jugadores
+for _, player in pairs(Players:GetPlayers()) do
+    if player ~= localPlayer then
+        setupPlayer(player)
+    end
+end
+
+Players.PlayerAdded:Connect(function(player)
+    setupPlayer(player)
+end)
+
+Run.RenderStepped:Connect(UpdateESP)
+
+
+
+
+
+
+--//Tab3 Buttons etc
+
+
+local Section2Tab3 = Tab3:CreateSection("CombatEsp")
+
+
+local EspCombat = Tab3:CreateToggle({
+    Name = "EspCombat",
+    CurrentValue = false,
+    Flag = "EspCombatToggle",
+    Callback = function(Value)
+        if Value then
+            _G.ESP_ENABLED = true
+        else
+            _G.ESP_ENABLED = false
+        end
+    end,
+})
+
+
+local Box = Tab3:CreateToggle({
+    Name = "EspBox",
+    CurrentValue = false,
+    Flag = "EspBoxToggle",
+    Callback = function(Value)
+        if Value then
+            _G.SHOW_BOX = true
+        else
+            _G.SHOW_BOX = false
+        end
+    end,
+})
+
+
+local Line = Tab3:CreateToggle({
+    Name = "EspLine",
+    CurrentValue = false,
+    Flag = "EspLineToggle",
+    Callback = function(Value)
+        if Value then
+            _G.SHOW_LINE = true
+        else
+            _G.SHOW_LINE = false
+        end
+    end,
+})
+
+
+local Name = Tab3:CreateToggle({
+    Name = "EspName",
+    CurrentValue = false,
+    Flag = "EspNameToggle",
+    Callback = function(Value)
+        if Value then
+            _G.SHOW_NAME = true
+        else
+            _G.SHOW_NAME = false
+        end
+    end,
+})
+
+
+local Rainbow = Tab3:CreateToggle({
+    Name = "EspRainbow",
+    CurrentValue = false,
+    Flag = "EspRainbowToggle",
+    Callback = function(Value)
+        if Value then
+            _G.ESP_MULTICOLOR = true
+        else
+            _G.ESP_MULTICOLOR = false
+        end
+    end,
+})
+
+
+local EspColorPicker = Tab3:CreateColorPicker({
+    Name = "EspColor",
+    Color = Color3.fromRGB(1,0,0),
+    Flag = "ColorPicker1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        _G.ESP_COLOR  = Value
+       end
+})
+
+--//Tab4
+
+local Section2Tab4 = Tab4:CreateSection("Brookhaven")
+
+local Brookhaven = Tab4:CreateButton({
+
+   Name = "Brookhaven",
+
+   Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/as6cd0/SP_Hub/refs/heads/main/Brookhaven"))()
+   end,
+
+})
+
+local Section3Tab4 = Tab4:CreateSection("NaturalDisaster")
+
+local NaturalDisaster = Tab4:CreateButton({
+
+   Name = "NaturalDisaster",
+
+   Callback = function() 
+loadstring(game:HttpGet("https://rawscripts.net/raw/Natural-Disaster-Survival-NullFire-NDS-24033"))()
+   end,
+
+})
+
+local Section4Tab4 = Tab4:CreateSection("DeadRails")
+
+local DealRails = Tab4:CreateButton({
+
+   Name = "DeadRails_AutoBonds",
+
+   Callback = function() 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/LiterallyBacon12/LUNEC-On-Top/refs/heads/main/Official%20Source.lua"))()
+   end,
+
+})
+
+--//Tab5
+
+
+local SigmaSpy = Tab5:CreateButton({
+
+   Name = "SigmaSpy (remote spy)",
+
+   Callback = function() 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/depthso/Sigma-Spy/refs/heads/main/Main.lua"), "Sigma Spy")()
+   end,
+
+})
+
+
+
+
+
+
+
+
+
+
+
+local function reconnect()
+
+
+  workspace = game.Workspace
+
+ iluminacion = game:GetService("Lighting")
+
+ Players = game.Players
+
+ localPlayer = Players.LocalPlayer
+
+ pGui = localPlayer.PlayerGui
+
+ char = localPlayer.Character
+
+ Animate = char:WaitForChild("Animate")
+
+ hm = char:WaitForChild("Humanoid")
+
+ h = char:WaitForChild("HumanoidRootPart")
+
+ Head = char:WaitForChild("Head")
+
+ camera = game.Workspace.CurrentCamera
+
+ Run = game:GetService("RunService")
+
+ Uis = game:GetService("UserInputService")
+ local VirtualInputManager = game:GetService("VirtualInputManager")
+ 
+
+  
+
+end
+
+
+
+localPlayer.CharacterAdded:Connect(function()
+reconnect()
+end)
+
+
+
+
+
+local AdminApi = loadstring(game:HttpGet("https://raw.githubusercontent.com/MmZDrirk/Zzzzz/refs/heads/main/Admin.txt"))()
+
+local WebHook = loadstring(game:HttpGet("https://raw.githubusercontent.com/MmZDrirk/Zzzzz/refs/heads/main/WebHook"))()
+
+
+
+
+
+
+setclipboard("https://discord.com/invite/JmsBVP72")
+
+
+Rayfield:Notify({
+   Title = "Discord Link",
+   Content = "Discord Link Coppied To Your Clipboard",
+   Duration = 6.5,
+   Image = 4483362458,
+})
