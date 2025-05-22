@@ -57,6 +57,16 @@ Uis.InputBegan:Connect(function(input)
       local bv = Makebv()
       hm.PlatformStand = true
       bv.Parent = hrp
+      for _, obj in ipairs(char:GetChildren()) do
+        if obj:IsA("BasePart") then
+          task.spawn(function()
+            while isFly do
+          obj.CanCollide = false
+          task.wait(0.01)
+          end
+          end)
+        end
+      end
     elseif isFly then
       local bv = hrp:FindFirstChild("BodyVelocity")
       if bv then
@@ -73,6 +83,12 @@ Uis.InputBegan:Connect(function(input)
         DPressed = false
         hm.PlatformStand = false
         bv:Destroy()
+        
+        for _, obj in ipairs(char:GetChildren()) do
+        if obj:IsA("BasePart") then
+          obj.CanCollide = true
+        end
+      end
       end
       for _, animt in ipairs(hm:GetPlayingAnimationTracks()) do
       if animt.Animation.AnimationId == IdleAnim or animt.Animation.AnimationId == AdelanteAnim or animt.Animation.AnimationId == AtrasAnim or animt.Animation.AnimationId == LadosAnim then
