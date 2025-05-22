@@ -27,7 +27,7 @@ end
 
 local isFly = false
 local camera = game.Workspace.CurrentCamera
-local FlySpeed = 100
+local FlySpeed = 50
 
 local isIdle = false
 
@@ -320,7 +320,7 @@ TextBox.Position = UDim2.new(0.5, 0, 0.01, 0)
 TextBox.BackgroundColor3 = Color3.new(0, 0, 0)
 TextBox.BorderColor3 = Color3.new(1, 0, 0)
 TextBox.BorderSizePixel = 2
-TextBox.Text = "FlySpeed = 100"
+TextBox.Text = "FlySpeed = 50"
 TextBox.TextColor3 = Color3.new(1,0,0)
 TextBox.BackgroundTransparency = 0
 TextBox.Font = Enum.Font.Code
