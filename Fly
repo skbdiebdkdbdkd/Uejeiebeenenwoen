@@ -1,0 +1,368 @@
+local Player = game.Players.LocalPlayer
+local char = Player.Character
+local hrp = char:FindFirstChild("HumanoidRootPart")
+local hm = char:FindFirstChild("Humanoid")
+local PGUI = Player:FindFirstChild("PlayerGui")
+
+local Uis = game:GetService("UserInputService")
+
+
+local IdleAnim = "rbxassetid://134283166482394"
+local AdelanteAnim = "rbxassetid://15698404340"
+local AtrasAnim = "rbxassetid://116936326516985"
+local LadosAnim = "rbxassetid://10147823318"
+
+
+
+local function PlayAnim(Id,Time)
+  local Animation = Instance.new("Animation")
+  Animation.AnimationId = Id
+  
+  local AnimTrack = hm:LoadAnimation(Animation)
+  AnimTrack:Play()
+  AnimTrack:AdjustSpeed(0)
+  task.wait(0.0001)
+  AnimTrack.TimePosition = Time
+end
+
+local isFly = false
+local camera = game.Workspace.CurrentCamera
+local FlySpeed = 100
+
+local isIdle = false
+
+local WPressed = false
+local APressed = false
+local SPressed = false
+local DPressed = false
+
+
+local IdleAnimIsPlay = false
+local AdelanteAnimIsPlay = false
+local AtrasAnimIsPlay = false
+local IzquierdaAnimIsPlay = false
+local DerechaAnimIsPlay = false
+
+local function Makebv()
+  local bv = Instance.new("BodyVelocity")
+  bv.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+  return bv
+end
+
+
+Uis.InputBegan:Connect(function(input)
+  if input.KeyCode == Enum.KeyCode.F then
+    if isFly == false then
+      isFly = true
+      local bv = Makebv()
+      hm.PlatformStand = true
+      bv.Parent = hrp
+    elseif isFly then
+      local bv = hrp:FindFirstChild("BodyVelocity")
+      if bv then
+        isFly = false
+        IdleAnimIsPlay = false
+        AdelanteAnimIsPlay = false
+        AtrasAnimIsPlay = false
+        DerechaAnimIsPlay = false
+        IzquierdaAnimIsPlay = false
+        
+        WPressed = false
+        SPressed = false
+        APressed = false
+        DPressed = false
+        hm.PlatformStand = false
+        bv:Destroy()
+      end
+      for _, animt in ipairs(hm:GetPlayingAnimationTracks()) do
+      if animt.Animation.AnimationId == IdleAnim or animt.Animation.AnimationId == AdelanteAnim or animt.Animation.AnimationId == AtrasAnim or animt.Animation.AnimationId == LadosAnim then
+        animt:Stop()
+      end
+      end
+    end
+  elseif input.KeyCode == Enum.KeyCode.W then
+    if isFly then
+      WPressed = true
+    end
+  elseif input.KeyCode == Enum.KeyCode.S then
+    if isFly then
+      SPressed = true
+    end
+  elseif input.KeyCode == Enum.KeyCode.A then
+    if isFly then
+      APressed = true
+    end
+  elseif input.KeyCode == Enum.KeyCode.D then
+    if isFly then
+      DPressed = true
+    end
+  end
+end)
+
+Uis.InputEnded:Connect(function(input)
+  if input.KeyCode == Enum.KeyCode.W then
+    if isFly then
+      WPressed = false
+      for _, animt in ipairs(hm:GetPlayingAnimationTracks()) do
+      if animt.Animation.AnimationId == AdelanteAnim then
+        animt:Stop()
+        AdelanteAnimIsPlay = false
+      end
+      end
+    end
+  elseif input.KeyCode == Enum.KeyCode.S then
+    if isFly then
+      SPressed = false
+      for _, animt in ipairs(hm:GetPlayingAnimationTracks()) do
+      if animt.Animation.AnimationId == AtrasAnim then
+        animt:Stop()
+        AtrasAnimIsPlay = false
+      end
+      end
+    end
+  elseif input.KeyCode == Enum.KeyCode.A then
+    if isFly then
+      APressed = false
+      for _, animt in ipairs(hm:GetPlayingAnimationTracks()) do
+      if animt.Animation.AnimationId == LadosAnim then
+        animt:Stop()
+        IzquierdaAnimIsPlay = false
+      end
+      end
+    end
+  elseif input.KeyCode == Enum.KeyCode.D then
+    if isFly then
+      DPressed = false
+      for _, animt in ipairs(hm:GetPlayingAnimationTracks()) do
+      if animt.Animation.AnimationId == LadosAnim then
+        animt:Stop()
+        DerechaAnimIsPlay = false
+      end
+      end
+    end
+  end
+end)
+
+
+local Run = game:GetService("RunService")
+
+Run.Heartbeat:Connect(function()
+  
+  if isFly then
+  hrp.CFrame = CFrame.lookAt(hrp.Position, hrp.Position + camera.CFrame.LookVector)
+  end
+  
+  if isFly then
+    local bv = hrp:FindFirstChild("BodyVelocity")
+    if WPressed then
+      isIdle = false
+      if AdelanteAnimIsPlay == false then
+        PlayAnim(AdelanteAnim,1)
+        AdelanteAnimIsPlay = true
+      end
+      for _, animt in ipairs(hm:GetPlayingAnimationTracks()) do
+      if animt.Animation.AnimationId == IdleAnim then
+        animt:Stop()
+        IdleAnimIsPlay = false
+      end
+      end
+      bv.Velocity = camera.CFrame.LookVector * FlySpeed
+    elseif SPressed then
+      isIdle = false
+      if AtrasAnimIsPlay == false then
+        PlayAnim(AtrasAnim,0.1)
+        AtrasAnimIsPlay = true
+      end
+      for _, animt in ipairs(hm:GetPlayingAnimationTracks()) do
+      if animt.Animation.AnimationId == IdleAnim then
+        animt:Stop()
+        IdleAnimIsPlay = false
+      end
+      end
+      bv.Velocity = camera.CFrame.LookVector * -FlySpeed
+    elseif APressed then
+      isIdle = false
+      if IzquierdaAnimIsPlay == false then
+        PlayAnim(LadosAnim,2)
+        IzquierdaAnimIsPlay = true
+      end
+      for _, animt in ipairs(hm:GetPlayingAnimationTracks()) do
+      if animt.Animation.AnimationId == IdleAnim then
+        animt:Stop()
+        IdleAnimIsPlay = false
+      end
+      end
+      bv.Velocity = camera.CFrame.RightVector * -FlySpeed
+    elseif DPressed then
+      isIdle = false
+      if DerechaAnimIsPlay == false then
+        PlayAnim(LadosAnim,6)
+        DerechaAnimIsPlay = true
+      end
+      for _, animt in ipairs(hm:GetPlayingAnimationTracks()) do
+      if animt.Animation.AnimationId == IdleAnim then
+        animt:Stop()
+        IdleAnimIsPlay = false
+      end
+      end
+      bv.Velocity = camera.CFrame.RightVector * FlySpeed
+    elseif WPressed == false and SPressed == false and APressed == false and DPressed == false then
+      isIdle = true
+      bv.Velocity = Vector3.new(0,0,0)
+      if IdleAnimIsPlay == false then
+      PlayAnim(IdleAnim,3.65)
+      IdleAnimIsPlay = true
+      end
+    end
+    end
+end)
+
+local function MakeMobileGui()
+local gui = Instance.new("ScreenGui")
+gui.Parent = PGUI
+
+
+local Frame = Instance.new("Frame")
+Frame.Active = false
+Frame.Visible = false
+Frame.Size = UDim2.new(0.5, 0, 0.7, 0)
+Frame.Position = UDim2.new(0.01, 0, 0.3, 0)
+Frame.BackgroundColor3 = Color3.new(1, 1, 1)
+Frame.BorderColor3 = Color3.new(0, 0, 0)
+Frame.BorderSizePixel = 1
+Frame.BackgroundTransparency = 1
+Frame.Draggable = false
+Frame.Parent = gui
+
+
+local WTextButton = Instance.new("TextButton")
+WTextButton.Size = UDim2.new(0.2, 0, 0.3, 0)
+WTextButton.Position = UDim2.new(0.25, 0, 0.01, 0)
+WTextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+WTextButton.BorderColor3 = Color3.new(0, 0, 0)
+WTextButton.BorderSizePixel = 1
+WTextButton.TextSize = 16
+WTextButton.Text = "W"
+WTextButton.BackgroundTransparency = 0 
+WTextButton.TextColor3 = Color3.new(255, 255, 255)
+WTextButton.Font = Enum.Font.Code
+WTextButton.Parent = Frame
+
+
+local ATextButton = Instance.new("TextButton")
+ATextButton.Size = UDim2.new(0.2, 0, 0.3, 0)
+ATextButton.Position = UDim2.new(0.03, 0, 0.35, 0)
+ATextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+ATextButton.BorderColor3 = Color3.new(0, 0, 0)
+ATextButton.BorderSizePixel = 1
+ATextButton.TextSize = 16
+ATextButton.Text = "A"
+ATextButton.BackgroundTransparency = 0 
+ATextButton.TextColor3 = Color3.new(255, 255, 255)
+ATextButton.Font = Enum.Font.Code
+ATextButton.Parent = Frame
+
+
+local STextButton = Instance.new("TextButton")
+STextButton.Size = UDim2.new(0.2, 0, 0.3, 0)
+STextButton.Position = UDim2.new(0.25, 0, 0.69, 0)
+STextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+STextButton.BorderColor3 = Color3.new(0, 0, 0)
+STextButton.BorderSizePixel = 1
+STextButton.TextSize = 16
+STextButton.Text = "S"
+STextButton.BackgroundTransparency = 0 
+STextButton.TextColor3 = Color3.new(255, 255, 255)
+STextButton.Font = Enum.Font.Code
+STextButton.Parent = Frame
+
+
+local DTextButton = Instance.new("TextButton")
+DTextButton.Size = UDim2.new(0.2, 0, 0.3, 0)
+DTextButton.Position = UDim2.new(0.47, 0, 0.35, 0)
+DTextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+DTextButton.BorderColor3 = Color3.new(0, 0, 0)
+DTextButton.BorderSizePixel = 1
+DTextButton.TextSize = 16
+DTextButton.Text = "D"
+DTextButton.BackgroundTransparency = 0 
+DTextButton.TextColor3 = Color3.new(255, 255, 255)
+DTextButton.Font = Enum.Font.Code
+DTextButton.Parent = Frame
+
+
+local Frame2 = Instance.new("Frame")
+Frame2.Size = UDim2.new(0.5, 0, 0.5, 0)
+Frame2.Active = false
+Frame2.Visible = true
+Frame2.Position = UDim2.new(0.5, 0, 0.01, 0)
+Frame2.BackgroundColor3 = Color3.new(1, 1, 1)
+Frame2.BorderColor3 = Color3.new(0, 0, 0)
+Frame2.BorderSizePixel = 1
+Frame2.BackgroundTransparency = 1
+Frame2.Draggable = false
+Frame2.Parent = gui
+
+
+local FTextButton = Instance.new("TextButton")
+FTextButton.Size = UDim2.new(0.3, 0, 0.4, 0)
+FTextButton.Position = UDim2.new(0.68, 0, 0.05, 0)
+FTextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+FTextButton.BorderColor3 = Color3.new(0, 0, 0)
+FTextButton.BorderSizePixel = 1
+FTextButton.TextSize = 16
+FTextButton.Text = "F"
+FTextButton.BackgroundTransparency = 0 
+FTextButton.TextColor3 = Color3.new(255, 255, 255)
+FTextButton.Font = Enum.Font.Code
+FTextButton.Parent = Frame2
+local VTIM = game:GetService("VirtualInputManager")
+
+WTextButton.MouseButton1Down:Connect(function()
+  VTIM:SendKeyEvent(true,Enum.KeyCode.W, false,game)
+end)
+
+WTextButton.MouseButton1Up:Connect(function()
+  VTIM:SendKeyEvent(false,Enum.KeyCode.W, false,game)
+end)
+
+ATextButton.MouseButton1Down:Connect(function()
+  VTIM:SendKeyEvent(true,Enum.KeyCode.A, false,game)
+end)
+
+ATextButton.MouseButton1Up:Connect(function()
+  VTIM:SendKeyEvent(false,Enum.KeyCode.A, false,game)
+end)
+
+STextButton.MouseButton1Down:Connect(function()
+  VTIM:SendKeyEvent(true,Enum.KeyCode.S, false,game)
+end)
+
+STextButton.MouseButton1Up:Connect(function()
+  VTIM:SendKeyEvent(false,Enum.KeyCode.S, false,game)
+end)
+
+DTextButton.MouseButton1Down:Connect(function()
+  VTIM:SendKeyEvent(true,Enum.KeyCode.D, false,game)
+end)
+
+DTextButton.MouseButton1Up:Connect(function()
+  VTIM:SendKeyEvent(false,Enum.KeyCode.D, false,game)
+end)
+
+FTextButton.MouseButton1Down:Connect(function()
+  VTIM:SendKeyEvent(true,Enum.KeyCode.F, false,game)
+  if Frame.Visible == false then
+    Frame.Visible = true
+  elseif Frame.Visible == true then
+    Frame.Visible = false
+  end
+end)
+
+FTextButton.MouseButton1Up:Connect(function()
+  VTIM:SendKeyEvent(false,Enum.KeyCode.F, false,game)
+end)
+end
+
+
+MakeMobileGui()
