@@ -161,7 +161,7 @@ Run.Heartbeat:Connect(function()
         AdelanteAnimIsPlay = true
       end
       for _, animt in ipairs(hm:GetPlayingAnimationTracks()) do
-      if animt.Animation.AnimationId == IdleAnim then
+      if animt.Animation.AnimationId == IdleAnim or animt.Animation.AnimationId == AtrasAnim or animt.Animation.AnimationId == LadosAnim then
         animt:Stop()
         IdleAnimIsPlay = false
       end
@@ -174,7 +174,7 @@ Run.Heartbeat:Connect(function()
         AtrasAnimIsPlay = true
       end
       for _, animt in ipairs(hm:GetPlayingAnimationTracks()) do
-      if animt.Animation.AnimationId == IdleAnim then
+      if animt.Animation.AnimationId == IdleAnim or animt.Animation.AnimationId == AdelanteAnim or animt.Animation.AnimationId == LadosAnim then
         animt:Stop()
         IdleAnimIsPlay = false
       end
@@ -187,7 +187,7 @@ Run.Heartbeat:Connect(function()
         IzquierdaAnimIsPlay = true
       end
       for _, animt in ipairs(hm:GetPlayingAnimationTracks()) do
-      if animt.Animation.AnimationId == IdleAnim then
+      if animt.Animation.AnimationId == IdleAnim or animt.Animation.AnimationId == AtrasAnim or animt.Animation.AnimationId == AdelanteAnim then
         animt:Stop()
         IdleAnimIsPlay = false
       end
@@ -200,7 +200,7 @@ Run.Heartbeat:Connect(function()
         DerechaAnimIsPlay = true
       end
       for _, animt in ipairs(hm:GetPlayingAnimationTracks()) do
-      if animt.Animation.AnimationId == IdleAnim then
+      if animt.Animation.AnimationId == IdleAnim or animt.Animation.AnimationId == AtrasAnim or animt.Animation.AnimationId == AdelanteAnim then
         animt:Stop()
         IdleAnimIsPlay = false
       end
@@ -213,6 +213,13 @@ Run.Heartbeat:Connect(function()
       PlayAnim(IdleAnim,3.65)
       IdleAnimIsPlay = true
       end
+      for _, animt in ipairs(hm:GetPlayingAnimationTracks()) do
+      if animt.Animation.AnimationId == AdelanteAnim or animt.Animation.AnimationId == AtrasAnim or animt.Animation.AnimationId == LadosAnim then
+        animt:Stop()
+        IdleAnimIsPlay = false
+      end
+      end
+      
     end
     end
 end)
@@ -227,7 +234,7 @@ Frame.Active = false
 Frame.Visible = false
 Frame.Size = UDim2.new(0.5, 0, 0.7, 0)
 Frame.Position = UDim2.new(0.01, 0, 0.3, 0)
-Frame.BackgroundColor3 = Color3.new(1, 1, 1)
+Frame.BackgroundColor3 = Color3.new(0, 1, 0)
 Frame.BorderColor3 = Color3.new(0, 0, 0)
 Frame.BorderSizePixel = 1
 Frame.BackgroundTransparency = 1
@@ -238,13 +245,13 @@ Frame.Parent = gui
 local WTextButton = Instance.new("TextButton")
 WTextButton.Size = UDim2.new(0.2, 0, 0.3, 0)
 WTextButton.Position = UDim2.new(0.25, 0, 0.01, 0)
-WTextButton.BackgroundColor3 = Color3.new(0, 0, 0)
-WTextButton.BorderColor3 = Color3.new(0, 0, 0)
-WTextButton.BorderSizePixel = 1
-WTextButton.TextSize = 16
+WTextButton.BackgroundColor3 = Color3.new(0,0,0)
+WTextButton.BorderColor3 = Color3.new(1,0,0)
+WTextButton.BorderSizePixel = 2
+WTextButton.TextSize = 25
 WTextButton.Text = "W"
 WTextButton.BackgroundTransparency = 0 
-WTextButton.TextColor3 = Color3.new(255, 255, 255)
+WTextButton.TextColor3 = Color3.new(1, 0, 0)
 WTextButton.Font = Enum.Font.Code
 WTextButton.Parent = Frame
 
@@ -253,12 +260,12 @@ local ATextButton = Instance.new("TextButton")
 ATextButton.Size = UDim2.new(0.2, 0, 0.3, 0)
 ATextButton.Position = UDim2.new(0.03, 0, 0.35, 0)
 ATextButton.BackgroundColor3 = Color3.new(0, 0, 0)
-ATextButton.BorderColor3 = Color3.new(0, 0, 0)
-ATextButton.BorderSizePixel = 1
-ATextButton.TextSize = 16
+ATextButton.BorderColor3 = Color3.new(1, 0, 0)
+ATextButton.BorderSizePixel = 2
+ATextButton.TextSize = 25
 ATextButton.Text = "A"
 ATextButton.BackgroundTransparency = 0 
-ATextButton.TextColor3 = Color3.new(255, 255, 255)
+ATextButton.TextColor3 = Color3.new(1,0,0)
 ATextButton.Font = Enum.Font.Code
 ATextButton.Parent = Frame
 
@@ -267,12 +274,12 @@ local STextButton = Instance.new("TextButton")
 STextButton.Size = UDim2.new(0.2, 0, 0.3, 0)
 STextButton.Position = UDim2.new(0.25, 0, 0.69, 0)
 STextButton.BackgroundColor3 = Color3.new(0, 0, 0)
-STextButton.BorderColor3 = Color3.new(0, 0, 0)
-STextButton.BorderSizePixel = 1
-STextButton.TextSize = 16
+STextButton.BorderColor3 = Color3.new(1, 0, 0)
+STextButton.BorderSizePixel = 2
+STextButton.TextSize = 25
 STextButton.Text = "S"
 STextButton.BackgroundTransparency = 0 
-STextButton.TextColor3 = Color3.new(255, 255, 255)
+STextButton.TextColor3 = Color3.new(1,0,0)
 STextButton.Font = Enum.Font.Code
 STextButton.Parent = Frame
 
@@ -281,14 +288,31 @@ local DTextButton = Instance.new("TextButton")
 DTextButton.Size = UDim2.new(0.2, 0, 0.3, 0)
 DTextButton.Position = UDim2.new(0.47, 0, 0.35, 0)
 DTextButton.BackgroundColor3 = Color3.new(0, 0, 0)
-DTextButton.BorderColor3 = Color3.new(0, 0, 0)
-DTextButton.BorderSizePixel = 1
-DTextButton.TextSize = 16
+DTextButton.BorderColor3 = Color3.new(1, 0, 0)
+DTextButton.BorderSizePixel = 2
+DTextButton.TextSize = 25
 DTextButton.Text = "D"
 DTextButton.BackgroundTransparency = 0 
-DTextButton.TextColor3 = Color3.new(255, 255, 255)
+DTextButton.TextColor3 = Color3.new(1,0,0)
 DTextButton.Font = Enum.Font.Code
 DTextButton.Parent = Frame
+
+
+local TextBox = Instance.new("TextBox")
+TextBox.Size = UDim2.new(0.3, 0, 0.2, 0)
+TextBox.Position = UDim2.new(0.5, 0, 0.01, 0)
+TextBox.BackgroundColor3 = Color3.new(0, 0, 0)
+TextBox.BorderColor3 = Color3.new(1, 0, 0)
+TextBox.BorderSizePixel = 2
+TextBox.Text = "FlySpeed = 100"
+TextBox.TextColor3 = Color3.new(1,0,0)
+TextBox.BackgroundTransparency = 0
+TextBox.Font = Enum.Font.Code
+TextBox.TextSize = 25
+TextBox.Parent = Frame
+
+
+
 
 
 local Frame2 = Instance.new("Frame")
@@ -361,6 +385,13 @@ end)
 
 FTextButton.MouseButton1Up:Connect(function()
   VTIM:SendKeyEvent(false,Enum.KeyCode.F, false,game)
+end)
+
+TextBox:GetPropertyChangedSignal("Text"):Connect(function()
+  local num = tonumber(TextBox.Text)
+  if num then
+    FlySpeed = num
+  end
 end)
 end
 
