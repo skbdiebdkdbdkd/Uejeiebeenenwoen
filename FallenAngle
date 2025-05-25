@@ -1,0 +1,152 @@
+local Player = game.Players.LocalPlayer
+local Char = Player.Character
+local UP = Char:FindFirstChild("UpperTorso")
+local Head = Char:FindFirstChild("Head")
+local hrp = Char:FindFirstChild("HumanoidRootPart")
+local hm = Char:FindFirstChild("Humanoid")
+
+local function ModifyChar()
+  for _, obj in ipairs(Char:GetChildren()) do
+    if obj:IsA("BasePart") then
+      obj.Material = Enum.Material.Neon
+      obj.Color = Color3.fromRGB(1,1,1)
+      if obj == Head then
+        obj.Transparency = 1
+      end
+    end
+    
+    if obj:IsA("Pants") or obj:IsA("Shirt") or obj:IsA("Accessory") then
+      obj:Destroy()
+    end
+  end
+  
+  if Char.Animate then
+    Char.Animate:Destroy()
+  end
+end
+
+ModifyChar()
+
+
+local LeftWingId = "rbxassetid://125496490342257"
+local HaloId = "rbxassetid://17228181333"
+
+local function MakeMeshParts()
+  local LeftWing = Instance.new("MeshPart")
+  LeftWing.Color = Color3.fromRGB(1,1,1)
+  LeftWing.CanCollide = false
+  LeftWing.MeshId = LeftWingId
+  LeftWing.Size = Vector3.new(1,1,1)
+  LeftWing.Parent = Char
+  
+  local Halo = Instance.new("MeshPart")
+  Halo.MeshId = HaloId
+  Halo.Material = Enum.Material.Neon
+  Halo.Color = Color3.fromRGB(255,255,0)
+  Halo.CanCollide = false
+  Halo.Size = Vector3.new(0.7,1,0.7)
+  Halo.Parent = Char
+  
+  return {
+    LeftWing = LeftWing,
+    Halo = Halo
+  }
+end
+
+
+local Run = game:GetService("RunService")
+
+local MeshParts = MakeMeshParts()
+local LeftWing = MeshParts.LeftWing
+local Halo = MeshParts.Halo
+local FakeHead = Head:Clone()
+FakeHead.Transparency = 0
+FakeHead.Parent = Char
+
+local i = 0
+
+
+Run.Heartbeat:Connect(function(deltaTime)
+  hm.HipHeight = 3
+  
+  FakeHead.CFrame = Head.CFrame
+  
+  LeftWing.CFrame = UP.CFrame * CFrame.new(-3,3.5,0.8)
+  LeftWing.CFrame = LeftWing.CFrame * CFrame.Angles(math.rad(7),math.rad(-20),math.rad(5))
+  
+  Halo.CFrame = Head.CFrame * CFrame.new(0,1,0)
+  Halo.CFrame = Halo.CFrame * CFrame.Angles(math.rad(0),math.rad(i),math.rad(0))
+  
+  i = i + 100
+end)
+
+
+local isIdle = true
+local isMove = false
+
+local isPlayIdleAnim = false
+local isPlayMoveAnim = false
+
+local IdleAnimId = "rbxassetid://10714347256"
+local MoveAnimId = "rbxassetid://15698404340"
+
+local SlideSpeed = 2
+
+local function PlayAnim(Id,Time)
+  local Animation = Instance.new("Animation")
+  Animation.AnimationId = Id
+  
+  local track = hm:LoadAnimation(Animation)
+  track:Play()
+  track:AdjustSpeed(0)
+  track.TimePosition = Time
+end
+
+Run.Heartbeat:Connect(function(deltaTime)
+  local Vel = Vector3.new(hrp.Velocity.X , 0 , hrp.Velocity.Z)
+  if Vel.Magnitude <= 2 then
+    isIdle = true
+    isMove = false
+  elseif Vel.Magnitude >= 5 then
+    isIdle = false
+    isMove = true
+  end
+  
+  if isIdle and isPlayIdleAnim == false then
+    PlayAnim(IdleAnimId,1)
+    isPlayIdleAnim = true
+  elseif isIdle == false then
+    for _, obj in ipairs(hm:GetPlayingAnimationTracks()) do
+      if obj.Animation.AnimationId == IdleAnimId then
+        obj:Stop()
+        isPlayIdleAnim = false
+      end
+    end
+  end
+  
+  if isMove and isPlayMoveAnim == false then
+    PlayAnim(MoveAnimId,1)
+    isPlayMoveAnim = true
+  elseif isMove == false then
+    for _, obj in ipairs(hm:GetPlayingAnimationTracks()) do
+      if obj.Animation.AnimationId == MoveAnimId then
+        obj:Stop()
+        isPlayMoveAnim = false
+      end
+    end
+  end
+  
+  if isMove then
+    hrp.CFrame = hrp.CFrame * CFrame.new(0,0,-SlideSpeed)
+  end
+end)
+
+
+
+Posibles cosas pa agregar
+
+Linea de particulas detras mio
+Musica
+Que el halo parpadee? No estoy seguro prueba
+Efectos al activar / aparecer
+Poderes
