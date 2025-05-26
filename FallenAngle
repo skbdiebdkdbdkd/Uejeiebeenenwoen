@@ -1,3 +1,17 @@
+local TextChatService = game:GetService("TextChatService")
+
+local function SendChatMessage(message)
+    if TextChatService.ChatVersion == Enum.ChatVersion.TextChatService then
+        local textChannel = TextChatService.TextChannels.RBXGeneral
+        textChannel:SendAsync(message)
+    else
+        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message, "All")
+    end
+end
+
+SendChatMessage("Fallen Angel: MadeBy ZDev")
+
+
 
 local Player = game.Players.INFINITYH4CK2
 local Char = Player.Character
@@ -17,6 +31,8 @@ wait(0.5)
 local function SpawnEffects()
   local ExplosionPart = Instance.new("MeshPart")
   ExplosionPart.Size = Vector3.new(0.1,0.1,0.1)
+  ExplosionPart.Material = Enum.Material.Neon
+  ExplosionPart.Color = Color3.fromRGB(1,1,1)
   ExplosionPart.MeshId = "rbxassetid://930476639"
   ExplosionPart.Parent = Char
   
