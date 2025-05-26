@@ -10,7 +10,7 @@ local function SendChatMessage(message)
 end
 
 SendChatMessage("Fallen Angel: MadeBy ZDev")
-SendChatMessage("F: Destructive ball, Z: NearestPlayerTp, More Abilitys Soon")
+SendChatMessage("F: Destructive ball|... Z: TpToNearestPlayer|... X: EvilPulse|... C: VoidDragAll|...")
 
 
 
@@ -406,6 +406,137 @@ Uis.InputBegan:Connect(function(input)
       return
     else
     TeleportToNearestPlayer()
+    end
+  end
+end)
+
+
+local EvilPulseCooldown = false
+
+
+local function EvilPulse()
+  EvilPulseCooldown = true
+  PlayAnim("rbxassetid://10714164866",1)
+  for _, t in ipairs(hm:GetPlayingAnimationTracks()) do
+    if t.Animation then
+      if t.Animation.AnimationId == IdleAnimId or t.Animation.AnimationId == MoveAnimId then
+        t:Stop()
+      end
+    end
+  end
+  
+  
+  local Pulse = Instance.new("MeshPart")
+      Pulse.MeshId = HaloId
+      Pulse.CanCollide = false
+      Pulse.Size = Vector3.new(2,2,2)
+      Pulse.Material = Enum.Material.Neon
+      Pulse.Color = Color3.fromRGB(1,1,1)
+      Pulse.Transparency = 0.7
+      Pulse.Parent = game.Workspace
+  
+  
+  Pulse.Touched:Connect(function(hit)
+        if not hit:IsDescendantOf(Char) then
+        if hit.Name == "HumanoidRootPart" then
+          if hit ~= hrp then
+          hit.Anchored = true
+          task.spawn(function()
+            for i = 1,1000,5 do
+              hit.CFrame = hit.CFrame * CFrame.new(math.random(-5,5),math.random(0,5),math.random(-5,5))
+              task.wait(0.001)
+            end
+            hit.Anchored = false
+          end)
+          end
+        end
+        end
+      end)
+  
+  
+  
+  task.spawn(function()
+  for i = 1,1000,5 do
+            Pulse.CFrame = hrp.CFrame
+            Pulse.Size = Vector3.new(i,2,i)
+            task.wait(0.001)
+  end
+  end)
+  
+  wait(1)
+  for _, tracks in ipairs(hm:GetPlayingAnimationTracks()) do
+  if tracks.Animation then
+    if tracks.Animation.AnimationId == "rbxassetid://10714164866" then
+      tracks:Stop()
+      end
+  end
+end
+
+if isIdle and isPlayIdleAnim then
+  PlayAnim(IdleAnimId,1)
+elseif isMove and isPlayMoveAnim then
+  PlayAnim(MoveAnimId,1)
+end
+  
+  Pulse:Destroy()
+  EvilPulseCooldown = false
+end
+
+
+Uis.InputBegan:Connect(function(input)
+  if input.KeyCode == Enum.KeyCode.X then
+    if EvilPulseCooldown then
+      return
+    else
+      EvilPulse()
+    end
+  end
+end)
+
+
+local VoidDragCooldown = false
+
+
+local function VoidDrag()
+  VoidDragCooldown = true
+  for _, p in ipairs(game.Players:GetPlayers()) do
+    if p ~= Player then
+    local pChar = p.Character
+    if pChar then
+      local pHrp = pChar:FindFirstChild("HumanoidRootPart")
+      pHrp.Anchored = true
+      if pHrp then
+        local void = Instance.new("Part")
+        void.Size = Vector3.new(5,0.3,5)
+        void.Color = Color3.fromRGB(1,1,1)
+        void.Material = Enum.Material.Neon
+        void.Anchored = true
+        void.CFrame = pHrp.CFrame * CFrame.new(0,-3,0)
+        void.Parent = game.Workspace
+        
+        task.spawn(function()
+          for i = 1,20,1 do
+        pHrp.CFrame = pHrp.CFrame * CFrame.new(0,-1,0)
+        task.wait(0.001)
+          end
+          task.wait(2)
+          void:Destroy()
+          pHrp.Anchored = false
+          VoidDragCooldown = false
+        end)
+      end
+    end
+    end
+  end
+end
+
+
+Uis.InputBegan:Connect(function(input)
+  if input.KeyCode == Enum.KeyCode.C then
+    if VoidDragCooldown then
+      return
+    else
+      VoidDrag()
     end
   end
 end)
