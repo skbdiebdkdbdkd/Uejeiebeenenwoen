@@ -1,9 +1,66 @@
-local Player = game.Players.LocalPlayer
+
+local Player = game.Players.INFINITYH4CK2
 local Char = Player.Character
-local UP = Char:FindFirstChild("UpperTorso")
+local UP = Char:FindFirstChild("UpperTorso") or Char:FindFirstChild("Torso")
 local Head = Char:FindFirstChild("Head")
 local hrp = Char:FindFirstChild("HumanoidRootPart")
 local hm = Char:FindFirstChild("Humanoid")
+
+
+local p = hrp.Position + Vector3.new(0,0,-2)
+
+hm:MoveTo(p)
+
+wait(0.5)
+
+
+local function SpawnEffects()
+  local ExplosionPart = Instance.new("MeshPart")
+  ExplosionPart.Size = Vector3.new(0.1,0.1,0.1)
+  ExplosionPart.MeshId = "rbxassetid://930476639"
+  ExplosionPart.Parent = Char
+  
+  local sound = Instance.new("Sound")
+  sound.Name = "ExplosionSound"
+  sound.SoundId = "rbxassetid://14145625078"
+  sound.Volume = 10
+  sound.Looped = true
+  sound.Parent = hrp
+  sound:Play()
+  
+  return ExplosionPart
+end
+
+local expPart = SpawnEffects()
+
+for i = 0.1,0.5,0.1 do
+  expPart.CFrame = UP.CFrame
+  expPart.Size = Vector3.new(i,i,i)
+  task.wait(0.001)
+end
+
+for i = 0.5,0.1,-0.1 do
+  expPart.CFrame = UP.CFrame
+  expPart.Size = Vector3.new(i,i,i)
+  task.wait(0.001)
+end
+
+task.spawn(function()
+  for i = 0.1,0.5,0.1 do
+  expPart.CFrame = UP.CFrame
+  expPart.Size = Vector3.new(i,i,i)
+  task.wait(0.001)
+end
+
+expPart:Destroy()
+expPart = nil
+end)
+
+
+
+local altura = 2.5
+
+
 
 local function ModifyChar()
   for _, obj in ipairs(Char:GetChildren()) do
@@ -12,6 +69,11 @@ local function ModifyChar()
       obj.Color = Color3.fromRGB(1,1,1)
       if obj == Head then
         obj.Transparency = 1
+        obj:FindFirstChild("face"):Destroy()
+      end
+      
+      if obj.Name == "Face" or obj.Name == "face" then
+        obj:Destroy()
       end
     end
     
@@ -23,16 +85,23 @@ local function ModifyChar()
   if Char.Animate then
     Char.Animate:Destroy()
   end
+  
+  local aura = Instance.new("Fire")
+  aura.Size = 10
+  aura.Color = Color3.fromRGB(1,1,1)
+  aura.SecondaryColor = Color3.fromRGB(255,0,0)
+  aura.Heat = 0.1
+  aura.Parent = hrp
 end
 
 ModifyChar()
-
 
 local LeftWingId = "rbxassetid://125496490342257"
 local HaloId = "rbxassetid://17228181333"
 
 local function MakeMeshParts()
   local LeftWing = Instance.new("MeshPart")
+  LeftWing.Name = "LeftWing"
   LeftWing.Color = Color3.fromRGB(1,1,1)
   LeftWing.CanCollide = false
   LeftWing.MeshId = LeftWingId
@@ -40,6 +109,7 @@ local function MakeMeshParts()
   LeftWing.Parent = Char
   
   local Halo = Instance.new("MeshPart")
+  Halo.Name = "Halo"
   Halo.MeshId = HaloId
   Halo.Material = Enum.Material.Neon
   Halo.Color = Color3.fromRGB(255,255,0)
@@ -60,14 +130,19 @@ local MeshParts = MakeMeshParts()
 local LeftWing = MeshParts.LeftWing
 local Halo = MeshParts.Halo
 local FakeHead = Head:Clone()
+FakeHead.Material = Enum.Material.Neon
 FakeHead.Transparency = 0
 FakeHead.Parent = Char
+
+if FakeHead:FindFirstChild("face") then
+  FakeHead:FindFirstChild("face"):Destroy()
+end
 
 local i = 0
 
 
 Run.Heartbeat:Connect(function(deltaTime)
-  hm.HipHeight = 3
+  hm.HipHeight = altura
   
   FakeHead.CFrame = Head.CFrame
   
@@ -90,7 +165,7 @@ local isPlayMoveAnim = false
 local IdleAnimId = "rbxassetid://10714347256"
 local MoveAnimId = "rbxassetid://15698404340"
 
-local SlideSpeed = 2
+local SlideSpeed = 80
 
 local function PlayAnim(Id,Time)
   local Animation = Instance.new("Animation")
@@ -137,16 +212,112 @@ Run.Heartbeat:Connect(function(deltaTime)
   end
   
   if isMove then
-    hrp.CFrame = hrp.CFrame * CFrame.new(0,0,-SlideSpeed)
+    local dir = hm.MoveDirection.Unit
+    if dir.Magnitude > 0 then
+    hrp.CFrame = hrp.CFrame + (dir * SlideSpeed * deltaTime)
+    end
   end
 end)
 
+task.spawn(function()
+for i = 1,900000,1 do
+  for _, obj in ipairs(Char:GetChildren()) do
+    if obj.Name ~= "Halo" or obj.Name ~= "LeftWing" then
+      if obj:IsA("BasePart") then
+        obj.Color = Color3.fromRGB(255,0,0)
+        task.wait(0.01)
+        if obj.Name ~= "Halo" then
+        obj.Color = Color3.fromRGB(1,1,1)
+        else
+          obj.Color = Color3.fromRGB(255,255,0)
+        end
+      end
+    end
+  end
+  task.wait(0.5)
+end
+end)
+
+local InCooldownBlackBall = false
 
 
-Posibles cosas pa agregar
 
-Linea de particulas detras mio
-Musica
-Que el halo parpadee? No estoy seguro prueba
-Efectos al activar / aparecer
-Poderes
+local function BlackBallAttack()
+  InCooldownBlackBall = true
+  PlayAnim("rbxassetid://10714395441",0.37)
+  for _, t in ipairs(hm:GetPlayingAnimationTracks()) do
+    if t.Animation then
+      if t.Animation.AnimationId == IdleAnimId or t.Animation.AnimationId == MoveAnimId then
+        t:Stop()
+      end
+    end
+  end
+  
+  local BlackBall = Instance.new("Part")
+  BlackBall.Shape = Enum.PartType.Ball
+  BlackBall.Material = Enum.Material.Neon
+  BlackBall.Color = Color3.fromRGB(1,1,1)
+  BlackBall.Anchored = false
+  BlackBall.Size = Vector3.new(6,6,6)
+  BlackBall.Parent = game.Workspace
+  
+  local ii = 0
+  
+  task.spawn(function()
+    local StarCFrame = hrp.CFrame * CFrame.new(0,2,-3)
+    BlackBall.CFrame = StarCFrame
+  for i = 1,160,1 do
+  BlackBall.CFrame = StarCFrame * CFrame.new(0,0,-ii)
+  ii = ii + 6
+  task.wait(0.001)
+  end
+  BlackBall:Destroy()
+  end)
+  
+  
+  
+  BlackBall.Touched:Connect(function(hit)
+    if hit.Parent:FindFirstChild("Humanoid") and hit.Parent:FindFirstChild("Humanoid") ~= hm then
+      hit.Parent:FindFirstChild("Humanoid").Health = hit.Parent:FindFirstChild("Humanoid").Health - 50
+    elseif hit:IsA("BasePart") and not hit:IsDescendantOf(Char) then
+      local exp = Instance.new("Explosion")
+      exp.Position = hit.Position
+      exp.BlastRadius = 10
+      exp.Parent = game.Workspace
+      task.wait(0.01)
+      hit:Destroy()
+    end
+    
+task.wait(1)
+
+for _, tracks in ipairs(hm:GetPlayingAnimationTracks()) do
+  if tracks.Animation then
+    if tracks.Animation.AnimationId == "rbxassetid://10714395441" then
+      tracks:Stop()
+      end
+  end
+end
+
+if isIdle and isPlayIdleAnim then
+  PlayAnim(IdleAnimId,1)
+elseif isMove and isPlayMoveAnim then
+  PlayAnim(MoveAnimId,1)
+end
+
+    
+end)
+task.wait(2)
+InCooldownBlackBall = false
+end
+
+local Uis = game:GetService("UserInputService")
+
+Uis.InputBegan:Connect(function(input)
+  if input.KeyCode == Enum.KeyCode.F then
+    if InCooldownBlackBall then
+      return
+    else
+      BlackBallAttack()
+    end
+  end
+end)
