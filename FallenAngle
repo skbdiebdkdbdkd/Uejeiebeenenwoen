@@ -10,6 +10,7 @@ local function SendChatMessage(message)
 end
 
 SendChatMessage("Fallen Angel: MadeBy ZDev")
+SendChatMessage("F: Destructive ball, Z: NearestPlayerTp, More Abilitys Soon")
 
 
 
@@ -334,6 +335,77 @@ Uis.InputBegan:Connect(function(input)
       return
     else
       BlackBallAttack()
+    end
+  end
+end)
+
+
+local NearestPlayer = nil
+local MinDistance = math.huge
+
+local function GetNearestPlayer()
+NearestPlayer = nil
+MinDistance = math.huge
+  for _, p in ipairs(game.Players:GetPlayers()) do
+    if p ~= Player then
+    local pChar = p.Character
+    if pChar then
+      local phrp = pChar:FindFirstChild("HumanoidRootPart")
+      local distance = (hrp.Position - phrp.Position).Magnitude
+      if distance <= MinDistance then
+        MinDistance = distance
+        NearestPlayer = p
+      end
+    end
+    end
+end
+end
+
+local NearestTpCooldown = false
+
+
+local function TeleportToNearestPlayer()
+  GetNearestPlayer()
+  local Target = NearestPlayer
+  local TargetChar = Target.Character
+  local TargetHrp = TargetChar:FindFirstChild("HumanoidRootPart")
+  NearestTpCooldown = true
+  
+  
+  local ExpP = Instance.new("MeshPart")
+  ExpP.Size = Vector3.new(0,0,0)
+  ExpP.MeshId = "rbxassetid://930476639"
+  ExpP.Material = Enum.Material.Neon
+  ExpP.CanCollide = false
+  ExpP.Anchored = true
+  ExpP.Color = Color3.fromRGB(1,1,1)
+  ExpP.Parent = Char
+  
+  
+  if TargetHrp and hrp then
+    for i = 0,0.5,0.05 do
+      ExpP.CFrame = hrp.CFrame
+      ExpP.Size = Vector3.new(i,i,i)
+      task.wait(0.001)
+    end
+    hrp.CFrame = TargetHrp.CFrame * CFrame.new(0,0,2)
+    for i = 0.5,0,-0.05 do
+      ExpP.CFrame = hrp.CFrame
+      ExpP.Size = Vector3.new(i,i,i)
+      task.wait(0.001)
+    end
+  end
+  
+  wait(1)
+  NearestTpCooldown = false
+end
+
+Uis.InputBegan:Connect(function(input)
+  if input.KeyCode == Enum.KeyCode.Z then
+    if NearestTpCooldown then
+      return
+    else
+    TeleportToNearestPlayer()
     end
   end
 end)
