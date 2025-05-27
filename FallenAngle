@@ -576,12 +576,17 @@ end)
 
 
 local tiempo = 0
+local min = 2
+local max = 7
+local center = (min + max) / 2 -- 4.5
+local amplitude = (max - min) / 2 -- 2.5
+
 
 Run.Heartbeat:Connect(function(deltaTime)
     if isIdle then
-        tiempo = tiempo + deltaTime
-        local amplitud = 2.5  -- (7 - 2) / 2
-        local offset = 4.5    -- (7 + 2) / 2
-        altura = math.sin(tiempo * 1.5) * amplitud + offset
+      tiempo = tiempo + deltaTime
+        local offset = math.sin(tiempo) * amplitude
+        local y = offset + center
+        altura = y
     end
-end)
+end) 
