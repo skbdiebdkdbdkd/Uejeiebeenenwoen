@@ -38,7 +38,7 @@ local function SpawnEffects()
   ExplosionPart.Parent = Char
   
   local sound = Instance.new("Sound")
-  sound.Name = "ExplosionSound"
+  sound.Name = "Music"
   sound.SoundId = "rbxassetid://14145625078"
   sound.Volume = 10
   sound.Looped = true
@@ -75,7 +75,7 @@ end)
 
 
 
-local altura = 2.5
+local altura = 2
 
 
 
@@ -456,7 +456,7 @@ local function EvilPulse()
   
   
   task.spawn(function()
-  for i = 1,1000,5 do
+  for i = 1,10000,5 do
             Pulse.CFrame = hrp.CFrame
             Pulse.Size = Vector3.new(i,2,i)
             task.wait(0.001)
@@ -504,6 +504,7 @@ local function VoidDrag()
     local pChar = p.Character
     if pChar then
       local pHrp = pChar:FindFirstChild("HumanoidRootPart")
+      if pHrp then
       pHrp.Anchored = true
       if pHrp then
         local void = Instance.new("Part")
@@ -511,19 +512,51 @@ local function VoidDrag()
         void.Color = Color3.fromRGB(1,1,1)
         void.Material = Enum.Material.Neon
         void.Anchored = true
-        void.CFrame = pHrp.CFrame * CFrame.new(0,-3,0)
+        void.CFrame = pHrp.CFrame * CFrame.new(0,-3.1,0)
         void.Parent = game.Workspace
         
         task.spawn(function()
-          for i = 1,20,1 do
+          for i = 1,10,1 do
         pHrp.CFrame = pHrp.CFrame * CFrame.new(0,-1,0)
         task.wait(0.001)
           end
-          task.wait(2)
+          
+  if hrp.Music then
+    hrp.Music:Stop()
+  end
+          
+  local sound = Instance.new("Sound")
+  sound.Name = "Laught"
+  sound.SoundId = "rbxassetid://76328397266180"
+  sound.Volume = 7
+  sound.Looped = true
+  sound.Parent = void
+  sound:Play()
+  
+  local sound2 = Instance.new("Sound")
+  sound2.Name = "HumanScreamer"
+  sound2.SoundId = "rbxassetid://6108565657"
+  sound2.Volume = 10
+  sound2.Looped = true
+  sound2.Parent = pHrp
+  sound2:Play()
+          
+          
+          
+          
+          
+          task.wait(10)
+          if hrp.Music then
+            hrp.Music:Play()
+          end
+          
+          sound:Destroy()
+          sound2:Destroy()
           void:Destroy()
           pHrp.Anchored = false
           VoidDragCooldown = false
         end)
+      end
       end
     end
     end
@@ -539,4 +572,16 @@ Uis.InputBegan:Connect(function(input)
       VoidDrag()
     end
   end
+end)
+
+
+local tiempo = 0
+
+Run.Heartbeat:Connect(function(deltaTime)
+    if isIdle then
+        tiempo = tiempo + deltaTime
+        local amplitud = 2.5  -- (7 - 2) / 2
+        local offset = 4.5    -- (7 + 2) / 2
+        altura = math.sin(tiempo * 1.5) * amplitud + offset
+    end
 end)
