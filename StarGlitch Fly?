@@ -1,0 +1,134 @@
+local Players = game.Players
+local Player = Players.LocalPlayer
+local Char = Player.Character
+local hrp = Char:FindFirstChild("HumanoidRootPart")
+local hm = Char:FindFirstChild("Humanoid")
+local Run = game:GetService("RunService")
+
+hm.WalkSpeed = 120
+
+if Char.Animate then
+Char.Animate:Destroy()
+end
+local IdleAnim1 = "rbxassetid://287325678"
+local IdleAnim2 = "rbxassetid://80979207"
+local IdleAnim3 = "rbxassetid://162861977"
+local IdleAnim4 = "rbxassetid://160737450"
+local MoveAnim = "rbxassetid://233087184"
+
+
+local function PlayAnim(Id,Time)
+  local Anim = Instance.new("Animation")
+  Anim.AnimationId = Id
+  
+  local track = hm:LoadAnimation(Anim)
+  
+  track:Play()
+  track:AdjustSpeed(0)
+  if Time then
+  track.TimePosition = Time
+  end
+end
+
+local isIdle = false
+local isPlayIdleAnim = false
+
+local isMove = false
+local isPlayMoveAnim = false
+
+
+local function PlayIdleAnim()
+PlayAnim(IdleAnim1)
+PlayAnim(IdleAnim2)
+PlayAnim(IdleAnim3)
+PlayAnim(IdleAnim4)
+PlayAnim(MoveAnim)
+end
+PlayIdleAnim()
+
+local Time = 0
+
+local miny = 1
+local maxy = 7
+local center = (miny + maxy) / 2
+local amplitude = (maxy - miny) / 2
+
+local Speed = 5
+
+
+Run.Heartbeat:Connect(function(deltaTime)
+  if hrp.Velocity.Magnitude < 100 then
+    isIdle = true
+    isMove = false
+  elseif hrp.Velocity.Magnitude > 5 then
+    isIdle = false
+    isMove = true
+  end
+  
+  
+  
+  
+  if isIdle then
+    Time = Time + deltaTime
+    
+    local z = math.sin(Time) * 15
+    
+    hrp.CFrame = hrp.CFrame * CFrame.Angles(math.rad(z),math.rad(z),math.rad(z))
+  end
+  
+  
+  
+  if isIdle then
+  Time = Time + deltaTime
+  
+  local offset = math.sin(Time) * amplitude
+  local altura = offset + center
+  
+  hm.HipHeight = altura
+  end
+  
+  if isIdle then
+    if isPlayIdleAnim == false then
+        PlayIdleAnim()
+        isPlayIdleAnim = true
+    end
+    end
+    
+    if isMove then
+      if isPlayMoveAnim == false then
+        PlayAnim("rbxassetid://80980235")
+        isPlayMoveAnim = true
+      end
+    end
+    
+    
+    if isIdle then
+      for _, obj in ipairs(hm:GetPlayingAnimationTracks()) do
+        if obj.Animation then
+          if obj.Animation.AnimationId == "rbxassetid://80980235" then
+            obj:Stop()
+            isPlayMoveAnim = false
+          end
+        end
+      end
+    end
+    
+    if isMove then
+      for _, obj in ipairs(hm:GetPlayingAnimationTracks()) do
+        if obj.Animation then
+          if obj.Animation.AnimationId == IdleAnim1 or obj.Animation.AnimationId == IdleAnim2 or obj.Animation.AnimationId == IdleAnim3 or obj.Animation.AnimationId == IdleAnim4 or obj.Animation.AnimationId == MoveAnim then
+            obj:Stop()
+            isPlayIdleAnim = false
+          end
+        end
+      end
+    end
+    
+    
+    if isMove then
+      hrp.CFrame = hrp.CFrame * CFrame.Angles(math.rad(-27),0,0)
+    end
+  if isMove then
+  hrp.CFrame = hrp.CFrame * CFrame.new(0,2,-Speed)
+  end
+end)
