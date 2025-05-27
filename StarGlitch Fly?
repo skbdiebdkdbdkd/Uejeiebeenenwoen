@@ -5,7 +5,23 @@ local hrp = Char:FindFirstChild("HumanoidRootPart")
 local hm = Char:FindFirstChild("Humanoid")
 local Run = game:GetService("RunService")
 
-hm.WalkSpeed = 40
+local Alas = Instance.new("MeshPart")
+Alas.MeshId = "rbxassetid://15695783981"
+Alas.Material = Enum.Material.Neon
+Alas.Color = Color3.fromRGB(248,248,248)
+Alas.Size = Vector3.new(9,9,9)
+Alas.Parent = Char
+Alas.CanCollide = false
+
+local Halo = Instance.new("MeshPart")
+Halo.MeshId = "rbxassetid://18276934478"
+Halo.Material = Enum.Material.Neon
+Halo.Color = Color3.fromRGB(248,248,248)
+Halo.Size = Vector3.new(0.08,0.08,0.08)
+Halo.Parent = Char
+Halo.CanCollide = false
+
+
 
 if Char.Animate then
 Char.Animate:Destroy()
@@ -49,18 +65,33 @@ PlayIdleAnim()
 local Time = 0
 
 local miny = 1
-local maxy = 3
+local maxy = 6
 local center = (miny + maxy) / 2
 local amplitude = (maxy - miny) / 2
+local numerito = 5
 
-local Speed = 5
+local Speed = 100
+local r = nil
+local r2 = nil
+
+r = Run.Heartbeat:Connect(function(deltaTime)
+  Alas.CFrame = Char:FindFirstChild("Torso").CFrame * CFrame.new(0,0.5,0.7)
+  Halo.CFrame = Char:FindFirstChild("Head").CFrame * CFrame.new(0,0,0.7)
+  Halo.CFrame = Halo.CFrame * CFrame.Angles(math.rad(90),math.rad(0),math.rad(0))
+end)
 
 
-Run.Heartbeat:Connect(function(deltaTime)
-  if hrp.Velocity.Magnitude < 40 then
+
+r2 = Run.Heartbeat:Connect(function(deltaTime)
+  
+  
+  
+  
+  
+  if hm.MoveDirection.Magnitude <= 0 then
     isIdle = true
     isMove = false
-  elseif hrp.Velocity.Magnitude > 40 then
+  elseif hm.MoveDirection.Magnitude >= 1 then
     isIdle = false
     isMove = true
   end
@@ -71,9 +102,15 @@ Run.Heartbeat:Connect(function(deltaTime)
   if isIdle then
     Time = Time + deltaTime
     
-    local z = math.sin(Time) * 10
+    local z = math.sin(Time) * numerito
     
-    hrp.CFrame = hrp.CFrame * CFrame.Angles(0,0,math.rad(z))
+    hrp.CFrame = hrp.CFrame * CFrame.Angles(math.rad(z),0,0)
+    
+    if z == 0 and numerito == 5 then
+      numerito = -5
+    elseif z == 0 and numerito == -5 then
+      numerito = 5
+    end
     
   end
   
@@ -124,12 +161,24 @@ Run.Heartbeat:Connect(function(deltaTime)
         end
       end
     end
-    print(hrp.Velocity)
+    
+    local dir = hm.MoveDirection.Unit
     
     if isMove then
-      hrp.CFrame = hrp.CFrame * CFrame.Angles(math.rad(-27),0,0)
+      hrp.CFrame = hrp.CFrame * CFrame.Angles(math.rad(-30),0,0)
     end
   if isMove then
-  hrp.CFrame = hrp.CFrame * CFrame.new(0,2,-Speed)
+  hrp.CFrame = hrp.CFrame + (dir * Speed * deltaTime)
+  end
+end)
+
+
+hm.Died:Connect(function()
+  if r then
+    r:Disconnect()
+  end
+  
+  if r2 then
+    r2:Disconnect()
   end
 end)
