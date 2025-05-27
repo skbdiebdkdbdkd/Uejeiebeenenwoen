@@ -5,7 +5,7 @@ local hrp = Char:FindFirstChild("HumanoidRootPart")
 local hm = Char:FindFirstChild("Humanoid")
 local Run = game:GetService("RunService")
 
-hm.WalkSpeed = 120
+hm.WalkSpeed = 40
 
 if Char.Animate then
 Char.Animate:Destroy()
@@ -49,7 +49,7 @@ PlayIdleAnim()
 local Time = 0
 
 local miny = 1
-local maxy = 7
+local maxy = 3
 local center = (miny + maxy) / 2
 local amplitude = (maxy - miny) / 2
 
@@ -57,10 +57,10 @@ local Speed = 5
 
 
 Run.Heartbeat:Connect(function(deltaTime)
-  if hrp.Velocity.Magnitude < 100 then
+  if hrp.Velocity.Magnitude < 40 then
     isIdle = true
     isMove = false
-  elseif hrp.Velocity.Magnitude > 5 then
+  elseif hrp.Velocity.Magnitude > 40 then
     isIdle = false
     isMove = true
   end
@@ -71,9 +71,10 @@ Run.Heartbeat:Connect(function(deltaTime)
   if isIdle then
     Time = Time + deltaTime
     
-    local z = math.sin(Time) * 15
+    local z = math.sin(Time) * 10
     
-    hrp.CFrame = hrp.CFrame * CFrame.Angles(math.rad(z),math.rad(z),math.rad(z))
+    hrp.CFrame = hrp.CFrame * CFrame.Angles(0,0,math.rad(z))
+    
   end
   
   
@@ -123,7 +124,7 @@ Run.Heartbeat:Connect(function(deltaTime)
         end
       end
     end
-    
+    print(hrp.Velocity)
     
     if isMove then
       hrp.CFrame = hrp.CFrame * CFrame.Angles(math.rad(-27),0,0)
