@@ -5,6 +5,34 @@ local hrp = Char:FindFirstChild("HumanoidRootPart")
 local hm = Char:FindFirstChild("Humanoid")
 local Run = game:GetService("RunService")
 
+local Music = Instance.new("Sound")
+Music.SoundId = "rbxassetid://127258758362950"
+Music.Volume = 10
+Music.Looped = true
+Music.Parent = game.Workspace
+Music:Play()
+
+
+local Ring = Instance.new("MeshPart")
+Ring.MeshId = "rbxassetid://18276934478"
+Ring.Material = Enum.Material.Neon
+Ring.Color = Color3.fromRGB(248,248,248)
+Ring.Size = Vector3.new(0.5,0.2,0.5)
+Ring.Parent = Char
+Ring.CanCollide = false
+
+
+
+local Ring2 = Instance.new("MeshPart")
+Ring2.MeshId = "rbxassetid://18276934478"
+Ring2.Material = Enum.Material.Neon
+Ring2.Color = Color3.fromRGB(248,248,248)
+Ring2.Size = Vector3.new(0.5,0.2,0.5)
+Ring2.Parent = Char
+Ring2.CanCollide = false
+
+
+
 local Alas = Instance.new("MeshPart")
 Alas.MeshId = "rbxassetid://15695783981"
 Alas.Material = Enum.Material.Neon
@@ -64,8 +92,8 @@ PlayIdleAnim()
 
 local Time = 0
 
-local miny = 1
-local maxy = 6
+local miny = 0.5
+local maxy = 9
 local center = (miny + maxy) / 2
 local amplitude = (maxy - miny) / 2
 local numerito = 5
@@ -73,11 +101,27 @@ local numerito = 5
 local Speed = 100
 local r = nil
 local r2 = nil
+local angle = 0
+local Direccion = 1
+local changeInterval = 3.5
+local TimeDir = 0
 
 r = Run.Heartbeat:Connect(function(deltaTime)
+  TimeDir = TimeDir + deltaTime
+  if TimeDir >= changeInterval then
+    Direccion = Direccion * -1
+    TimeDir = 0
+  end
+  
+  
+  angle = angle + deltaTime * math.rad(360) * Direccion
+  
+  
   Alas.CFrame = Char:FindFirstChild("Torso").CFrame * CFrame.new(0,0.5,0.7)
   Halo.CFrame = Char:FindFirstChild("Head").CFrame * CFrame.new(0,0,0.7)
   Halo.CFrame = Halo.CFrame * CFrame.Angles(math.rad(90),math.rad(0),math.rad(0))
+  Ring.CFrame = hrp.CFrame * CFrame.Angles(0,0,angle)
+  Ring2.CFrame = hrp.CFrame * CFrame.Angles(math.rad(90),0,0) * CFrame.Angles(angle,0,0)
 end)
 
 
@@ -106,11 +150,7 @@ r2 = Run.Heartbeat:Connect(function(deltaTime)
     
     hrp.CFrame = hrp.CFrame * CFrame.Angles(math.rad(z),0,0)
     
-    if z == 0 and numerito == 5 then
-      numerito = -5
-    elseif z == 0 and numerito == -5 then
-      numerito = 5
-    end
+    
     
   end
   
@@ -181,4 +221,6 @@ hm.Died:Connect(function()
   if r2 then
     r2:Disconnect()
   end
+  
+  Music:Stop()
 end)
