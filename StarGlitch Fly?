@@ -7,30 +7,10 @@ local Run = game:GetService("RunService")
 
 local Music = Instance.new("Sound")
 Music.SoundId = "rbxassetid://127258758362950"
-Music.Volume = 10
+Music.Volume = 0.1
 Music.Looped = true
 Music.Parent = game.Workspace
 Music:Play()
-
-
-local Ring = Instance.new("MeshPart")
-Ring.MeshId = "rbxassetid://18276934478"
-Ring.Material = Enum.Material.Neon
-Ring.Color = Color3.fromRGB(248,248,248)
-Ring.Size = Vector3.new(0.5,0.2,0.5)
-Ring.Parent = Char
-Ring.CanCollide = false
-
-
-
-local Ring2 = Instance.new("MeshPart")
-Ring2.MeshId = "rbxassetid://18276934478"
-Ring2.Material = Enum.Material.Neon
-Ring2.Color = Color3.fromRGB(248,248,248)
-Ring2.Size = Vector3.new(0.5,0.2,0.5)
-Ring2.Parent = Char
-Ring2.CanCollide = false
-
 
 
 local Alas = Instance.new("MeshPart")
@@ -114,14 +94,12 @@ r = Run.Heartbeat:Connect(function(deltaTime)
   end
   
   
-  angle = angle + deltaTime * math.rad(360) * Direccion
+  angle = angle + deltaTime * math.rad(100000) * Direccion
   
   
   Alas.CFrame = Char:FindFirstChild("Torso").CFrame * CFrame.new(0,0.5,0.7)
   Halo.CFrame = Char:FindFirstChild("Head").CFrame * CFrame.new(0,0,0.7)
   Halo.CFrame = Halo.CFrame * CFrame.Angles(math.rad(90),math.rad(0),math.rad(0))
-  Ring.CFrame = hrp.CFrame * CFrame.Angles(0,0,angle)
-  Ring2.CFrame = hrp.CFrame * CFrame.Angles(math.rad(90),0,0) * CFrame.Angles(angle,0,0)
 end)
 
 
