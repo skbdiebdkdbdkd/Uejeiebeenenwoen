@@ -4,10 +4,12 @@ local Char = Player.Character
 local hrp = Char:FindFirstChild("HumanoidRootPart")
 local hm = Char:FindFirstChild("Humanoid")
 local Run = game:GetService("RunService")
+local Head = Char:FindFirstChild("Head")
+local Torso = Char:FindFirstChild("Torso") or Char:FindFirstChild("UpperTorso")
 
 local Music = Instance.new("Sound")
 Music.SoundId = "rbxassetid://127258758362950"
-Music.Volume = 0.1
+Music.Volume = 0
 Music.Looped = true
 Music.Parent = game.Workspace
 Music:Play()
@@ -73,7 +75,7 @@ PlayIdleAnim()
 local Time = 0
 
 local miny = 0.5
-local maxy = 9
+local maxy = 3
 local center = (miny + maxy) / 2
 local amplitude = (maxy - miny) / 2
 local numerito = 5
@@ -97,8 +99,8 @@ r = Run.Heartbeat:Connect(function(deltaTime)
   angle = angle + deltaTime * math.rad(100000) * Direccion
   
   
-  Alas.CFrame = Char:FindFirstChild("Torso").CFrame * CFrame.new(0,0.5,0.7)
-  Halo.CFrame = Char:FindFirstChild("Head").CFrame * CFrame.new(0,0,0.7)
+  Alas.CFrame = Torso.CFrame * CFrame.new(0,0.5,0.7)
+  Halo.CFrame = Head.CFrame * CFrame.new(0,0,0.7)
   Halo.CFrame = Halo.CFrame * CFrame.Angles(math.rad(90),math.rad(0),math.rad(0))
 end)
 
@@ -183,7 +185,7 @@ r2 = Run.Heartbeat:Connect(function(deltaTime)
     local dir = hm.MoveDirection.Unit
     
     if isMove then
-      hrp.CFrame = hrp.CFrame * CFrame.Angles(math.rad(-30),0,0)
+      hrp.CFrame = hrp.CFrame * CFrame.Angles(math.rad(-25),0,0)
     end
   if isMove then
   hrp.CFrame = hrp.CFrame + (dir * Speed * deltaTime)
