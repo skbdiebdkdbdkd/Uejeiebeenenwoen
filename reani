@@ -1,0 +1,149 @@
+local Players = game.Players
+local player = Players.LocalPlayer
+local Run = game:GetService("RunService")
+
+
+local is_idle = false
+local is_Move = false
+local is_Jump = false
+local is_fall = false
+
+local rig = Players:CreateHumanoidModelFromUserId(player.UserId)
+local rigHRP = rig:FindFirstChild("HumanoidRootPart")
+local rigHumanoid = rig:FindFirstChild("Humanoid")
+if rigHRP then
+  rigHRP.CFrame = player.Character:FindFirstChild("HumanoidRootPart").CFrame
+end
+rig.Parent = game.Workspace
+
+
+task.spawn(function()
+  while true do
+    local Char = player.Character
+    if Char and Char ~= rig then
+      wait(0.1)
+      if Char:FindFirstChildOfClass("Humanoid") then
+        Char:FindFirstChildOfClass("Humanoid").Health = 0
+        
+        player.Character = rig
+        game.Workspace.CurrentCamera.CameraSubject = rig:FindFirstChildOfClass("Humanoid")
+      end
+   end
+    Run.Heartbeat:Wait()
+  end
+end)
+
+
+task.spawn(function()
+  while true do
+    local RealChar = game.Workspace:FindFirstChild(player.Name)
+    if RealChar then
+      local Hat = RealChar:FindFirstChild("CowboyHat")
+      if Hat then
+        local Handle = Hat:FindFirstChild("Handle")
+        if Handle then
+        if Hat.Handle:FindFirstChildWhichIsA("JointInstance", true) then
+        Hat.Handle:BreakJoints()
+        end
+        Hat.Handle.CFrame = rig:FindFirstChild("Head").CFrame * CFrame.new(0,1,0)
+        end
+      end
+    end
+    Run.Heartbeat:Wait()
+  end
+end)
+
+Run.Heartbeat:Connect(function(deltaTime)
+  if rigHumanoid then
+    local state = rigHumanoid:GetState()
+    
+    if state == Enum.HumanoidStateType.Freefall then
+    is_fall = true
+    is_idle = false
+    is_Jump = false
+    is_Move = false
+    
+    elseif rigHumanoid.Jump == true then
+    is_Jump = true
+    is_idle = false
+    is_Move = false
+    is_fall = false
+  
+    elseif rigHumanoid.MoveDirection.Magnitude >= 0.1 then
+    is_Move = true
+    is_idle = false
+    is_Jump = false
+    is_fall = false
+  
+    elseif rigHumanoid.MoveDirection.Magnitude <= 0 then
+      is_idle = true
+      is_Move = false
+      is_Jump = false
+      is_fall = false
+    end
+  
+  end
+end)
+
+
+
+
+local RootJoint = rig:FindFirstChild("HumanoidRootPart"):FindFirstChild("RootJoint")
+local neck = rig:FindFirstChild("Torso"):FindFirstChild("Neck")
+local LeftShoulder = rig:FindFirstChild("Torso"):FindFirstChild("Left Shoulder")
+local RightShoulder = rig:FindFirstChild("Torso"):FindFirstChild("Right Shoulder")
+local LeftHip = rig:FindFirstChild("Torso"):FindFirstChild("Left Hip")
+local RightHip = rig:FindFirstChild("Torso"):FindFirstChild("Right Hip")
+
+local function CFMul(a,b)
+  return a * b
+end
+
+local function angles(x,y,z)
+  return CFrame.Angles(x,y,z)
+end
+
+local sine = 0
+
+Run.Heartbeat:Connect(function(dt)
+  sine += dt * 3
+  local deltaTime = 0.15
+  
+  if is_idle then
+  
+  if RootJoint then
+    local Rootobjetivo = CFMul(CFrame.new(0,-0.2+0.05*math.sin(sine*4),0),angles(-1.3089969389957472,0,3.141592653589793))
+    RootJoint.C0 = RootJoint.C0:Lerp(Rootobjetivo,deltaTime)
+  end
+  
+  if neck then
+    local NeckObjetivo = CFMul(CFrame.new(0,1.1,0),angles(-2.007128639793479,0,3.141592653589793))
+    neck.C0 = neck.C0:Lerp(NeckObjetivo,deltaTime)
+  end
+  
+  if LeftShoulder then
+    local LeftShoulderObjetivo = CFMul(CFrame.new(-1+0.05*math.sin(sine*4),0.5+0.05*math.sin(sine * 4),0.2+0.05*math.sin(sine*4)), angles(0,-1.7453292519943295,0.5235987755982988))
+    LeftShoulder.C0 = LeftShoulder.C0:Lerp(LeftShoulderObjetivo,deltaTime)
+  end
+  
+  if RightShoulder then
+    local RightShoulderObjetivo = CFMul(CFrame.new(1+0.05*math.sin(sine*4),0.5+0.05*math.sin(sine*4),0.3+0.05*math.sin(sine*4)),angles(0,1.7453292519943295,-0.5235987755982988))
+    RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivo,deltaTime)
+  end
+  
+  if LeftHip then
+    local LeftHipObjetivo = CFMul(CFrame.new(-1,-1+0.05*math.sin(sine * 2),0.05*math.sin(sine*4)),angles(-0.2617993877991494,-1.5707963267948966,0.5235987755982988))
+    LeftHip.C0 = LeftHip.C0:Lerp(LeftHipObjetivo,deltaTime)
+  end
+  
+  if RightHip then
+    local RightHipObjetivo = CFMul(CFrame.new(1,-1+0.05*math.sin(sine*2),-0.3+0.05*math.sin(sine*4)),angles(-0.2617993877991494,1.5707963267948966,0))
+    RightHip.C0 = RightHip.C0:Lerp(RightHipObjetivo,deltaTime)
+  end
+  end
+end)
+
+
+
+AccessoryWeld.C0=Lerp(AccessoryWeld.C0,cf(-0.00006103515625,0.08627533912658691,-0.004791259765625),deltaTime) 
+AccessoryWeld.C0=Lerp(AccessoryWeld.C0,cf(0.011114001274108887,0.3591279983520508,-0.09732252359390259),deltaTime)
