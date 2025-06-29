@@ -8,7 +8,7 @@ local is_Move = false
 local is_Jump = false
 local is_fall = false
 
-local Speed = 2
+local Speed = 0
 
 local rig = Players:CreateHumanoidModelFromUserId(player.UserId)
 local rigHRP = rig:FindFirstChild("HumanoidRootPart")
@@ -34,7 +34,15 @@ task.spawn(function()
         Char:FindFirstChildOfClass("Humanoid").Health = 0
         
         player.Character = rig
-        game.Workspace.CurrentCamera.CameraSubject = rig:FindFirstChildOfClass("Humanoid")
+        game.Workspace.CurrentCamera.CameraSubject = rig:FindFirstChild("Head")
+        
+        local RealChar = game.Workspace:FindFirstChild(player.Name)
+        if RealChar then
+          local RealcharHRP = RealChar:FindFirstChild("HumanoidRootPart")
+          if RealcharHRP then
+            RealcharHRP.CFrame = rig:FindFirstChild("HumanoidRootPart").CFrame * CFrame.new(40,40,40)
+          end
+        end
       end
    end
     Run.Heartbeat:Wait()
@@ -69,14 +77,19 @@ task.spawn(function()
       
       
         
-        local Headweld = HeadHandle:FindFirstChild("AccessoryWeld")
-        local Torsoweld = TorsoHandle:FindFirstChild("AccessoryWeld")
-        local LArmweld = LArmHandle:FindFirstChild("AccessoryWeld")
-        local RArmweld = RArmHandle:FindFirstChild("AccessoryWeld")
-        local LLegweld = LLegHandle:FindFirstChild("AccessoryWeld")
-        local RLegmweld = RLegHandle:FindFirstChild("AccessoryWeld")
+        local Headweld = HeadHandle:FindFirstChild("HatAttachment")
+        local Torsoweld = TorsoHandle:FindFirstChild("HatAttachment")
+        local LArmweld = LArmHandle:FindFirstChild("LeftShoulderAttachment")
+        local RArmweld = RArmHandle:FindFirstChild("RightShoulderAttachment")
+        local LLegweld = LLegHandle:FindFirstChild("WaistCenterAttachment")
+        local RLegmweld = RLegHandle:FindFirstChild("WaistCenterAttachment")
         
-        
+        if Headweld then Headweld:Destroy() end
+        if Torsoweld then Torsoweld:Destroy() end
+        if LArmweld then LArmweld:Destroy() end
+        if RArmweld then RArmweld:Destroy() end
+        if LLegweld then LLegweld:Destroy() end
+        if RLegmweld then RLegmweld:Destroy() end
         
 
       if HeadHandle then
@@ -114,36 +127,32 @@ Run.Heartbeat:Wait()
     end)
 end)
 
+local Estado = " "
+
+local isPlaySitEmote = false
+
 Run.Heartbeat:Connect(function(deltaTime)
   if rigHumanoid then
     local state = rigHumanoid:GetState()
     
-    if state == Enum.HumanoidStateType.Freefall then
-    is_fall = true
-    is_idle = false
-    is_Jump = true
-    is_Move = false
+    if isPlaySitEmote == false then
+    if state == Enum.HumanoidStateType.Jumping then
+    Estado = "Saltando"
     
-    elseif state == Enum.HumanoidStateType.Jumping then
-    is_Jump = true
-    is_idle = false
-    is_Move = false
-    is_fall = false
+    elseif state == Enum.HumanoidStateType.Freefall then
+    Estado = "Cayendo"
   
     elseif rigHumanoid.MoveDirection.Magnitude >= 0.1 then
-    is_Move = true
-    is_idle = false
-    is_Jump = false
-    is_fall = false
+    Estado = "Caminando"
   
     elseif rigHumanoid.MoveDirection.Magnitude <= 0 then
-      is_idle = true
-      is_Move = false
-      is_Jump = false
-      is_fall = false
+      Estado = "Idle"
+    else
+      Estado = "Ninguno"
     end
   
-  end
+    end
+end
 end)
 
 
@@ -174,96 +183,129 @@ Run.Heartbeat:Connect(function(dt)
   
   local zancada = math.floor(sine * 2) % 2 == 1
 
-  if is_idle then
+  if Estado == "Idle" then
   
   if RootJoint then
-    local Rootobjetivo = CFMul(CFrame.new(0,2+2*math.sin(sine*1),0),angles(-0.3490658503988659,0,3.141592653589793))
+    local Rootobjetivo = CFMul(CFrame.new(0,0.05 * math.sin(sine*5),0),angles(-1.7453292519943295,0,3.141592653589793))
     RootJoint.C0 = RootJoint.C0:Lerp(Rootobjetivo,deltaTime)
   end
   
   if neck then
-    local NeckObjetivo = CFMul(CFrame.new(0,1,0),angles(-2.0943951023931953,0,3.141592653589793))
+    local NeckObjetivo = CFMul(CFrame.new(0,1,0),angles(-1.7453292519943295,0,3.141592653589793))
     neck.C0 = neck.C0:Lerp(NeckObjetivo,deltaTime)
   end
   
   if LeftShoulder then
-    local LeftShoulderObjetivo = CFMul(CFrame.new(-0.7,0.8,-0.1),angles(-2.792526803190927,-2.443460952792061,-0.7853981633974483))
+    local LeftShoulderObjetivo = CFMul(CFrame.new(-1,0.5+0.05*math.sin(sine*5),-0.5),angles(-1.5707963267948966,-1.5707963267948966+0.08726646259971647*math.sin(sine*2),-1.5707963267948966))
     LeftShoulder.C0 = LeftShoulder.C0:Lerp(LeftShoulderObjetivo,deltaTime)
   end
   
   if RightShoulder then
-    local RightShoulderObjetivo = CFMul(CFrame.new(0.7,0.8,-0.1),angles(2.792526803190927,2.443460952792061,0.7853981633974483))
+    local RightShoulderObjetivo = CFMul(CFrame.new(1,0.5+0.05*math.sin(sine*5),-1),angles(-1.5707963267948966,0,-1.7453292519943295))
     RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivo,deltaTime)
   end
   
   if LeftHip then
-    local LeftHipObjetivo = CFMul(CFrame.new(-1,-1,0),angles(-0.3490658503988659,-1.5707963267948966,0))
+    local LeftHipObjetivo = CFMul(CFrame.new(-1,-1,0),angles(0.17453292519943295,-1.5707963267948966,0))
     LeftHip.C0 = LeftHip.C0:Lerp(LeftHipObjetivo,deltaTime)
   end
   
   if RightHip then
-    local RightHipObjetivo = CFMul(CFrame.new(1,-1,0),angles(0.17453292519943295+0.17453292519943295*math.sin(sine*2),1.5707963267948966,0))
+    local RightHipObjetivo = CFMul(CFrame.new(1,-1,0),angles(0.17453292519943295,1.5707963267948966,0))
     RightHip.C0 = RightHip.C0:Lerp(RightHipObjetivo,deltaTime)
   end
   
-  elseif is_Move then
+  elseif Estado == "Caminando" then
     
     if RootJoint then
-      local RootobjetivoRun = CFMul(CFrame.new(0,1+0.05*math.sin(sine+10)*5,0),angles(-2.2689280275926285,0,3.14159265358979))
+      local RootobjetivoRun = CFMul(CFrame.new(0,0.1 * math.sin(sine*10),0),angles(-1.7453292519943295,0.0017453292519943296*math.sin(sine*0.1),3.141592653589793))
       RootJoint.C0 = RootJoint.C0:Lerp(RootobjetivoRun,deltaTime)
     end
     
     if neck then
-      local NeckObjetivoRun = CFMul(CFrame.new(0,1,0),angles(-1.0471975511965976,0,3.141592653589793))
+      local NeckObjetivoRun = CFMul(CFrame.new(0,1,0),angles(-1.9198621771937625,0,3.141592653589793))
       neck.C0 = neck.C0:Lerp(NeckObjetivoRun,deltaTime)
     end
     
     if RightShoulder then
-      local RightShoulderObjetivoRun = CFMul(CFrame.new(1,1,-0.1),angles(2.6179938779914944,1.5707963267948966,0))
+      local RightShoulderObjetivoRun = CFMul(CFrame.new(1,0.5+0.1*math.sin(sine*5),0),angles(0.6981317007977318*math.sin(sine*5),1.5707963267948966,0))
       RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivoRun,deltaTime)
     end
     
     if LeftShoulder then
-      local LeftShoulderObjetivoRun = CFMul(CFrame.new(-1,0.5,0.2),angles(-0.6981317007977318,-1.5707963267948966,0))
+      local LeftShoulderObjetivoRun = CFMul(CFrame.new(-1,0.5+0.1*math.sin(sine*5),0),angles(-0.6981317007977318*math.sin(sine*5),-1.5707963267948966,0))
       LeftShoulder.C0 = LeftShoulder.C0:Lerp(LeftShoulderObjetivoRun,deltaTime)
     end
     
     if RightHip then
-      local RightHipObjetivoRun = CFMul(CFrame.new(1,-0.8,-0.5),angles(0,1.5707963267948966,0))
+      local RightHipObjetivoRun = CFMul(CFrame.new(1,-1+0.1*math.sin(sine*5),0),angles(-0.6981317007977318*math.sin(sine*5),1.5707963267948966,0))
       RightHip.C0 = RightHip.C0:Lerp(RightHipObjetivoRun,deltaTime)
     end
     
     if LeftHip then
-      local LeftHipObjetivoRun = CFMul(CFrame.new(-1,-1,0),angles(-0.3490658503988659,-1.5707963267948966,0))
+      local LeftHipObjetivoRun = CFMul(CFrame.new(-1,-1+0.1*math.sin(sine*5),0),angles(0.6981317007977318*math.sin(sine*5),-1.5707963267948966,0))
       LeftHip.C0 = LeftHip.C0:Lerp(LeftHipObjetivoRun,deltaTime)
     end
     
-  elseif is_Jump then
+  elseif Estado == "Saltando" then
     if RootJoint then
-      local RootobjetivoJump = CFMul(CFrame.new(0,0,0),angles(6.283185307179586+3.490658503988659*math.sin(sine*5),0,3.141592653589793))
+      local RootobjetivoJump = CFMul(CFrame.new(0,0,0),angles(-1.5707963267948966,0,3.141592653589793))
       RootJoint.C0 = RootJoint.C0:Lerp(RootobjetivoJump,deltaTime)
     end
     if  LeftShoulder then
-      local LeftShoulderObjetivoJump = CFMul(CFrame.new(-1,0.5,0),angles(3.141592653589793+3.490658503988659*math.sin(sine*1),-1.5707963267948966,0))
+      local LeftShoulderObjetivoJump = CFMul(CFrame.new(-1,0.5,0.3),angles(-0.3490658503988659,-1.0471975511965976,0))
       LeftShoulder.C0 = LeftShoulder.C0:Lerp(LeftShoulderObjetivoJump,deltaTime)
     end
     if RightShoulder then
-      local RightShoulderObjetivoJump = CFMul(CFrame.new(1,0.5,0),angles(3.141592653589793+3.490658503988659*math.sin(sine*1),1.5707963267948966,0))
+      local RightShoulderObjetivoJump = CFMul(CFrame.new(1,0.5,0.3),angles(-0.3490658503988659,1.0471975511965976,0))
       RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivoJump,deltaTime)
     end
     if RightHip then
-      local RightHipObjetivoJump = CFMul(CFrame.new(1,-1,0),angles(-1.0471975511965976-1.0471975511965976*math.sin(sine*1),1.5707963267948966,0))
+      local RightHipObjetivoJump = CFMul(CFrame.new(1,-0.3,-1),angles(-0.5235987755982988,1.5707963267948966,0))
       RightHip.C0 = RightHip.C0:Lerp(RightHipObjetivoJump,deltaTime)
     end
     if LeftHip then
-      local LeftHipObjetivoJump = CFMul(CFrame.new(-1,-1,0),angles(-0.8726646259971648+1.7453292519943295*math.sin(sine*1),-1.5707963267948966,0))
+      local LeftHipObjetivoJump = CFMul(CFrame.new(-1,-1,-0.7),angles(-0.5235987755982988,-1.3962634015954636,0))
       LeftHip.C0 = LeftHip.C0:Lerp(LeftHipObjetivoJump,deltaTime)
     end
     if neck then
-      local NeckObjetivoJump = CFMul(CFrame.new(0,1,0),angles(-1.5707963267948966,0,3.141592653589793))
+      local NeckObjetivoJump = CFMul(CFrame.new(0,1,0),angles(-1.5707963267948966,0,3.141592653589793)) 
       neck.C0 = neck.C0:Lerp(NeckObjetivoJump,deltaTime)
     end
+  elseif Estado == "Cayendo" then
+    
+    if RootJoint then
+    local RootobjetivoFall = CFMul(CFrame.new(0,0,0),angles(-1.6580627893946132,0,3.141592653589793))
+    RootJoint.C0 = RootJoint.C0:Lerp(RootobjetivoFall,deltaTime)
+    end
+    
+    if neck then
+    local NeckobjetivoFall = CFMul(CFrame.new(0,1,0),angles(-1.5707963267948966,0,3.141592653589793))
+    neck.C0 = neck.C0:Lerp(NeckobjetivoFall,deltaTime)
+    end
+    
+    if RightShoulder then
+    local RightShoulderobjetivoFall = CFMul(CFrame.new(1,0.9,-0.4),angles(3.141592653589793,2.792526803190927,-0.8726646259971648))
+    RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderobjetivoFall,deltaTime)
+    end
+    
+    if LeftShoulder then
+    local LeftShoulderobjetivoFall = CFMul(CFrame.new(-1,0.9,-0.4),angles(3.141592653589793,-2.792526803190927,0.8726646259971648))
+    LeftShoulder.C0 = LeftShoulder.C0:Lerp(LeftShoulderobjetivoFall,deltaTime)
+    end
+    
+    if RightHip then
+    local RightHipobjetivoFall = CFMul(CFrame.new(1,-1,0.3),angles(0,0.8726646259971648,0.3490658503988659))
+    RightHip.C0 = RightHip.C0:Lerp(RightHipobjetivoFall,deltaTime)
+    end
+    
+    if LeftHip then
+    local LeftHipobjetivoFall = CFMul(CFrame.new(-1,-1,0.3),angles(0,-0.8726646259971648,-0.3490658503988659))
+    LeftHip.C0 = LeftHip.C0:Lerp(LeftHipobjetivoFall,deltaTime)
+    end
   end
-end)
 
-RightHip.C0=Lerp(RightHip.C0,cfMul(cf(1,-1,0),angles(0.17453292519943295+0.17453292519943295*sin(sine*2),1.5707963267948966,0)),deltaTime)
+if isPlaySitEmote then
+  
+end
+end)
