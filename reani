@@ -177,32 +177,32 @@ Run.Heartbeat:Connect(function(dt)
   if is_idle then
   
   if RootJoint then
-    local Rootobjetivo = CFMul(CFrame.new(0,-0.2+0.05*math.sin(sine*4),0),angles(-1.3089969389957472,0,3.141592653589793))
+    local Rootobjetivo = CFMul(CFrame.new(0,2+2*math.sin(sine*1),0),angles(-0.3490658503988659,0,3.141592653589793))
     RootJoint.C0 = RootJoint.C0:Lerp(Rootobjetivo,deltaTime)
   end
   
   if neck then
-    local NeckObjetivo = CFMul(CFrame.new(0,1.1,0),angles(-2.007128639793479,0,3.141592653589793))
+    local NeckObjetivo = CFMul(CFrame.new(0,1,0),angles(-2.0943951023931953,0,3.141592653589793))
     neck.C0 = neck.C0:Lerp(NeckObjetivo,deltaTime)
   end
   
   if LeftShoulder then
-    local LeftShoulderObjetivo = CFMul(CFrame.new(-1+0.05*math.sin(sine*4),0.5+0.05*math.sin(sine * 4),0.2+0.05*math.sin(sine*4)), angles(0,-1.7453292519943295,0.5235987755982988))
+    local LeftShoulderObjetivo = CFMul(CFrame.new(-0.7,0.8,-0.1),angles(-2.792526803190927,-2.443460952792061,-0.7853981633974483))
     LeftShoulder.C0 = LeftShoulder.C0:Lerp(LeftShoulderObjetivo,deltaTime)
   end
   
   if RightShoulder then
-    local RightShoulderObjetivo = CFMul(CFrame.new(1+0.05*math.sin(sine*4),0.5+0.05*math.sin(sine*4),0.3+0.05*math.sin(sine*4)),angles(0,1.7453292519943295,-0.5235987755982988))
+    local RightShoulderObjetivo = CFMul(CFrame.new(0.7,0.8,-0.1),angles(2.792526803190927,2.443460952792061,0.7853981633974483))
     RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivo,deltaTime)
   end
   
   if LeftHip then
-    local LeftHipObjetivo = CFMul(CFrame.new(-1,-1+0.05*math.sin(sine * 2),0.05*math.sin(sine*4)),angles(-0.2617993877991494,-1.5707963267948966,0.5235987755982988))
+    local LeftHipObjetivo = CFMul(CFrame.new(-1,-1,0),angles(-0.3490658503988659,-1.5707963267948966,0))
     LeftHip.C0 = LeftHip.C0:Lerp(LeftHipObjetivo,deltaTime)
   end
   
   if RightHip then
-    local RightHipObjetivo = CFMul(CFrame.new(1,-1+0.05*math.sin(sine*2),-0.3+0.05*math.sin(sine*4)),angles(-0.2617993877991494,1.5707963267948966,0))
+    local RightHipObjetivo = CFMul(CFrame.new(1,-1,0),angles(0.17453292519943295+0.17453292519943295*math.sin(sine*2),1.5707963267948966,0))
     RightHip.C0 = RightHip.C0:Lerp(RightHipObjetivo,deltaTime)
   end
   
@@ -265,3 +265,5 @@ Run.Heartbeat:Connect(function(dt)
     end
   end
 end)
+
+RightHip.C0=Lerp(RightHip.C0,cfMul(cf(1,-1,0),angles(0.17453292519943295+0.17453292519943295*sin(sine*2),1.5707963267948966,0)),deltaTime)
