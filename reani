@@ -26,7 +26,7 @@ end
 
 
 task.spawn(function()
-  while true do
+  Run.Heartbeat:Connect(function(deltaT)
     local Char = player.Character
     if Char and Char ~= rig then
       wait(0.1)
@@ -46,7 +46,7 @@ task.spawn(function()
       end
    end
     Run.Heartbeat:Wait()
-  end
+  end)
 end)
 
 
@@ -179,71 +179,71 @@ local SegundaZancada = false
 
 Run.Heartbeat:Connect(function(dt)
   sine += dt * 3
-  local deltaTime = 0.15
+  local deltaTime = 1 / 10
   
   local zancada = math.floor(sine * 2) % 2 == 1
 
   if Estado == "Idle" then
   
   if RootJoint then
-    local Rootobjetivo = CFMul(CFrame.new(0,0.05 * math.sin(sine*5),0),angles(-1.7453292519943295,0,3.141592653589793))
+    local Rootobjetivo = CFMul(CFrame.new(0,2+1*math.sin(sine*1.5),0),angles(-1.5707963267948966,0.2617993877991494*math.sin(sine*2),3.141592653589793))
     RootJoint.C0 = RootJoint.C0:Lerp(Rootobjetivo,deltaTime)
   end
   
   if neck then
-    local NeckObjetivo = CFMul(CFrame.new(0,1,0),angles(-1.7453292519943295,0,3.141592653589793))
+    local NeckObjetivo = CFMul(CFrame.new(0,1,0),angles(-1.9198621771937625+0.17453292519943295*math.sin(sine*2.5),0,3.6651914291880923))
     neck.C0 = neck.C0:Lerp(NeckObjetivo,deltaTime)
   end
   
   if LeftShoulder then
-    local LeftShoulderObjetivo = CFMul(CFrame.new(-1,0.5+0.05*math.sin(sine*5),-0.5),angles(-1.5707963267948966,-1.5707963267948966+0.08726646259971647*math.sin(sine*2),-1.5707963267948966))
+    local LeftShoulderObjetivo = CFMul(CFrame.new(-1.4,0.5+0.2*math.sin(sine*2.5),-0.5),angles(1.3962634015954636+0.08726646259971647*math.sin(sine*2),0.8726646259971648,1.0471975511965976))
     LeftShoulder.C0 = LeftShoulder.C0:Lerp(LeftShoulderObjetivo,deltaTime)
   end
   
   if RightShoulder then
-    local RightShoulderObjetivo = CFMul(CFrame.new(1,0.5+0.05*math.sin(sine*5),-1),angles(-1.5707963267948966,0,-1.7453292519943295))
+    local RightShoulderObjetivo = CFMul(CFrame.new(1,0.5,0),angles(2.0943951023931953+0.17453292519943295*math.sin(sine*1),2.0943951023931953,2.0943951023931953))
     RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivo,deltaTime)
   end
   
   if LeftHip then
-    local LeftHipObjetivo = CFMul(CFrame.new(-1,-1,0),angles(0.17453292519943295,-1.5707963267948966,0))
+    local LeftHipObjetivo = CFMul(CFrame.new(-1,-0.7,-0.7),angles(-0.5235987755982988+0.17453292519943295*math.sin(sine*2.5),-1.0471975511965976,0))
     LeftHip.C0 = LeftHip.C0:Lerp(LeftHipObjetivo,deltaTime)
   end
   
   if RightHip then
-    local RightHipObjetivo = CFMul(CFrame.new(1,-1,0),angles(0.17453292519943295,1.5707963267948966,0))
+    local RightHipObjetivo = CFMul(CFrame.new(1,-1,0),angles(-0.5235987755982988-0.17453292519943295*math.sin(sine*2.5),1.9198621771937625,0.008726646259971648*math.sin(sine*2.5)))
     RightHip.C0 = RightHip.C0:Lerp(RightHipObjetivo,deltaTime)
   end
   
   elseif Estado == "Caminando" then
     
     if RootJoint then
-      local RootobjetivoRun = CFMul(CFrame.new(0,0.1 * math.sin(sine*10),0),angles(-1.7453292519943295,0.0017453292519943296*math.sin(sine*0.1),3.141592653589793))
+      local RootobjetivoRun = CFMul(CFrame.new(0,-0.1+0.1*math.sin(sine*10),0),angles(-1.5707963267948966,0,3.141592653589793))
       RootJoint.C0 = RootJoint.C0:Lerp(RootobjetivoRun,deltaTime)
     end
     
     if neck then
-      local NeckObjetivoRun = CFMul(CFrame.new(0,1,0),angles(-1.9198621771937625,0,3.141592653589793))
+      local NeckObjetivoRun = CFMul(CFrame.new(0,1,0),angles(-2.0943951023931953,0,3.141592653589793))
       neck.C0 = neck.C0:Lerp(NeckObjetivoRun,deltaTime)
     end
     
     if RightShoulder then
-      local RightShoulderObjetivoRun = CFMul(CFrame.new(1,0.5+0.1*math.sin(sine*5),0),angles(0.6981317007977318*math.sin(sine*5),1.5707963267948966,0))
+      local RightShoulderObjetivoRun = CFMul(CFrame.new(1,0.5+0.05*math.sin(sine*10),0),angles(-0.03490658503988659,0.5235987755982988,-0.5235987755982988))
       RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivoRun,deltaTime)
     end
     
     if LeftShoulder then
-      local LeftShoulderObjetivoRun = CFMul(CFrame.new(-1,0.5+0.1*math.sin(sine*5),0),angles(-0.6981317007977318*math.sin(sine*5),-1.5707963267948966,0))
+      local LeftShoulderObjetivoRun = CFMul(CFrame.new(-1,0.5+0.05*math.sin(sine*10),0),angles(-0.03490658503988659,-0.5235987755982988,0.5235987755982988))
       LeftShoulder.C0 = LeftShoulder.C0:Lerp(LeftShoulderObjetivoRun,deltaTime)
     end
     
     if RightHip then
-      local RightHipObjetivoRun = CFMul(CFrame.new(1,-1+0.1*math.sin(sine*5),0),angles(-0.6981317007977318*math.sin(sine*5),1.5707963267948966,0))
+      local RightHipObjetivoRun = CFMul(CFrame.new(1,-1+0.1*math.sin(sine*2.5),0),angles(0,1.5707963267948966,0.6981317007977318*math.sin(sine*5)))
       RightHip.C0 = RightHip.C0:Lerp(RightHipObjetivoRun,deltaTime)
     end
     
     if LeftHip then
-      local LeftHipObjetivoRun = CFMul(CFrame.new(-1,-1+0.1*math.sin(sine*5),0),angles(0.6981317007977318*math.sin(sine*5),-1.5707963267948966,0))
+      local LeftHipObjetivoRun = CFMul(CFrame.new(-1,-1+0.1*math.sin(sine*2.5),0),angles(0,-1.5707963267948966,0.6981317007977318*math.sin(sine*5)))
       LeftHip.C0 = LeftHip.C0:Lerp(LeftHipObjetivoRun,deltaTime)
     end
     
@@ -350,3 +350,6 @@ uis.InputBegan:Connect(function(input)
     end
 end
 end)
+
+
+LeftHip.C0=Lerp(LeftHip.C0,cfMul(cf(-1,-0.5,-0.6),angles(-0.5235987755982988,-1.5707963267948966,0)),deltaTime)  AccessoryWeld.C0=Lerp(AccessoryWeld.C0,cfMul(cf(-0.0032386777456849813,0.1935257911682129,0.18658447265625),angles(3.141592653589793,0,3.141592653589793)),deltaTime)  AccessoryWeld.C0=Lerp(AccessoryWeld.C0,cf(-0.00006103515625,0.08627533912658691,-0.004791259765625),deltaTime)  AccessoryWeld.C0=Lerp(AccessoryWeld.C0,cfMul(cf(0.46598052978515625,-0.10890470445156097,1.101987834317697e-09),angles(0,-1.5707963267948966,0)),deltaTime)  RightShoulder.C0=Lerp(RightShoulder.C0,cfMul(cf(1.3,1,0),angles(0.17453292519943295+0.3490658503988659*sin(sine*-1),0,3.6651914291880923)),deltaTime)  RootJoint.C0=Lerp(RootJoint.C0,cfMul(cf(0,3+1*sin(sine*1),0),angles(-0.17453292519943295,0,3.141592653589793)),deltaTime)  LeftShoulder.C0=Lerp(LeftShoulder.C0,cfMul(cf(-1,0.5,0),angles(-0.8726646259971648,-1.5707963267948966,0.5235987755982988*sin(sine*1))),deltaTime)  RightHip.C0=Lerp(RightHip.C0,cfMul(cf(1,-1,0),angles(-0.3490658503988659+0.6981317007977318*sin(sine*-1),1.5707963267948966,0)),deltaTime)  Neck.C0=Lerp(Neck.C0,cfMul(cf(0,1,0),angles(-1.7453292519943295+0.3490658503988659*sin(sine*-1),0,3.141592653589793)),deltaTime)  --MW_animatorProgressSave: LeftLeg,-1,0,0,1,-30,0,0,1,-0.5,0,0,1,-90,,0,1,-0.6,0,0,1,,,0,1,SpikyBlackAnimeHair_Handle,-0.0032386777456849813,0,0,1,180,0,0,1,0.1935257911682129,0,0,1,0,0,0,1,0.18658447265625,0,0,1,180,0,0,1,CowboyHat_Handle,-0.00006103515625,0,0,1,0,0,0,1,0.08627533912658691,0,0,1,0,0,0,1,-0.004791259765625,0,0,1,0,0,0,1,Modernglasses_Handle,0.46598052978515625,0,0,1,0,0,0,1,-0.10890470445156097,0,0,1,-90,0,0,1,1.101987834317697e-09,0,0,1,0,0,0,1,RightArm,1.3,0,0,1,10,20,0,-1,1,0,0,1,,0,0,1,,0,0,1,210,0,0,1,Torso,0,0,0,1,-10,0,0,1,3,1,0,1,0,0,0,1,0,0,0,1,180,0,0,1,LeftArm,-1,0,0,1,-50,0,0,0,0.5,0,0,1,-90,0,0,1,0,0,0,1,0,30,0,1,RightLeg,1,0,0,1,-20,40,0,-1,-1,0,0,1,90,0,0,1,0,0,0,1,0,0,0,1,Head,0,0,0,1,-100,20,0,-1,1,0,0,1,0,0,0,1,0,0,0,1,180,0,0,1
