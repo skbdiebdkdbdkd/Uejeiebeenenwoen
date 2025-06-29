@@ -307,5 +307,46 @@ Run.Heartbeat:Connect(function(dt)
 
 if isPlaySitEmote then
   
+  if RootJoint then
+    local RootJointObjetivo = CFMul(CFrame.new(0,-1.6,0),angles(-1.1344640137963142,0,3.141592653589793))
+    RootJoint.C0 = RootJoint.C0:Lerp(RootJointObjetivo,deltaTime)
+  end
+  
+  if neck then
+    local neckObjetivo = CFMul(CFrame.new(0,1,0),angles(-1.9198621771937625,0.3490658503988659*math.sin(sine*3),3.141592653589793))
+    neck.C0 = neck.C0:Lerp(neckObjetivo,deltaTime)
+  end
+  
+  if RightShoulder then
+    local RightShoulderObjetivo = CFMul(CFrame.new(1,0.5,0.5),angles(-0.6981317007977318,1.5707963267948966,0))
+    RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivo,deltaTime)
+  end
+  
+  if LeftShoulder then
+    local LeftShoulderObjetivo = CFMul(CFrame.new(-1,0.5,0.5),angles(-0.6981317007977318,-1.5707963267948966,0))
+    LeftShoulder.C0 = LeftShoulder.C0:Lerp(LeftShoulderObjetivo,deltaTime)
+  end
+  
+  if RightHip then
+    local RightHipObjetivo = CFMul(CFrame.new(1,-1,0),angles(1.0471975511965976+0.17453292519943295*math.sin(sine*2.5),1.5707963267948966,0))
+    RightHip.C0 = RightHip.C0:Lerp(RightHipObjetivo,deltaTime)
+  end
+  
+  if LeftHip then
+    local LeftHipObjetivo = CFMul(CFrame.new(-1,-1,0),angles(1.0471975511965976+0.17453292519943295*math.sin(sine*-2.5),-1.5707963267948966,0)) 
+    LeftHip.C0 = LeftHip.C0:Lerp(LeftHipObjetivo,deltaTime)
+  end
+end
+end)
+
+local uis = game:GetService("UserInputService")
+
+uis.InputBegan:Connect(function(input)
+  if input.KeyCode == Enum.KeyCode.F then
+    if isPlaySitEmote == false then
+    isPlaySitEmote = true
+    elseif isPlaySitEmote == true then
+      isPlaySitEmote = false
+    end
 end
 end)
