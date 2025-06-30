@@ -132,6 +132,7 @@ local Estado = " "
 
 local isPlayChillFloatEmote = false
 local isPlayRasca_RascaEmote = false
+local isPlayBangEmote = false
 
 Run.Heartbeat:Connect(function(deltaTime)
   if rigHumanoid then
@@ -143,6 +144,9 @@ Run.Heartbeat:Connect(function(deltaTime)
     elseif isPlayRasca_RascaEmote then
       Estado = "Rasca_Rasca"
     
+    elseif isPlayBangEmote then
+      Estado = "Bang"
+      
     elseif state == Enum.HumanoidStateType.Jumping then
     Estado = "Saltando"
     
@@ -373,8 +377,45 @@ Run.Heartbeat:Connect(function(dt)
     local LeftHipObjetivo = CFMul(CFrame.new(0,-0.6,-0.7),angles(0,1.5707963267948966,-1.2217304763960306*math.sin(sine*-50)))
     LeftHip.C0 = LeftHip.C0:Lerp(LeftHipObjetivo,deltaTime)
   end
+  elseif Estado == "Bang" then
+    
   end
 end)
+
+local nearestDistance = math.huge
+local nearestPlayer = nil
+
+Run.Heartbeat:Connect(function()
+  nearestDistance = math.huge
+  for _, Players in ipairs(Players:GetPlayers()) do
+    if Players ~= player then
+    local pChar = Players.Character
+    if pChar then
+      pHRP = pChar:FindFirstChild("HumanoidRootPart")
+      if pHRP then
+        local Distance = (pHRP.Position - rigHRP.Position).Magnitude
+        if Distance <= nearestDistance then
+          nearestDistance = Distance
+          nearestPlayer = Players
+        end
+      end
+    end
+    end
+  end
+  
+  if nearestPlayer then
+    local nearestPlayerChar = nearestPlayer.Character
+    if nearestPlayerChar then
+      local nearestPlayerHRP = nearestPlayerChar:FindFirstChild("HumanoidRootPart")
+      if nearestPlayerHRP then
+        if isPlayBangEmote then
+          rigHRP.CFrame = nearestPlayerHRP.CFrame * CFrame.new(0,0,1)
+        end
+      end
+    end
+  end
+end)
+
 
 local uis = game:GetService("UserInputService")
 
@@ -391,5 +432,14 @@ uis.InputBegan:Connect(function(input)
     elseif isPlayRasca_RascaEmote == true then
       isPlayRasca_RascaEmote = false
     end
+  elseif input.KeyCode == Enum.KeyCode.B then
+    if isPlayBangEmote == false then
+      isPlayBangEmote = true
+    elseif isPlayBangEmote == true then
+      isPlayBangEmote = false
+    end
 end
 end)
+
+
+AccessoryWeld.C0=Lerp(AccessoryWeld.C0,cfMul(cf(0.46598052978515625,-0.10890470445156097,1.101987834317697e-09),angles(0,-1.5707963267948966,0)),deltaTime)  LeftShoulder.C0=Lerp(LeftShoulder.C0,cfMul(cf(-1,0.5,-0.2+0.3*sin(sine*10)),angles(0,-1.5707963267948966-0.3490658503988659*sin(sine*10),-1.5707963267948966)),deltaTime)  RootJoint.C0=Lerp(RootJoint.C0,cfMul(cf(0,0.2 * sin(sine*10),0),angles(-1.5707963267948966+0.17453292519943295*sin(sine*10),0,3.141592653589793)),deltaTime)  LeftHip.C0=Lerp(LeftHip.C0,cfMul(cf(-1,-1,0),angles(0,-1.0471975511965976,0.6981317007977318*sin(sine*-10))),deltaTime)  AccessoryWeld.C0=Lerp(AccessoryWeld.C0,cf(-0.00006103515625,0.08627533912658691,-0.004791259765625),deltaTime)  Neck.C0=Lerp(Neck.C0,cfMul(cf(0,1,0),angles(-1.5707963267948966-0.5235987755982988*sin(sine*10),0,3.141592653589793)),deltaTime)  AccessoryWeld.C0=Lerp(AccessoryWeld.C0,cfMul(cf(-0.0032386777456849813,0.1935257911682129,0.18658447265625),angles(3.141592653589793,0,3.141592653589793)),deltaTime)  RightShoulder.C0=Lerp(RightShoulder.C0,cfMul(cf(1,0.5,-0.2+0.3*sin(sine*10)),angles(0,1.5707963267948966+0.3490658503988659*sin(sine*10),1.5707963267948966)),deltaTime)  RightHip.C0=Lerp(RightHip.C0,cfMul(cf(1,-1,0),angles(0,1.0471975511965976,0.6981317007977318*sin(sine*10))),deltaTime)  --MW_animatorProgressSave: Modernglasses_Handle,0.46598052978515625,0,0,1,0,0,0,1,-0.10890470445156097,0,0,1,-90,0,0,1,1.101987834317697e-09,0,0,1,0,0,0,1,LeftArm,-1,0,0,1,,0,0,1,0.5,0,0,1,-90,-20,0,10,-0.2,0.3,0,10,-90,,0,,Torso,0,0,0,1,-90,10,0,10,0,0.2,0,10,0,0,0,1,0,0,0,1,180,0,0,1,LeftLeg,-1,0,0,1,0,0,0,1,-1,0,0,1,-60,0,0,1,0,,0,,0,40,0,-10,CowboyHat_Handle,-0.00006103515625,0,0,1,0,0,0,1,0.08627533912658691,0,0,1,0,0,0,1,-0.004791259765625,0,0,1,0,0,0,1,Head,0,,0,1,-90,-30,0,10,1,,0,1,0,0,0,1,0,0,0,,180,,0,0,SpikyBlackAnimeHair_Handle,-0.0032386777456849813,0,0,1,180,0,0,1,0.1935257911682129,0,0,1,0,0,0,1,0.18658447265625,0,0,1,180,0,0,1,RightArm,1,0,0,1,0,,0,1,0.5,0,0,1,90,20,0,10,-0.2,0.3,0,10,90,,0,5,RightLeg,1,0,0,1,0,,0,,-1,0,0,1,60,0,0,1,0,0,0,1,,40,,10
