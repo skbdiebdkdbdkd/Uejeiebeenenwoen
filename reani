@@ -30,9 +30,10 @@ task.spawn(function()
   Run.Heartbeat:Connect(function(deltaT)
     local Char = player.Character
     if Char and Char ~= rig then
-      wait(0.1)
+      wait(0.2)
       if Char:FindFirstChildOfClass("Humanoid") then
         Char:FindFirstChildOfClass("Humanoid").Health = 0
+        Char:FindFirstChild("HumanoidRootPart").CanCollide = false
         
         player.Character = rig
         game.Workspace.CurrentCamera.CameraSubject = rig:FindFirstChild("Head")
@@ -41,7 +42,7 @@ task.spawn(function()
         if RealChar then
           local RealcharHRP = RealChar:FindFirstChild("HumanoidRootPart")
           if RealcharHRP then
-            RealcharHRP.CFrame = rig:FindFirstChild("HumanoidRootPart").CFrame * CFrame.new(40,40,40)
+            RealcharHRP.CFrame = rig:FindFirstChild("HumanoidRootPart").CFrame * CFrame.new(math.random(-30,30),math.random(-30,30),math.random(-30,30))
           end
         end
       end
@@ -133,6 +134,7 @@ local Estado = " "
 local isPlayChillFloatEmote = false
 local isPlayRasca_RascaEmote = false
 local isPlayBangEmote = false
+local isPlayExtrangeWalkEmote = false
 
 Run.Heartbeat:Connect(function(deltaTime)
   if rigHumanoid then
@@ -146,6 +148,9 @@ Run.Heartbeat:Connect(function(deltaTime)
     
     elseif isPlayBangEmote then
       Estado = "Bang"
+      
+    elseif isPlayExtrangeWalkEmote then
+      Estado = "ExtrangeWalk"
       
     elseif state == Enum.HumanoidStateType.Jumping then
     Estado = "Saltando"
@@ -407,6 +412,37 @@ Run.Heartbeat:Connect(function(dt)
     local LeftHipObjetivo = CFMul(CFrame.new(-1,-1,0),angles(0,-1.0471975511965976,0.6981317007977318*math.sin(sine*-80)))
     LeftHip.C0 = LeftHip.C0:Lerp(LeftHipObjetivo,deltaTime)
   end
+  
+   elseif Estado == "ExtrangeWalk" then
+      if RootJoint then
+    local RootJointObjetivo = CFMul(CFrame.new(0,0,0),angles(-1.5707963267948966+0.17453292519943295*math.sin(sine*-40),0,3.141592653589793))
+    RootJoint.C0 = RootJoint.C0:Lerp(RootJointObjetivo,deltaTime)
+  end
+  
+  if neck then
+    local neckObjetivo = CFMul(CFrame.new(0,1.2-0.2*math.sin(sine*80),0),angles(-1.5707963267948966,0,3.141592653589793))
+    neck.C0 = neck.C0:Lerp(neckObjetivo,deltaTime)
+  end
+  
+  if RightShoulder then
+    local RightShoulderObjetivo = CFMul(CFrame.new(1,0.5+0.2*math.sin(sine*80),0),angles(0,1.5707963267948966,-1.0471975511965976*math.sin(sine*40)))
+    RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivo,deltaTime)
+  end
+  
+  if LeftShoulder then
+    local LeftShoulderObjetivo = CFMul(CFrame.new(-1,0.5+0.2*math.sin(sine*80),0),angles(0,-1.5707963267948966,1.0471975511965976*math.sin(sine*-40)))
+    LeftShoulder.C0 = LeftShoulder.C0:Lerp(LeftShoulderObjetivo,deltaTime)
+  end
+  
+  if RightHip then
+    local RightHipObjetivo = CFMul(CFrame.new(1,-1+0.2*math.sin(sine*80),0),angles(0.17453292519943295*sin(sine*40),1.5707963267948966,-0.6981317007977318*sin(sine*-40)))
+    RightHip.C0 = RightHip.C0:Lerp(RightHipObjetivo,deltaTime)
+  end
+  
+  if LeftHip then
+    local LeftHipObjetivo = CFMul(CFrame.new(-1,-1+0.2*math.sin(sine*80),0),angles(0.17453292519943295*math.sin(sine*40),-1.5707963267948966,0.6981317007977318*math.sin(sine*40)))
+    LeftHip.C0 = LeftHip.C0:Lerp(LeftHipObjetivo,deltaTime)
+  end
   end
 end)
 
@@ -466,5 +502,17 @@ uis.InputBegan:Connect(function(input)
     elseif isPlayBangEmote == true then
       isPlayBangEmote = false
     end
+  elseif input.KeyCode == Enum.KeyCode.E then
+    if isPlayExtrangeWalkEmote == false then
+      isPlayExtrangeWalkEmote = true
+    elseif isPlayExtrangeWalkEmote == true then
+      isPlayExtrangeWalkEmote = false
+    end
 end
 end)
+
+
+
+LeftHip.C0=Lerp(LeftHip.C0,CFMul(CFrame.new(-1,-1+0.2*math.sin(sine*80),0),angles(0.17453292519943295*math.sin(sine*40),-1.5707963267948966,0.6981317007977318*math.sin(sine*40)))
+
+RightHip.C0=Lerp(RightHip.C0,CFMul(CFrame.new(1,-1+0.2*math.sin(sine*80),0),angles(0.17453292519943295*sin(sine*40),1.5707963267948966,-0.6981317007977318*sin(sine*-40)))
