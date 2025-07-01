@@ -567,6 +567,8 @@ uis.InputBegan:Connect(function(input)
       AgarrarEspada = true
       AgarrarEspadaEmote = false
     elseif AgarrarEspada then
+      AgarrarEspadaEmote = true
+      wait(0.3)
       AgarrarEspada = false
       AgarrarEspadaEmote = false
     end
