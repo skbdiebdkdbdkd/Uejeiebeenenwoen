@@ -82,7 +82,9 @@ Run.Heartbeat:Connect(function(deltaTime)
     elseif AgarrarEspadaEmote then
       Estado = "AgarrarEspada"
       
-    elseif state == Enum.HumanoidStateType.Jumping then
+    else
+      
+    if state == Enum.HumanoidStateType.Jumping then
     Estado = "Saltando"
     
     elseif state == Enum.HumanoidStateType.Freefall then
@@ -96,7 +98,7 @@ Run.Heartbeat:Connect(function(deltaTime)
     else
       Estado = "Ninguno"
     end
-  
+  end
     end
 end)
 
