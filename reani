@@ -113,7 +113,7 @@ task.spawn(function()
       local RArm = RealChar:FindFirstChild("Accessory (RArm)") 
       local LLeg = RealChar:FindFirstChild("Accessory (LLeg)") 
       local RLeg = RealChar:FindFirstChild("Accessory (RLeg)")
-      local Sword = RealChar:FindFirstChild("Sword")
+      local Sword = RealChar:FindFirstChild("Accessory (gonerswordAccessory)")
       if HeadHat then
         if TorsoHat then
           if LArm then
@@ -138,7 +138,7 @@ task.spawn(function()
         local RArmweld = RArmHandle:FindFirstChild("RightShoulderAttachment")
         local LLegweld = LLegHandle:FindFirstChild("WaistCenterAttachment")
         local RLegmweld = RLegHandle:FindFirstChild("WaistCenterAttachment")
-        local SwordWeld = SwordHandle:FindFirstChild("WaistCenterAttachment")
+        local SwordWeld = SwordHandle:FindFirstChild("BodyBackAttachment")
         
         if Headweld then Headweld:Destroy() end
         if Torsoweld then Torsoweld:Destroy() end
@@ -167,11 +167,13 @@ task.spawn(function()
       if RLegHandle then
         RLegHandle.CFrame = rig:FindFirstChild("Right Leg").CFrame * CFrame.Angles(math.rad(90),math.rad(90),0)
         end
-        if sword then
+        if SwordHandle then
           if AgarrarEspada then
-            SwordHandle.CFrame = rig:FindFirstChild("Right Arm").CFrame
+            SwordHandle.CFrame = rig:FindFirstChild("Right Arm").CFrame * CFrame.new(0,-1,-1.5) * CFrame.Angles(math.rad(-90),math.rad(90),math.rad(130))
+            elseif AgarrarEspada == false then
+              SwordHandle.CFrame = rig:FindFirstChild("Torso").CFrame * CFrame.new(0,0,0.5)
           end
-        end
+      end
         
     local movedir = rig:FindFirstChild("Humanoid").MoveDirection
     
@@ -463,32 +465,32 @@ Run.Heartbeat:Connect(function(dt)
   end
   elseif Estado == "AgarrarEspada" then
       if RootJoint then
-    local RootJointObjetivo = CFMul(CFrame.new(0,0,0),angles())
+    local RootJointObjetivo = CFMul(CFrame.new(0,-0.3,0),angles(-1.5707963267948966,0,3.141592653589793))
     RootJoint.C0 = RootJoint.C0:Lerp(RootJointObjetivo,deltaTime)
   end
   
   if neck then
-    local neckObjetivo = CFMul(CFrame.new(0,0,0),angles())
+    local neckObjetivo = CFMul(CFrame.new(0,1,0),angles(-2.443460952792061,0,3.141592653589793))
     neck.C0 = neck.C0:Lerp(neckObjetivo,deltaTime)
   end
   
   if RightShoulder then
-    local RightShoulderObjetivo = CFMul(CFrame.new(0,0,0),angles())
+    local RightShoulderObjetivo = CFMul(CFrame.new(1,0.9,0),angles(3.839724354387525,3.141592653589793,1.2217304763960306))
     RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivo,deltaTime)
   end
   
   if LeftShoulder then
-    local LeftShoulderObjetivo = CFMul(CFrame.new(0,0,0),angles())
+    local LeftShoulderObjetivo = CFMul(CFrame.new(-1,0.5,0),angles(-0.17453292519943295,-1.5707963267948966,0))
     LeftShoulder.C0 = LeftShoulder.C0:Lerp(LeftShoulderObjetivo,deltaTime)
   end
   
   if RightHip then
-    local RightHipObjetivo = CFMul(CFrame.new(0,0,0),angles())
+    local RightHipObjetivo = CFMul(CFrame.new(1,-1,-0.8),angles(-0.5235987755982988,1.5707963267948966,0))
     RightHip.C0 = RightHip.C0:Lerp(RightHipObjetivo,deltaTime)
   end
   
   if LeftHip then
-    local LeftHipObjetivo = CFMul(CFrame.new(0,0,0),angles())
+    local LeftHipObjetivo = CFMul(CFrame.new(-1,-1,0),angles(-0.8726646259971648,-1.5707963267948966,0))
     LeftHip.C0 = LeftHip.C0:Lerp(LeftHipObjetivo,deltaTime)
   end
   end
@@ -557,12 +559,12 @@ uis.InputBegan:Connect(function(input)
       isPlayExtrangeWalkEmote = false
     end
   elseif input.KeyCode == Enum.KeyCode.G then
-    if AgarrarEspadaEmote == false then
+    if not AgarrarEspada then
       AgarrarEspadaEmote = true
-      wait(1)
+      wait(0.3)
       AgarrarEspada = true
       AgarrarEspadaEmote = false
-    elseif AgarrarEspadaEmote == false and AgarrarEspada == true then
+    elseif AgarrarEspada then
       AgarrarEspada = false
       AgarrarEspadaEmote = false
     end
