@@ -20,7 +20,7 @@ rig.Parent = game.Workspace
 
 for _, obj in ipairs(rig:GetDescendants()) do
   if obj:IsA("BasePart") then
-    obj.Transparency = 0
+    obj.Transparency = 1
     obj.CanCollide = false
   end
 end
@@ -142,6 +142,18 @@ task.spawn(function()
         local RLegmweld = RLegHandle:FindFirstChild("WaistCenterAttachment")
         local SwordWeld = SwordHandle:FindFirstChild("BodyBackAttachment")
         
+        
+        
+        local Headweld2 = HeadHandle:FindFirstChild("AccessoryWeld")
+        local Torsoweld2 = TorsoHandle:FindFirstChild("AccessoryWeld")
+        local LArmweld2 = LArmHandle:FindFirstChild("AccessoryWeld")
+        local RArmweld2 = RArmHandle:FindFirstChild("AccessoryWeld")
+        local LLegweld2 = LLegHandle:FindFirstChild("AccessoryWeld")
+        local RLegmweld2 = RLegHandle:FindFirstChild("AccessoryWeld")
+        local SwordWeld2 = SwordHandle:FindFirstChild("AccessoryWeld")
+        
+        
+        
         if Headweld then Headweld:Destroy() end
         if Torsoweld then Torsoweld:Destroy() end
         if LArmweld then LArmweld:Destroy() end
@@ -149,6 +161,15 @@ task.spawn(function()
         if LLegweld then LLegweld:Destroy() end
         if RLegmweld then RLegmweld:Destroy() end
         if SwordWeld then SwordWeld:Destroy() end
+        
+        
+        if Headweld2 then Headweld2:Destroy() end
+        if Torsoweld2 then Torsoweld2:Destroy() end
+        if LArmweld2 then LArmweld2:Destroy() end
+        if RArmweld2 then RArmweld2:Destroy() end
+        if LLegweld2 then LLegweld2:Destroy() end
+        if RLegmweld2 then RLegmweld2:Destroy() end
+        if SwordWeld2 then SwordWeld2:Destroy() end
         
 
       if HeadHandle then
@@ -573,4 +594,19 @@ uis.InputBegan:Connect(function(input)
       AgarrarEspadaEmote = false
     end
 end
+end)
+
+
+player.Chatted:Connect(function(msg)
+  local mensaje = msg:lower()
+  
+  if mensaje == "/reset" then
+  local RealChar = game.Workspace:FindFirstChild(player.Name)
+  if RealChar then
+    local RealHumanoid = RealChar:FindFirstChild("Humanoid")
+    if RealHumanoid then
+      RealHumanoid.Health = 0
+    end
+  end
+  end
 end)
