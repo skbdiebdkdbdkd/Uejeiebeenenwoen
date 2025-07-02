@@ -666,7 +666,7 @@ HandleSword.Touched:Connect(function(hit)
             for i = 0,60,1 do
             RealcharHRP.Transparency = 0.8
             RealcharHRP.AssemblyLinearVelocity = Vector3.new(90000,90000,90000)
-            RealcharHRP.CFrame = playersHRP.CFrame * CFrame.Angles(math.rad(math.random(360)),math.rad(math.random(360)),math.rad(math.random(360)))
+            RealcharHRP.CFrame = playersHRP.CFrame * CFrame.new(math.random(-0.5,0.5),math.random(-0.5,0.5),math.random(-0.5,0.5)) * CFrame.Angles(math.rad(math.random(360)),math.rad(math.random(360)),math.rad(math.random(360)))
             wait(0.01)
             end
             Fling = false
