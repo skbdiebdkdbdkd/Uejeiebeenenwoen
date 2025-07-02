@@ -63,6 +63,8 @@ local isPlayExtrangeWalkEmote = false
 local AgarrarEspadaEmote = false
 local AgarrarEspada = false
 
+local SlashEmote = false
+
 Run.Heartbeat:Connect(function(deltaTime)
   if rigHumanoid then
     local state = rigHumanoid:GetState()
@@ -253,9 +255,18 @@ Run.Heartbeat:Connect(function(dt)
   end
   
   if RightShoulder then
+    if not SlashEmote then
     local RightShoulderObjetivo = CFMul(CFrame.new(1,0.5,0),angles(2.0943951023931953+0.17453292519943295*math.sin(sine*16),2.0943951023931953,2.0943951023931953))
     RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivo,deltaTime)
-  end
+    elseif SlashEmote then
+    if AgarrarEspada then
+    if RightShoulder then
+      RightShoulderObjetivo = CFMul(CFrame.new(1.4,0.8,-0.4),angles(1.2217304763960306,0.17453292519943295,1.5707963267948966*math.sin(sine*80)))
+      RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivo,deltaTime)
+    end
+    end
+    end
+end
   
   if LeftHip then
     local LeftHipObjetivo = CFMul(CFrame.new(-1,-0.7,-0.7),angles(-0.5235987755982988+0.17453292519943295*math.sin(sine*40),-1.0471975511965976,0))
@@ -586,6 +597,12 @@ uis.InputBegan:Connect(function(input)
       wait(0.3)
       AgarrarEspada = false
       AgarrarEspadaEmote = false
+    end
+  elseif input.UserInputType == Enum.UserInputType.Touch then
+    if not SlashEmote then
+      SlashEmote = true
+    wait(0.5)
+      SlashEmote = false
     end
 end
 end)
