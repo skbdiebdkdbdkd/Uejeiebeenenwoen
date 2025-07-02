@@ -21,7 +21,7 @@ rig.Parent = game.Workspace
 for _, obj in ipairs(rig:GetDescendants()) do
   if obj:IsA("BasePart") then
     obj.Transparency = 1
-    obj.CanCollide = false
+    obj.CanCollide = true
   end
 end
 
@@ -42,7 +42,7 @@ task.spawn(function()
         if RealChar then
           local RealcharHRP = RealChar:FindFirstChild("HumanoidRootPart")
           if RealcharHRP then
-            RealcharHRP.CFrame = rig:FindFirstChild("HumanoidRootPart").CFrame * CFrame.new(math.random(-30,30),math.random(-30,30),math.random(-30,30))
+            RealcharHRP.CFrame = rig:FindFirstChild("HumanoidRootPart").CFrame * CFrame.new(math.random(-3000,3000),math.random(0,3000),math.random(-3000,3000))
           end
         end
       end
@@ -109,6 +109,12 @@ task.spawn(function()
     local RealChar = game.Workspace:FindFirstChild(player.Name)
     if RealChar then
       
+      for _, obj in ipairs(RealChar:GetDescendants()) do
+        if obj:IsA("BasePart") then
+          obj.CanCollide = false
+        end
+      end
+      
       local HeadHat = RealChar:FindFirstChild("Accessory (chapeleiroamarelo)")
       local TorsoHat = RealChar:FindFirstChild("Accessory (Black)") 
       local LArm = RealChar:FindFirstChild("Accessory (LArm)") 
@@ -144,13 +150,7 @@ task.spawn(function()
         
         
         
-        local Headweld2 = HeadHandle:FindFirstChild("AccessoryWeld")
-        local Torsoweld2 = TorsoHandle:FindFirstChild("AccessoryWeld")
-        local LArmweld2 = LArmHandle:FindFirstChild("AccessoryWeld")
-        local RArmweld2 = RArmHandle:FindFirstChild("AccessoryWeld")
-        local LLegweld2 = LLegHandle:FindFirstChild("AccessoryWeld")
-        local RLegmweld2 = RLegHandle:FindFirstChild("AccessoryWeld")
-        local SwordWeld2 = SwordHandle:FindFirstChild("AccessoryWeld")
+        
         
         
         
@@ -163,13 +163,7 @@ task.spawn(function()
         if SwordWeld then SwordWeld:Destroy() end
         
         
-        if Headweld2 then Headweld2:Destroy() end
-        if Torsoweld2 then Torsoweld2:Destroy() end
-        if LArmweld2 then LArmweld2:Destroy() end
-        if RArmweld2 then RArmweld2:Destroy() end
-        if LLegweld2 then LLegweld2:Destroy() end
-        if RLegmweld2 then RLegmweld2:Destroy() end
-        if SwordWeld2 then SwordWeld2:Destroy() end
+        
         
 
       if HeadHandle then
