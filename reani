@@ -2,6 +2,22 @@ local Players = game.Players
 local player = Players.LocalPlayer
 local Run = game:GetService("RunService")
 
+Run.Heartbeat:Connect(function()
+  for _, p in ipairs(Players:GetPlayers()) do
+    if p ~= player then
+      local pchar = p.Character
+      if pchar then
+        for _, obj in ipairs(pchar:GetChildren()) do
+          if obj:IsA("BasePart") then
+            obj.CanCollide = true
+          end
+        end
+      end
+    end
+  end
+  Run.Heartbeat:Wait()
+end)
+
 
 local is_idle = false
 local is_Move = false
@@ -35,7 +51,7 @@ task.spawn(function()
       wait(0.2)
       if Char:FindFirstChildOfClass("Humanoid") then
         Char:FindFirstChildOfClass("Humanoid").Health = 0
-        Char:FindFirstChild("HumanoidRootPart").CanCollide = false
+        Char:FindFirstChild("HumanoidRootPart").CanCollide = true
         
         player.Character = rig
         game.Workspace.CurrentCamera.CameraSubject = rig:FindFirstChild("Head")
@@ -115,7 +131,7 @@ task.spawn(function()
     if RealChar then
       
       for _, obj in ipairs(RealChar:GetDescendants()) do
-        if obj:IsA("BasePart") then
+        if obj:IsA("BasePart") and obj.Name ~= "Handle" then
           obj.CanCollide = false
         end
       end
@@ -663,10 +679,10 @@ HandleSword.Touched:Connect(function(hit)
             High.Parent = playersChar
             end
             Fling = false
-            for i = 0,60,1 do
+            for i = 0,30,1 do
             RealcharHRP.Transparency = 0.8
             RealcharHRP.AssemblyLinearVelocity = Vector3.new(90000,90000,90000)
-            RealcharHRP.CFrame = playersHRP.CFrame * CFrame.new(math.random(-0.5,0.5),math.random(-0.5,0.5),math.random(-0.5,0.5)) * CFrame.Angles(math.rad(math.random(360)),math.rad(math.random(360)),math.rad(math.random(360)))
+            RealcharHRP.CFrame = playersHRP.CFrame * CFrame.new(math.random(-0.3,0.3),math.random(-0.3,0.3),math.random(-0.3,0.3)) * CFrame.Angles(math.rad(math.random(-360,360)),math.rad(math.random(-360,360)),math.rad(math.random(-360,360)))
             wait(0.01)
             end
             Fling = false
