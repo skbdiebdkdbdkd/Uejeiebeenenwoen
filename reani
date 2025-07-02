@@ -240,28 +240,28 @@ Run.Heartbeat:Connect(function(dt)
   if Estado == "Idle" then
   
   if RootJoint then
-    local Rootobjetivo = CFMul(CFrame.new(0,2+1*math.sin(sine*24),0),angles(-1.5707963267948966,0.2617993877991494*math.sin(sine*32),3.141592653589793))
+    local Rootobjetivo = CFMul(CFrame.new(0,0,0),angles(-1.5707963267948966,0,3.141592653589793))
     RootJoint.C0 = RootJoint.C0:Lerp(Rootobjetivo,deltaTime)
   end
   
   if neck then
-    local NeckObjetivo = CFMul(CFrame.new(0,1,0),angles(-1.9198621771937625+0.17453292519943295*math.sin(sine*40),0,3.6651914291880923))
+    local NeckObjetivo = CFMul(CFrame.new(0,1,0),angles(-2.0943951023931953+0.08726646259971647*math.sin(sine*80),0,3.6651914291880923+0.3490658503988659*math.sin(sine*160)))
     neck.C0 = neck.C0:Lerp(NeckObjetivo,deltaTime)
   end
   
   if LeftShoulder then
-    local LeftShoulderObjetivo = CFMul(CFrame.new(-1.4,0.5+0.2*math.sin(sine*40),-0.5),angles(1.3962634015954636+0.08726646259971647*math.sin(sine*32),0.8726646259971648,1.0471975511965976))
+    local LeftShoulderObjetivo = CFMul(CFrame.new(-1.5,-0.2+0.1*math.sin(sine*160),0),angles(0.5235987755982988,-3.141592653589793+0.17453292519943295*math.sin(sine*160),0))
     LeftShoulder.C0 = LeftShoulder.C0:Lerp(LeftShoulderObjetivo,deltaTime)
   end
   
   if RightShoulder then
     if not SlashEmote then
-    local RightShoulderObjetivo = CFMul(CFrame.new(1,0.5,0),angles(2.0943951023931953+0.17453292519943295*math.sin(sine*16),2.0943951023931953,2.0943951023931953))
+    local RightShoulderObjetivo = CFMul(CFrame.new(1,0.5+0.1*math.sin(sine*160),0),angles(-0.6981317007977318,1.0471975511965976+0.17453292519943295*math.sin(sine*-160),3.141592653589793))
     RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivo,deltaTime)
     elseif SlashEmote then
     if AgarrarEspada then
     if RightShoulder then
-      RightShoulderObjetivo = CFMul(CFrame.new(1.4,0.8,-0.4),angles(1.2217304763960306,0.17453292519943295,1.5707963267948966*math.sin(sine*80)))
+      RightShoulderObjetivo = CFMul(CFrame.new(1.4,0.8,-0.4),angles(1.2217304763960306,0.17453292519943295,1.5707963267948966*math.sin(sine*160)))
       RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivo,deltaTime)
     end
     end
@@ -269,12 +269,12 @@ Run.Heartbeat:Connect(function(dt)
 end
   
   if LeftHip then
-    local LeftHipObjetivo = CFMul(CFrame.new(-1,-0.7,-0.7),angles(-0.5235987755982988+0.17453292519943295*math.sin(sine*40),-1.0471975511965976,0))
+    local LeftHipObjetivo = CFMul(CFrame.new(-1,-1,0),angles(0,-0.8726646259971648+0.08726646259971647*math.sin(sine*160),0.17453292519943295))
     LeftHip.C0 = LeftHip.C0:Lerp(LeftHipObjetivo,deltaTime)
   end
   
   if RightHip then
-    local RightHipObjetivo = CFMul(CFrame.new(1,-1,0),angles(-0.5235987755982988-0.17453292519943295*math.sin(sine*40),1.9198621771937625,0.008726646259971648*math.sin(sine*40)))
+    local RightHipObjetivo = CFMul(CFrame.new(1,-1.2,-0.4),angles(0,2.0943951023931953+0.08726646259971647*math.sin(sine*-160),-0.6981317007977318))
     RightHip.C0 = RightHip.C0:Lerp(RightHipObjetivo,deltaTime)
   end
   
@@ -561,6 +561,8 @@ end)
 
 local uis = game:GetService("UserInputService")
 
+local SlashCooldown = false
+
 uis.InputBegan:Connect(function(input)
   if input.KeyCode == Enum.KeyCode.F then
     if isPlayChillFloatEmote == false then
@@ -599,10 +601,14 @@ uis.InputBegan:Connect(function(input)
       AgarrarEspadaEmote = false
     end
   elseif input.UserInputType == Enum.UserInputType.Touch then
+    if not SlashCooldown then
+      SlashCooldown = true
     if not SlashEmote then
       SlashEmote = true
+    end
     wait(0.5)
-      SlashEmote = false
+    SlashEmote = false
+    SlashCooldown = false
     end
 end
 end)
