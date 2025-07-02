@@ -662,6 +662,7 @@ local HandleSword = child:FindFirstChild("Handle")
 if HandleSword then
 HandleSword.Touched:Connect(function(hit)
   if AgarrarEspada then
+    if SlashEmote then
   for _, players in ipairs(Players:GetPlayers()) do
     if players ~= player then
     local playersChar = players.Character
@@ -695,6 +696,7 @@ HandleSword.Touched:Connect(function(hit)
       end
     end
     end
+end
 end
   end
 end)
