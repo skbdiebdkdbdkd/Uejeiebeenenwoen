@@ -311,8 +311,17 @@ end
     end
     
     if RightShoulder then
+      if not SlashEmote then
       local RightShoulderObjetivoRun = CFMul(CFrame.new(1,0.5+0.05*math.sin(sine*80),0),angles(-0.03490658503988659,0.5235987755982988,-0.5235987755982988))
       RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivoRun,deltaTime)
+      elseif SlashEmote then
+    if AgarrarEspada then
+    if RightShoulder then
+      RightShoulderObjetivo = CFMul(CFrame.new(1.4,0.8,-0.4),angles(1.2217304763960306,0.17453292519943295,1.5707963267948966*math.sin(sine*160)))
+      RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivo,deltaTime)
+    end
+    end
+    end
     end
     
     if LeftShoulder then
@@ -340,8 +349,17 @@ end
       LeftShoulder.C0 = LeftShoulder.C0:Lerp(LeftShoulderObjetivoJump,deltaTime)
     end
     if RightShoulder then
+      if not SlashEmote then
       local RightShoulderObjetivoJump = CFMul(CFrame.new(1,0.5,0.3),angles(-0.3490658503988659,1.0471975511965976,0))
       RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivoJump,deltaTime)
+      elseif SlashEmote then
+    if AgarrarEspada then
+    if RightShoulder then
+      RightShoulderObjetivo = CFMul(CFrame.new(1.4,0.8,-0.4),angles(1.2217304763960306,0.17453292519943295,1.5707963267948966*math.sin(sine*160)))
+      RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivo,deltaTime)
+    end
+    end
+    end
     end
     if RightHip then
       local RightHipObjetivoJump = CFMul(CFrame.new(1,-0.3,-1),angles(-0.5235987755982988,1.5707963267948966,0))
@@ -368,8 +386,17 @@ end
     end
     
     if RightShoulder then
+      if not SlashEmote then
     local RightShoulderobjetivoFall = CFMul(CFrame.new(1,0.9,-0.4),angles(3.141592653589793,2.792526803190927,-0.8726646259971648))
     RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderobjetivoFall,deltaTime)
+    elseif SlashEmote then
+    if AgarrarEspada then
+    if RightShoulder then
+      RightShoulderObjetivo = CFMul(CFrame.new(1.4,0.8,-0.4),angles(1.2217304763960306,0.17453292519943295,1.5707963267948966*math.sin(sine*160)))
+      RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivo,deltaTime)
+    end
+    end
+    end
     end
     
     if LeftShoulder then
@@ -400,8 +427,17 @@ end
   end
   
   if RightShoulder then
+    if not SlashEmote then
     local RightShoulderObjetivo = CFMul(CFrame.new(1.3,1,0),angles(0.17453292519943295+0.3490658503988659*math.sin(sine*-8),0,3.6651914291880923))
     RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivo,deltaTime)
+    elseif SlashEmote then
+    if AgarrarEspada then
+    if RightShoulder then
+      RightShoulderObjetivo = CFMul(CFrame.new(1.4,0.8,-0.4),angles(1.2217304763960306,0.17453292519943295,1.5707963267948966*math.sin(sine*160)))
+      RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivo,deltaTime)
+    end
+    end
+    end
   end
   
   if LeftShoulder then
@@ -432,8 +468,17 @@ end
   end
   
   if RightShoulder then
+    if not SlashEmote then
     local RightShoulderObjetivo = CFMul(CFrame.new(1.3,0.5+0.05*math.sin(sine*80),0),angles(2.6179938779914944,0.3490658503988659,-1.5707963267948966))
     RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivo,deltaTime)
+    elseif SlashEmote then
+    if AgarrarEspada then
+    if RightShoulder then
+      RightShoulderObjetivo = CFMul(CFrame.new(1.4,0.8,-0.4),angles(1.2217304763960306,0.17453292519943295,1.5707963267948966*math.sin(sine*160)))
+      RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivo,deltaTime)
+    end
+    end
+    end
   end
   
   if LeftShoulder then
@@ -462,8 +507,17 @@ end
   end
   
   if RightShoulder then
+    if not SlashEmote then
     local RightShoulderObjetivo = CFMul(CFrame.new(1,0.5,-0.2+0.3*math.sin(sine*80)),angles(0,1.5707963267948966+0.3490658503988659*math.sin(sine*80),1.5707963267948966))
     RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivo,deltaTime)
+    elseif SlashEmote then
+    if AgarrarEspada then
+    if RightShoulder then
+      RightShoulderObjetivo = CFMul(CFrame.new(1.4,0.8,-0.4),angles(1.2217304763960306,0.17453292519943295,1.5707963267948966*math.sin(sine*160)))
+      RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivo,deltaTime)
+    end
+    end
+    end
   end
   
   if LeftShoulder then
@@ -493,8 +547,17 @@ end
   end
   
   if RightShoulder then
+    if not SlashEmote then
     local RightShoulderObjetivo = CFMul(CFrame.new(1,0.5+0.2*math.sin(sine*80),0),angles(1.3962634015954636*math.sin(sine*40),1.5707963267948966,0))
     RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivo,deltaTime)
+    elseif SlashEmote then
+    if AgarrarEspada then
+    if RightShoulder then
+      RightShoulderObjetivo = CFMul(CFrame.new(1.4,0.8,-0.4),angles(1.2217304763960306,0.17453292519943295,1.5707963267948966*math.sin(sine*160)))
+      RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivo,deltaTime)
+    end
+    end
+    end
   end
   
   if LeftShoulder then
