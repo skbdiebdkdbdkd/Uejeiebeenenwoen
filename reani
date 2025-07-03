@@ -767,7 +767,9 @@ HandleSword.Touched:Connect(function(hit)
             if RealHumanoid then
               if RealHumanoid.Health == 0 then
                 wait(Players.RespawnTime + 0.05)
+                if playersHRP then
                 game.Workspace.CurrentCamera.CameraSubject = playersHRP
+                end
               end
               RealChar = game.Workspace:FindFirstChild(player.Name)
               local RealcharHRP = RealChar:FindFirstChild("HumanoidRootPart")
