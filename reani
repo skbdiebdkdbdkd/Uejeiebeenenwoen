@@ -35,6 +35,12 @@ if rigHRP then
 end
 rig.Parent = game.Workspace
 
+Run.Heartbeat:Connect(function()
+  if rigHRP.Position.Y <= -100 then
+    rigHRP.CFrame = CFrame.new(0,5,0)
+  end
+end)
+
 for _, obj in ipairs(rig:GetDescendants()) do
   if obj:IsA("BasePart") then
     obj.Transparency = 1
@@ -721,7 +727,11 @@ end)
 
 local lastRealChar = nil
 
+local f = false
+local reps = 0
+
 local function ReconnectChildAdded(RealChar)
+  reps = 0
 RealChar.ChildAdded:Connect(function(child)
   if child:IsA("Accessory") and child.Name == "Accessory (gonerswordAccessory)" then
     
@@ -749,33 +759,33 @@ HandleSword.Touched:Connect(function(hit)
             High.OutlineColor = Color3.new(1,0,0)
             High.Parent = playersChar
             end
-            wait(0.3)
+            wait(1.2)
             Fling = true
-            rigHRP.Anchored = true
+            rigHRP.Anchored = false
+            
             local RealHumanoid = RealChar:FindFirstChild("Humanoid")
             if RealHumanoid then
               if RealHumanoid.Health == 0 then
-                wait(Players.RespawnTime + 0.1)
-                game.Workspace.CurrentCamera.CameraSubject = rigHead
+                wait(Players.RespawnTime + 0.05)
+                game.Workspace.CurrentCamera.CameraSubject = playersHRP
               end
               RealChar = game.Workspace:FindFirstChild(player.Name)
               local RealcharHRP = RealChar:FindFirstChild("HumanoidRootPart")
               if RealcharHRP then
-                game.Workspace.CurrentCamera.CameraSubject = rigHead
-            for i = 0,60,1 do
-              playersChar = players.Character
-              playersHRP = playersChar:FindFirstChild("HumanoidRootPart")
+                game.Workspace.CurrentCamera.CameraSubject = playersHRP
+                RealcharHRP.AssemblyAngularVelocity = Vector3.new(0,14000,0)
+                f = true
+            while f do
+              reps = reps + 0.1
             RealcharHRP.Transparency = 0.8
-            RealcharHRP.AssemblyLinearVelocity = Vector3.new(9000,9000,9000)
-            RealcharHRP.Velocity = Vector3.new(9000,9000,9000)
+            
             RealcharHRP.CFrame = playersHRP.CFrame
-            RealcharHRP.CFrame = playersHRP.CFrame * CFrame.new(math.random(-0.5,0.5),math.random(-0.5,0.5),math.random(-0.5,0.5))
-            wait(0.01)
+            if reps >= 100 then
+              f = false
             end
-            for i = 0,15,1 do
-            RealcharHRP.AssemblyLinearVelocity = Vector3.new(0,0,0)
-            RealcharHRP.Velocity = Vector3.new(0,0,0)
+            wait(0.05)
             end
+            
             if playersChar and playersChar:FindFirstChild("Highlight") then
               playersChar:FindFirstChild("Highlight"):Destroy()
               wait(0.01)
@@ -799,6 +809,8 @@ end
 end)
 end
 
+
+
 Run.Heartbeat:Connect(function()
   local CurrentRealChar = game.Workspace:FindFirstChild(player.Name)
   if CurrentRealChar and CurrentRealChar ~= lastRealChar then
@@ -806,3 +818,11 @@ Run.Heartbeat:Connect(function()
     ReconnectChildAdded(CurrentRealChar)
   end
 end)
+
+
+task.spawn(function()
+            while not Fling do
+              game.Workspace.CurrentCamera.CameraSubject = rigHead
+              Run.Heartbeat:Wait()
+            end
+            end)
