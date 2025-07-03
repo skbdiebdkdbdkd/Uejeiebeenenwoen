@@ -24,7 +24,7 @@ local is_Move = false
 local is_Jump = false
 local is_fall = false
 
-local Speed = 0
+local Speed = 2
 
 local rig = Players:CreateHumanoidModelFromUserId(4958831850)
 local rigHead = rig:FindFirstChild("Head")
@@ -97,6 +97,8 @@ local AgarrarEspada = false
 
 local SlashEmote = false
 
+local Running = false
+
 Run.Heartbeat:Connect(function(deltaTime)
   if rigHumanoid then
     local state = rigHumanoid:GetState()
@@ -123,6 +125,9 @@ Run.Heartbeat:Connect(function(deltaTime)
     
     elseif state == Enum.HumanoidStateType.Freefall then
     Estado = "Cayendo"
+    
+    elseif Running and rigHumanoid.MoveDirection.Magnitude >= 0.1 then
+      Estado = "Corriendo"
   
     elseif rigHumanoid.MoveDirection.Magnitude >= 0.1 then
     Estado = "Caminando"
@@ -230,7 +235,7 @@ task.spawn(function()
         
     local movedir = rig:FindFirstChild("Humanoid").MoveDirection
     
-    if movedir.Magnitude >= 0.1 then
+    if movedir.Magnitude >= 0.1 and Running then
       rig:FindFirstChild("HumanoidRootPart").CFrame = rig:FindFirstChild("HumanoidRootPart").CFrame + movedir * Speed
     end
                   end
@@ -311,6 +316,47 @@ end
   
   if RightHip then
     local RightHipObjetivo = CFMul(CFrame.new(1,-1.2,-0.4),angles(0,2.0943951023931953+0.08726646259971647*math.sin(sine*-160),-0.6981317007977318))
+    RightHip.C0 = RightHip.C0:Lerp(RightHipObjetivo,deltaTime)
+  end
+  
+  elseif Estado == "Corriendo" then
+  
+  if RootJoint then
+    local Rootobjetivo = CFMul(CFrame.new(0,0.2 * math.sin(sine*40),0),angles(-2.792526803190927,0,3.141592653589793+0.08726646259971647*math.sin(sine*20)))
+    RootJoint.C0 = RootJoint.C0:Lerp(Rootobjetivo,deltaTime)
+  end
+  
+  if neck then
+    local NeckObjetivo = CFMul(CFrame.new(0,1,0),angles(-0.8726646259971648+0.08726646259971647*math.sin(sine*20),0.08726646259971647*math.sin(sine*-20),3.141592653589793))
+    neck.C0 = neck.C0:Lerp(NeckObjetivo,deltaTime)
+  end
+  
+  if LeftShoulder then
+    local LeftShoulderObjetivo = CFMul(CFrame.new(-1,0.5,0),angles(2.443460952792061+0.08726646259971647*math.sin(sine*-20),-1.5707963267948966,0))
+    LeftShoulder.C0 = LeftShoulder.C0:Lerp(LeftShoulderObjetivo,deltaTime)
+  end
+  
+  if RightShoulder then
+    if not SlashEmote then
+    local RightShoulderObjetivo = CFMul(CFrame.new(1,0.5,0),angles(-1.0471975511965976+0.08726646259971647*math.sin(sine*20),1.5707963267948966,0))
+    RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivo,deltaTime)
+    elseif SlashEmote then
+    if AgarrarEspada then
+    if RightShoulder then
+      RightShoulderObjetivo = CFMul(CFrame.new(1.4,0.8,-0.4),angles(1.2217304763960306,0.17453292519943295,1.5707963267948966*math.sin(sine*160)))
+      RightShoulder.C0 = RightShoulder.C0:Lerp(RightShoulderObjetivo,deltaTime)
+    end
+    end
+    end
+end
+  
+  if LeftHip then
+    local LeftHipObjetivo = CFMul(CFrame.new(-1,-1,0),angles(-0.3490658503988659+0.08726646259971647*math.sin(sine*20),-1.5707963267948966,0))
+    LeftHip.C0 = LeftHip.C0:Lerp(LeftHipObjetivo,deltaTime)
+  end
+  
+  if RightHip then
+    local RightHipObjetivo = CFMul(CFrame.new(1,-0.9,-0.5),angles(0.17453292519943295+0.08726646259971647*math.sin(sine*20),1.5707963267948966,0))
     RightHip.C0 = RightHip.C0:Lerp(RightHipObjetivo,deltaTime)
   end
   
@@ -713,6 +759,12 @@ uis.InputBegan:Connect(function(input)
     SlashCooldown = false
     end
     end
+  elseif input.KeyCode == Enum.KeyCode.Q then
+    if Running == false then
+      Running = true
+    elseif Running == true then
+      Running = false
+    end
 end
 end)
 
@@ -773,6 +825,7 @@ HandleSword.Touched:Connect(function(hit)
     
     Fling = true
     flingActivo = true
+    rigHRP.Anchored = true
     if RealChar:FindFirstChild("Humanoid").Health == 0 then
     wait(Players.RespawnTime + 0.1)
     print("Esperando el RespawnTime")
@@ -806,6 +859,7 @@ HandleSword.Touched:Connect(function(hit)
     end)
     wait(3)
     Fling = false
+    rigHRP.Anchored = false
     print("Fling Finalizado")
     CameraS = rigHead
     
@@ -839,8 +893,8 @@ end)
 
 
 task.spawn(function()
-            while not Fling do
-              game.Workspace.CurrentCamera.CameraSubject = rigHead
-              Run.Heartbeat:Wait()
-            end
-            end)
+    while not Fling do
+    game.Workspace.CurrentCamera.CameraSubject = rigHead
+    Run.Heartbeat:Wait()
+    end
+end)
