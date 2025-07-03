@@ -825,7 +825,6 @@ HandleSword.Touched:Connect(function(hit)
     
     Fling = true
     flingActivo = true
-    rigHRP.Anchored = true
     if RealChar:FindFirstChild("Humanoid").Health == 0 then
     wait(Players.RespawnTime + 0.1)
     print("Esperando el RespawnTime")
@@ -859,7 +858,6 @@ HandleSword.Touched:Connect(function(hit)
     end)
     wait(3)
     Fling = false
-    rigHRP.Anchored = false
     print("Fling Finalizado")
     CameraS = rigHead
     
