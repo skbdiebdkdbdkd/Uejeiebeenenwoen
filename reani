@@ -27,6 +27,7 @@ local is_fall = false
 local Speed = 0
 
 local rig = Players:CreateHumanoidModelFromUserId(4958831850)
+local rigHead = rig:FindFirstChild("Head")
 local rigHRP = rig:FindFirstChild("HumanoidRootPart")
 local rigHumanoid = rig:FindFirstChild("Humanoid")
 if rigHRP then
@@ -127,6 +128,7 @@ end)
 
 task.spawn(function()
   Run.Heartbeat:Connect(function(delta)
+    if not Fling then
     local RealChar = game.Workspace:FindFirstChild(player.Name)
     if RealChar then
       
@@ -228,6 +230,7 @@ end
 end
 end
 Run.Heartbeat:Wait()
+end
     end)
 end)
 
@@ -252,6 +255,7 @@ local sine = 0
 local SegundaZancada = false
 
 Run.Heartbeat:Connect(function(dt)
+  if not Fling then
   sine += dt * 0.1
   local deltaTime = dt * 8
   
@@ -605,6 +609,7 @@ end
     LeftHip.C0 = LeftHip.C0:Lerp(LeftHipObjetivo,deltaTime)
   end
   end
+  end
 end)
 
 local nearestDistance = math.huge
@@ -719,10 +724,11 @@ local lastRealChar = nil
 local function ReconnectChildAdded(RealChar)
 RealChar.ChildAdded:Connect(function(child)
   if child:IsA("Accessory") and child.Name == "Accessory (gonerswordAccessory)" then
-
-local HandleSword = child:FindFirstChild("Handle")
+    
+local HandleSword = child:WaitForChild("Handle")
 
 if HandleSword then
+  
 HandleSword.Touched:Connect(function(hit)
   if hit:IsDescendantOf(RealChar) then return end
   if AgarrarEspada then
@@ -731,7 +737,7 @@ HandleSword.Touched:Connect(function(hit)
     if players ~= player then
     local playersChar = players.Character
     if playersChar then
-      for _, obj in ipairs(playersChar:GetChildren()) do
+      for _, obj in ipairs(playersChar:GetDescendants()) do
       if hit == obj then
         local RealcharHRP = RealChar:FindFirstChild("HumanoidRootPart")
         local playersHRP = playersChar:FindFirstChild("HumanoidRootPart")
@@ -743,18 +749,42 @@ HandleSword.Touched:Connect(function(hit)
             High.OutlineColor = Color3.new(1,0,0)
             High.Parent = playersChar
             end
-            Fling = false
-            for i = 0,30,1 do
+            wait(0.3)
+            Fling = true
+            rigHRP.Anchored = true
+            local RealHumanoid = RealChar:FindFirstChild("Humanoid")
+            if RealHumanoid then
+              if RealHumanoid.Health == 0 then
+                wait(Players.RespawnTime + 0.001)
+                game.Workspace.CurrentCamera.CameraSubject = rigHead
+              end
+              RealChar = game.Workspace:FindFirstChild(player.Name)
+              local RealcharHRP = RealChar:FindFirstChild("HumanoidRootPart")
+              if RealcharHRP then
+                game.Workspace.CurrentCamera.CameraSubject = rigHead
+            for i = 0,60,1 do
+              playersChar = players.Character
+              playersHRP = playersChar:FindFirstChild("HumanoidRootPart")
             RealcharHRP.Transparency = 0.8
-            RealcharHRP.AssemblyLinearVelocity = Vector3.new(90000,90000,90000)
-            RealcharHRP.CFrame = playersHRP.CFrame * CFrame.new(math.random(-0.3,0.3),math.random(-0.3,0.3),math.random(-0.3,0.3)) * CFrame.Angles(math.rad(math.random(-360,360)),math.rad(math.random(-360,360)),math.rad(math.random(-360,360)))
+            RealcharHRP.AssemblyLinearVelocity = Vector3.new(9000,9000,9000)
+            RealcharHRP.Velocity = Vector3.new(9000,9000,9000)
+            RealcharHRP.CFrame = playersHRP.CFrame
+            RealcharHRP.CFrame = playersHRP.CFrame * CFrame.new(math.random(-0.5,0.5),math.random(-0.5,0.5),math.random(-0.5,0.5))
             wait(0.01)
             end
-            Fling = false
+            for i = 0,15,1 do
+            RealcharHRP.AssemblyLinearVelocity = Vector3.new(0,0,0)
+            RealcharHRP.Velocity = Vector3.new(0,0,0)
+            end
             if playersChar and playersChar:FindFirstChild("Highlight") then
               playersChar:FindFirstChild("Highlight"):Destroy()
+              wait(0.01)
             end
-          end
+            Fling = false
+            rigHRP.Anchored = false
+            end
+            end
+        end
         end
       end
       end
@@ -762,8 +792,8 @@ HandleSword.Touched:Connect(function(hit)
     end
 end
 end
-  end
-end)
+end
+  end)
 end
 end
 end)
