@@ -277,7 +277,7 @@ local SegundaZancada = false
 
 Run.Heartbeat:Connect(function(dt)
   if not Fling then
-  sine += dt * 0.1
+  sine = sine + dt * 0.1
   local deltaTime = dt * 8
   
   local zancada = math.floor(sine * 2) % 2 == 1
@@ -719,7 +719,7 @@ local nearestDistance = math.huge
 local nearestPlayer = nil
 
 task.spawn(function()
-while true do
+Run.Heartbeat:Connect(function()
   nearestDistance = math.huge
   for _, Players in ipairs(Players:GetPlayers()) do
     if Players ~= player then
@@ -746,8 +746,8 @@ while true do
       end
     end
   end
-  wait(0.05)
-end
+  Run.Heartbeat:Wait()
+end)
 end)
 
 
@@ -756,7 +756,7 @@ local nearestDistance2 = math.huge
 local nearestPlayer2 = nil
 
 task.spawn(function()
-while true do
+Run.Heartbeat:Connect(function()
   nearestDistance2 = math.huge
   for _, Players in ipairs(Players:GetPlayers()) do
     if Players ~= player then
@@ -784,8 +784,8 @@ while true do
       end
     end
   end
-  wait(0.05)
-end
+  Run.Heartbeat:Wait()
+end)
 end)
 
 
