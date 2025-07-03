@@ -35,11 +35,17 @@ if rigHRP then
 end
 rig.Parent = game.Workspace
 
+local CameraS = rigHead
+
 Run.Heartbeat:Connect(function()
+  game.Workspace.CurrentCamera.CameraSubject = CameraS
+  
   if rigHRP.Position.Y <= -100 then
     rigHRP.CFrame = CFrame.new(0,5,0)
   end
 end)
+
+
 
 for _, obj in ipairs(rig:GetDescendants()) do
   if obj:IsA("BasePart") then
@@ -727,8 +733,11 @@ end)
 
 local lastRealChar = nil
 
-local f = false
+local flingedHumanoids = {}
+
 local reps = 0
+
+local flingActivo = false
 
 local function ReconnectChildAdded(RealChar)
   reps = 0
@@ -740,71 +749,78 @@ local HandleSword = child:WaitForChild("Handle")
 if HandleSword then
   
 HandleSword.Touched:Connect(function(hit)
-  if hit:IsDescendantOf(RealChar) then return end
+  if hit:IsDescendantOf(RealChar) or hit:IsDescendantOf(RealChar) then return end
   if AgarrarEspada then
     if SlashEmote then
-  for _, players in ipairs(Players:GetPlayers()) do
-    if players ~= player then
-    local playersChar = players.Character
-    if playersChar then
-      for _, obj in ipairs(playersChar:GetDescendants()) do
-      if hit == obj then
-        local RealcharHRP = RealChar:FindFirstChild("HumanoidRootPart")
-        local playersHRP = playersChar:FindFirstChild("HumanoidRootPart")
-        if RealcharHRP then
-          if playersHRP then
-            if playersChar and not playersChar:FindFirstChild("Highlight") then
-            local High = Instance.new("Highlight")
-            High.FillColor = Color3.new(1,0,0)
-            High.OutlineColor = Color3.new(1,0,0)
-            High.Parent = playersChar
-            end
-            wait(1.2)
-            Fling = true
-            rigHRP.Anchored = false
-            
-            local RealHumanoid = RealChar:FindFirstChild("Humanoid")
-            if RealHumanoid then
-              if RealHumanoid.Health == 0 then
-                wait(Players.RespawnTime + 0.05)
-                if playersHRP then
-                game.Workspace.CurrentCamera.CameraSubject = playersHRP
-                end
-              end
-              RealChar = game.Workspace:FindFirstChild(player.Name)
-              local RealcharHRP = RealChar:FindFirstChild("HumanoidRootPart")
-              if RealcharHRP then
-                game.Workspace.CurrentCamera.CameraSubject = playersHRP
-                RealcharHRP.AssemblyAngularVelocity = Vector3.new(0,14000,0)
-                f = true
-            while f do
-              reps = reps + 0.1
-            RealcharHRP.Transparency = 0.8
-            
-            RealcharHRP.CFrame = playersHRP.CFrame
-            if reps >= 100 then
-              f = false
-            end
-            wait(0.05)
-            end
-            
-            if playersChar and playersChar:FindFirstChild("Highlight") then
-              playersChar:FindFirstChild("Highlight"):Destroy()
-              wait(0.01)
-            end
-            Fling = false
-            rigHRP.Anchored = false
-            end
-            end
-        end
+  if hit.Parent:FindFirstChild("Humanoid") and not hit:IsDescendantOf(RealChar) and not hit:IsDescendantOf(rig) then
+  if flingedHumanoids[hit.Parent:FindFirstChild("Humanoid")] then return end
+  if flingActivo then return end
+  
+    flingedHumanoids[hit.Parent:FindFirstChild("Humanoid")] = true
+    
+    print("Se detecto el touch")
+    
+    if not hit.Parent:FindFirstChild("Highlight") then
+      local h = Instance.new("Highlight")
+      h.FillColor = Color3.new(1,0,0)
+      h.OutlineColor = Color3.new(1,0,0)
+      h.Parent = hit.Parent
+    end
+    
+    print("Se aplico eo Highlight")
+    
+    wait(2)
+    
+    Fling = true
+    flingActivo = true
+    if RealChar:FindFirstChild("Humanoid").Health == 0 then
+    wait(Players.RespawnTime + 0.1)
+    print("Esperando el RespawnTime")
+    end
+    CameraS = hit.Parent:FindFirstChild("Head") or hit
+    print("Cambiando CameraSubject")
+    
+    
+    print("Procediendo con el fling")
+    local start = tick()
+    local c = nil
+    c = Run.Heartbeat:Connect(function()
+      ReaChar = game.Workspace:FindFirstChild(player.Name)
+      if RealChar then
+        local RealHRP = ReaChar:FindFirstChild("HumanoidRootPart")
+        local RealHumanoid = ReaChar:FindFirstChild("Humanoid")
+        if RealHRP and RealHumanoid then
+          local Target = hit.Parent:FindFirstChild("HumanoidRootPart") or hit
+          if Target then
+            RealHRP.CFrame = Target.CFrame
+            RealHRP.AssemblyAngularVelocity = Vector3.new(0,14000,0)
+            RealHumanoid.PlatformStand = false
+          end
         end
       end
+      local now = tick()
+      if now - start >= 3 then
+        c:Disconnect()
       end
+      Run.Heartbeat:Wait()
+    end)
+    wait(3)
+    Fling = false
+    print("Fling Finalizado")
+    CameraS = rigHead
+    
+    if hit.Parent:FindFirstChild("Highlight") then
+      hit.Parent:FindFirstChild("Highlight"):Destroy()
     end
-    end
-end
-end
-end
+    print("Destruyendo Highlight")
+    
+    wait(0.5)
+    flingedHumanoids = {}
+    flingActivo = false
+    
+  end
+   end
+   end
   end)
 end
 end
