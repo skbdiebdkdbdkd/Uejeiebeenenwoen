@@ -1,0 +1,171 @@
+local Players = game.Players
+local player = Players.LocalPlayer
+local Run = game:GetService("RunService")
+
+local Hats = {
+  Head = "HeadAccessoryName",
+  Torso = "TorsoAccessoryName",
+  Right_Arm = "Right_ArmAccessoryName",
+  Left_Arm = "Left_ArmAccessoryName",
+  Right_Leg = "Right_LegAccessoryName",
+  Left_Leg = "Left_LegAccessoryName"
+}
+
+local HatsOffsets = {
+  Head = CFrame.new(0,0.5,0) * CFrame.Angles(0,0,0),
+  Torso = CFrame.new(0,0,0) * CFrame.Angles(0,0,0),
+  Right_Arm = CFrame.new(0,0,0) * CFrame.Angles(math.rad(90),math.rad(90),0),
+  Left_Arm = CFrame.new(0,0,0) * CFrame.Angles(math.rad(90),math.rad(90),0),
+  Right_Leg = CFrame.new(0,0,0) * CFrame.Angles(math.rad(90),math.rad(90),0),
+  Left_Leg = CFrame.new(0,0,0) * CFrame.Angles(math.rad(90),math.rad(90),0),
+}
+
+
+local rig = Players:CreateHumanoidModelFromUserId(4958831850)
+rig.Parent = game.Workspace
+
+local rigParts = {
+  Head = rig:FindFirstChild("Head"),
+  Torso = rig:FindFirstChild("Torso"),
+  Right_Arm = rig:FindFirstChild("Right Arm"),
+  Left_Arm = rig:FindFirstChild("Left Arm"),
+  Right_Leg = rig:FindFirstChild("Right Leg"),
+  Left_Leg = rig:FindFirstChild("Left Leg")
+}
+
+local CameraS = rig.Head
+
+Run.Heartbeat:Connect(function()
+  game.Workspace.CurrentCamera.CameraSubject = CameraS
+end)
+
+Run.Heartbeat:Connect(function(dt)
+  if player.Character ~= rig then
+    player.Character = rig
+    local RealChar = game.Workspace:FindFirstChild(player.Name)
+    if RealChar then
+      local RealHumanoid = RealChar:FindFirstChild("Humanoid")
+      if RealHumanoid then
+        RealHumanoid.Health = 0
+      end
+    end
+  end
+end)
+
+Run.Heartbeat:Connect(function()
+  local RealChar = game.Workspace:FindFirstChild(player.Name)
+  
+  for BodyPart, Hat in pairs(Hats) do
+    local rigPart = rigParts[BodyPart]
+    local Hat = RealChar:FindFirstChild(Hat)
+    
+    if rigPart and Hat and Hat:IsA("Accessory") then
+      local Handle = Hat:FindFirstChild("Handle")
+      if Handle then
+      local hatOffset = HatsOffsets[BodyPart]
+      if typeof(hatOffset) == "function" then
+        hatOffset = hatOffset()
+      end
+      
+      Handle.CFrame = rigPart.CFrame * hatOffset
+      end
+    end
+  end
+end)
+
+local State = " "
+
+Run.Heartbeat:Connect(function()
+  local rigHumanoid = rig:FindFirstChild("Humanoid")
+  if rigHumanoid then
+    local St = rigHumanoid:GetState()
+    
+    if St == Enum.HumanoidStateType.Jumping then
+      State = "Jumping"
+    
+    elseif St == Enum.HumanoidStateType.Freefall then
+      State = "Falling"
+      
+    elseif rigHumanoid.MoveDirection.Magnitude <= 0 then
+      State = "Idle"
+      
+    elseif rigHumanoid.MoveDirection.Magnitude >= 0.1 then
+      State = "Running"
+    
+    else
+      State = "Ninguno"
+      
+    end
+    
+  end
+end)
+
+local function cfmul(a,b)
+  return a * b
+end
+
+local function angles(x,y,z)
+  return CFrame.Angles(x,y,z)
+end
+
+
+local Animations = {
+Idle = {
+  RootJoint = nil,
+  Neck = nil,
+  RightShoulder = nil,
+  LeftShoulder = nil,
+  RightHip = nil,
+  LeftHip = nil
+  },
+Running = {
+  RootJoint = nil,
+  Neck = nil,
+  RightShoulder = nil,
+  LeftShoulder = nil,
+  RightHip = nil,
+  LeftHip = nil
+},
+Jumping = {
+  RootJoint = nil,
+  Neck = nil,
+  RightShoulder = nil,
+  LeftShoulder = nil,
+  RightHip = nil,
+  LeftHip = nil
+},
+Falling = {
+  RootJoint = nil,
+  Neck = nil,
+  RightShoulder = nil,
+  LeftShoulder = nil,
+  RightHip = nil,
+  LeftHip = nil
+}
+}
+
+local Joints = {
+  RootJoint = rig:FindFirstChild("HumanoidRootPart"):FindFirstChild("RootJoint"),
+  Neck = rig:FindFirstChild("Torso"):FindFirstChild("Neck"),
+  RightShoulder = rig:FindFirstChild("Torso"):FindFirstChild("RightShoulder"),
+  LeftShoulder = rig:FindFirstChild("Torso"):FindFirstChild("LeftShoulder"),
+  RightHip = rig:FindFirstChild("Torso"):FindFirstChild("RightHip"),
+  LeftHip = rig:FindFirstChild("Torso"):FindFirstChild("LeftHip")
+}
+
+local sine = 0
+
+Run.Heartbeat:Connect(function(dt)
+  sine = sine + dt * 0.1
+  local deltaTime = dt * 8
+  
+  local Objetivo = Animations[State]
+  if Objetivo then
+    for nombre, cf in pairs(Objetivo) do
+      local Joint = Joints[nombre]
+      if Joint and cf then
+        Joint.C0 = Joint.C0:Lerp(cf,deltaTime)
+      end
+    end
+  end
+end)
