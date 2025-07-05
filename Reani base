@@ -100,7 +100,7 @@ Run.Heartbeat:Connect(function()
   end
 end)
 
-local function cfmul(a,b)
+local function cfMul(a,b)
   return a * b
 end
 
@@ -108,59 +108,63 @@ local function angles(x,y,z)
   return CFrame.Angles(x,y,z)
 end
 
+local sine = 0
 
 local Animations = {
-Idle = {
+Idle = function()
+  return {
+  RootJoint = cfMul(CFrame.new(0,0.1 * math.sin(sine*55),0),angles(-1.5707963267948966,0,3.141592653589793)),
+  Neck = cfMul(CFrame.new(0,1,0),angles(-1.5707963267948966+0.17453292519943295*math.sin(sine*-55),0,3.141592653589793)),
+  RightShoulder = cfMul(CFrame.new(1.5,0.5+0.1*math.sin(sine*55),0.5),angles(0,-3.141592653589793,-0.17453292519943295)),
+  LeftShoulder = cfMul(CFrame.new(-1.5,0.5+0.1*math.sin(sine*55),0.5),angles(0,3.141592653589793,0.17453292519943295)),
+  RightHip = cfMul(CFrame.new(1.1,-1,0),angles(0,1.2217304763960306-0.17453292519943295*math.sin(sine*-55),0)),
+  LeftHip = cfMul(CFrame.new(-1.1,-1,0),angles(0,-1.2217304763960306+0.17453292519943295*math.sin(sine*-55),0))
+  }end,
+Running = function()
+  return {
   RootJoint = nil,
   Neck = nil,
   RightShoulder = nil,
   LeftShoulder = nil,
   RightHip = nil,
   LeftHip = nil
-  },
-Running = {
+}end,
+Jumping = function()
+  return {
   RootJoint = nil,
   Neck = nil,
   RightShoulder = nil,
   LeftShoulder = nil,
   RightHip = nil,
   LeftHip = nil
-},
-Jumping = {
+}end,
+Falling = function()
+  return {
   RootJoint = nil,
   Neck = nil,
   RightShoulder = nil,
   LeftShoulder = nil,
   RightHip = nil,
   LeftHip = nil
-},
-Falling = {
-  RootJoint = nil,
-  Neck = nil,
-  RightShoulder = nil,
-  LeftShoulder = nil,
-  RightHip = nil,
-  LeftHip = nil
-}
+}end
 }
 
 local Joints = {
   RootJoint = rig:FindFirstChild("HumanoidRootPart"):FindFirstChild("RootJoint"),
   Neck = rig:FindFirstChild("Torso"):FindFirstChild("Neck"),
-  RightShoulder = rig:FindFirstChild("Torso"):FindFirstChild("RightShoulder"),
-  LeftShoulder = rig:FindFirstChild("Torso"):FindFirstChild("LeftShoulder"),
-  RightHip = rig:FindFirstChild("Torso"):FindFirstChild("RightHip"),
-  LeftHip = rig:FindFirstChild("Torso"):FindFirstChild("LeftHip")
+  RightShoulder = rig:FindFirstChild("Torso"):FindFirstChild("Right Shoulder"),
+  LeftShoulder = rig:FindFirstChild("Torso"):FindFirstChild("Left Shoulder"),
+  RightHip = rig:FindFirstChild("Torso"):FindFirstChild("Right Hip"),
+  LeftHip = rig:FindFirstChild("Torso"):FindFirstChild("Left Hip")
 }
-
-local sine = 0
 
 Run.Heartbeat:Connect(function(dt)
   sine = sine + dt * 0.1
   local deltaTime = dt * 8
   
-  local Objetivo = Animations[State]
-  if Objetivo then
+  local ObjetivoFunc = Animations[State]
+  if ObjetivoFunc then
+    local Objetivo = ObjetivoFunc()
     for nombre, cf in pairs(Objetivo) do
       local Joint = Joints[nombre]
       if Joint and cf then
@@ -169,3 +173,4 @@ Run.Heartbeat:Connect(function(dt)
     end
   end
 end)
+
