@@ -3,12 +3,12 @@ local player = Players.LocalPlayer
 local Run = game:GetService("RunService")
 
 local Hats = {
-  Head = "HeadAccessoryName",
-  Torso = "TorsoAccessoryName",
-  Right_Arm = "Right_ArmAccessoryName",
-  Left_Arm = "Left_ArmAccessoryName",
-  Right_Leg = "Right_LegAccessoryName",
-  Left_Leg = "Left_LegAccessoryName"
+  Head = "Accessory (chapeleiroamarelo)",
+  Torso = "Accessory (Black)",
+  Right_Arm = "Accessory (RArm)",
+  Left_Arm = "Accessory (LArm)",
+  Right_Leg = "Accessory (RLeg)",
+  Left_Leg = "Accessory (LLeg)"
 }
 
 local HatsOffsets = {
