@@ -2,6 +2,35 @@ local Players = game.Players
 local player = Players.LocalPlayer
 local Run = game:GetService("RunService")
 
+local rChar = game.Workspace:FindFirstChild(player.Name)
+local FHeadHat = rChar:FindFirstChild("Accessory (chapeleiroamarelo)"):Clone()
+local FTorsoHat = rChar:FindFirstChild("Accessory (Black)"):Clone() 
+local FLArm = rChar:FindFirstChild("Accessory (LArm)"):Clone()
+local FRArm = rChar:FindFirstChild("Accessory (RArm)"):Clone()
+local FLLeg = rChar:FindFirstChild("Accessory (LLeg)"):Clone()
+local FRLeg = rChar:FindFirstChild("Accessory (RLeg)"):Clone()
+local FSword = rChar:FindFirstChild("Accessory (gonerswordAccessory)"):Clone()
+
+
+FHeadHat.Handle.Transparency = 0.7
+FTorsoHat.Handle.Transparency = 0.7
+FLArm.Handle.Transparency = 0.7
+FRArm.Handle.Transparency = 0.7
+FRLeg.Handle.Transparency = 0.7
+FLLeg.Handle.Transparency = 0.7
+FSword.Handle.Transparency = 0.7
+
+
+FHeadHat.Parent = game.Workspace
+FTorsoHat.Parent = game.Workspace
+FLArm.Parent = game.Workspace
+FRArm.Parent = game.Workspace
+FLLeg.Parent = game.Workspace
+FRLeg.Parent = game.Workspace
+FSword.Parent = game.Workspace
+
+
+
 Run.Heartbeat:Connect(function()
   for _, p in ipairs(Players:GetPlayers()) do
     if p ~= player then
@@ -149,9 +178,53 @@ end)
 
 task.spawn(function()
   Run.Heartbeat:Connect(function(delta)
+    local FHeadHandle = FHeadHat:FindFirstChild("Handle")
+      local FTorsoHandle = FTorsoHat:FindFirstChild("Handle")
+      local FLArmHandle = FLArm:FindFirstChild("Handle")
+      local FRArmHandle = FRArm:FindFirstChild("Handle")
+      local FLLegHandle = FLLeg:FindFirstChild("Handle")
+      local FRLegHandle = FRLeg:FindFirstChild("Handle")
+      local FSwordHandle = FSword:FindFirstChild("Handle")
+      
+      local FHeadweld = FHeadHandle:FindFirstChild("HatAttachment")
+        local FTorsoweld = FTorsoHandle:FindFirstChild("HatAttachment")
+        local FLArmweld = FLArmHandle:FindFirstChild("LeftShoulderAttachment")
+        local FRArmweld = FRArmHandle:FindFirstChild("RightShoulderAttachment")
+        local FLLegweld = FLLegHandle:FindFirstChild("WaistCenterAttachment")
+        local FRLegmweld = FRLegHandle:FindFirstChild("WaistCenterAttachment")
+        local FSwordWeld = FSwordHandle:FindFirstChild("BodyBackAttachment")
+        
+        if FHeadweld then FHeadweld:Destroy() end
+        if FTorsoweld then FTorsoweld:Destroy() end
+        if FLArmweld then FLArmweld:Destroy() end
+        if FRArmweld then FRArmweld:Destroy() end
+        if FLLegweld then FLLegweld:Destroy() end
+        if FRLegmweld then FRLegmweld:Destroy() end
+        if FSwordWeld then FSwordWeld:Destroy() end
+        
+        FHeadHandle.CFrame = rig:FindFirstChild("Head").CFrame * CFrame.new(0,0.5,0)
+        FTorsoHandle.CFrame = rig:FindFirstChild("Torso").CFrame
+        FLArmHandle.CFrame = rig:FindFirstChild("Left Arm").CFrame * CFrame.Angles(math.rad(90),math.rad(90),0)
+        FRArmHandle.CFrame = rig:FindFirstChild("Right Arm").CFrame * CFrame.Angles(math.rad(90),math.rad(90),0)
+        FLLegHandle.CFrame = rig:FindFirstChild("Left Leg").CFrame * CFrame.Angles(math.rad(90),math.rad(90),0)
+        FRLegHandle.CFrame = rig:FindFirstChild("Right Leg").CFrame * CFrame.Angles(math.rad(90),math.rad(90),0)
+        
+        if not AgarrarEspada then
+          FSwordHandle.CFrame = rig:FindFirstChild("Torso").CFrame * CFrame.new(0,0,0.5)
+        elseif AgarrarEspada then
+          FSwordHandle.CFrame = rig:FindFirstChild("Right Arm").CFrame * CFrame.new(0,-1,-1.5) * CFrame.Angles(math.rad(-90),math.rad(90),math.rad(130))
+        end
+        
+        
     if not Fling then
     local RealChar = game.Workspace:FindFirstChild(player.Name)
     if RealChar then
+      
+      for _, obj in ipairs(RealChar:GetDescendants()) do
+        if obj:IsA("BasePart") and obj.Name ~= "Handle" then
+          obj.Transparency = 1
+        end
+      end
       
       for _, obj in ipairs(RealChar:GetDescendants()) do
         if obj:IsA("BasePart") and obj.Name ~= "Handle" then
@@ -166,6 +239,8 @@ task.spawn(function()
       local LLeg = RealChar:FindFirstChild("Accessory (LLeg)") 
       local RLeg = RealChar:FindFirstChild("Accessory (RLeg)")
       local Sword = RealChar:FindFirstChild("Accessory (gonerswordAccessory)")
+      
+      
       if HeadHat then
         if TorsoHat then
           if LArm then
@@ -182,7 +257,7 @@ task.spawn(function()
       local RLegHandle = RLeg:FindFirstChild("Handle")
       local SwordHandle = Sword:FindFirstChild("Handle")
       
-      
+
         
         local Headweld = HeadHandle:FindFirstChild("HatAttachment")
         local Torsoweld = TorsoHandle:FindFirstChild("HatAttachment")
@@ -191,7 +266,6 @@ task.spawn(function()
         local LLegweld = LLegHandle:FindFirstChild("WaistCenterAttachment")
         local RLegmweld = RLegHandle:FindFirstChild("WaistCenterAttachment")
         local SwordWeld = SwordHandle:FindFirstChild("BodyBackAttachment")
-        
         
         
         
@@ -911,13 +985,12 @@ HandleSword.Touched:Connect(function(hit)
       h.Parent = hit.Parent
     end
     
-    print("Se aplico eo Highlight")
+    print("Se aplico el Highlight")
     
-    wait(2)
+    wait(4)
     
     Fling = true
     flingActivo = true
-    rigHRP.Anchored = true
     if RealChar:FindFirstChild("Humanoid").Health == 0 then
     wait(Players.RespawnTime + 0.1)
     print("Esperando el RespawnTime")
@@ -925,7 +998,7 @@ HandleSword.Touched:Connect(function(hit)
     CameraS = hit.Parent:FindFirstChild("Head") or hit
     print("Cambiando CameraSubject")
     
-    
+    rigHRP.Anchored = true
     print("Procediendo con el fling")
     local start = tick()
     local c = nil
@@ -938,6 +1011,7 @@ HandleSword.Touched:Connect(function(hit)
           local Target = hit.Parent:FindFirstChild("HumanoidRootPart") or hit
           if Target then
             RealHRP.CFrame = Target.CFrame
+            RealHumanoid.Jump = true
             RealHRP.AssemblyAngularVelocity = Vector3.new(0,14000,0)
             RealHumanoid.PlatformStand = false
           end
@@ -952,6 +1026,7 @@ HandleSword.Touched:Connect(function(hit)
     wait(3)
     Fling = false
     rigHRP.Anchored = false
+    RealChar:FindFirstChild("Humanoid").Health = 0
     print("Fling Finalizado")
     CameraS = rigHead
     
